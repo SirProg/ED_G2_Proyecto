@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DSProyect_P1</string>
+
+    <string name="orden">Orden</string>
 </resources>

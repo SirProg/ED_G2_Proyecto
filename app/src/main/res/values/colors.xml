@@ -4,7 +4,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="on_Primary">#272b60</color>
-    <color name="Primary">#272b60</color>
+    <color name="Primary">#bfc2ff</color>
 
     <color name="on_Secondary">#2e2f42</color>
     <color name="Secondary">#c5c4dd</color>
@@ -15,5 +15,7 @@
     <color name="textColorPrimary">#e4e1e9</color>
     <color name="textColorSecondary">#c7c5d0</color>
 
-    <color name="delete">#ffb4ab</color>
+    <color name="on_Delete">#690005</color>
+    <color name="Delete">#ffb4ab</color>
+
 </resources>
