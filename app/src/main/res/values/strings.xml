@@ -2,4 +2,33 @@
     <string name="app_name">DSProyect_P1</string>
 
     <string name="orden">Orden</string>
+    <string name="Contactos">Contactos</string>
+    <string name="add">Guardar</string>
+    <string name="close">Cancelar</string>
+    <string-array name="etiquetas_telefono">
+        <item>Casa</item>
+        <item>Trabajo</item>
+        <item>Personal</item>
+    </string-array>
+    <string-array name="etiquetas_email">
+        <item>Personal</item>
+        <item>Trabajo</item>
+    </string-array>
+    <string-array name="etiquetas_direccion">
+        <item>Domicilio</item>
+        <item>Trabajo</item>
+        <item>Otro</item>
+    </string-array>
+    <string-array name="etiquetas_fecha">
+        <item>Cumpleaños</item>
+        <item>Aniversario</item>
+        <item>Otro</item>
+    </string-array>
+    <string-array name="etiquetas_RedSocial">
+        <item>Facebook</item>
+        <item>Instagram</item>
+        <item>Twitter</item>
+        <item>Otro</item>
+    </string-array>
+
 </resources>
