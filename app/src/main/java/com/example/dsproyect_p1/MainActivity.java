@@ -1,6 +1,7 @@
 package com.example.dsproyect_p1;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,8 @@ import com.example.dsproyect_p1.modules.adapter.AdapterRecyclerView;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private AdapterRecyclerView myAdapter;
-    private String[] contact;
-
+    private String[] contact={"Hola", "SI", "Tal vez", "Kevin"};
+    private Button btnContacts, btnFavorite, btnOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +29,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+
         recyclerView = findViewById(R.id.recyclerViewContacts);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new AdapterRecyclerView(this,contact));
 
-        recyclerView.setHasFixedSize(true);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-
-        myAdapter = new AdapterRecyclerView(contact);
-        recyclerView.setAdapter(myAdapter);
     }
 
-    public void createContacts(){
-    }
 }
