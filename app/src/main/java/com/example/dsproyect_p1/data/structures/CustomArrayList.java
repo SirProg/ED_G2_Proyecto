@@ -71,8 +71,7 @@ public class CustomArrayList<E> implements List<E> {
       return (T[]) Arrays.copyOf(elements, size, a.getClass());
     }
     System.arraycopy(elements, 0, a, 0, size);
-    if (a.length > size)
-      a[size] = null;
+    if (a.length > size) a[size] = null;
     return a;
   }
 
@@ -95,9 +94,7 @@ public class CustomArrayList<E> implements List<E> {
 
   @Override
   public boolean containsAll(Collection<?> c) {
-    for (Object e : c)
-      if (!contains(e))
-        return false;
+    for (Object e : c) if (!contains(e)) return false;
     return true;
   }
 
@@ -119,8 +116,7 @@ public class CustomArrayList<E> implements List<E> {
     ensureCapacity(size + numNew); // Ensure capacity
 
     int numMoved = size - index;
-    if (numMoved > 0)
-      System.arraycopy(elements, index, elements, index + numNew, numMoved);
+    if (numMoved > 0) System.arraycopy(elements, index, elements, index + numNew, numMoved);
 
     System.arraycopy(a, 0, elements, index, numNew);
     size += numNew;
@@ -131,7 +127,7 @@ public class CustomArrayList<E> implements List<E> {
   public boolean removeAll(Collection<?> c) {
     Objects.requireNonNull(c);
     boolean modified = false;
-    for (Iterator<?> it = iterator(); it.hasNext();) {
+    for (Iterator<?> it = iterator(); it.hasNext(); ) {
       if (c.contains(it.next())) {
         it.remove();
         modified = true;
@@ -144,7 +140,7 @@ public class CustomArrayList<E> implements List<E> {
   public boolean retainAll(Collection<?> c) {
     Objects.requireNonNull(c);
     boolean modified = false;
-    for (Iterator<?> it = iterator(); it.hasNext();) {
+    for (Iterator<?> it = iterator(); it.hasNext(); ) {
       if (!c.contains(it.next())) {
         it.remove();
         modified = true;
@@ -156,8 +152,7 @@ public class CustomArrayList<E> implements List<E> {
   @Override
   public void clear() {
     // Help GC
-    for (int i = 0; i < size; i++)
-      elements[i] = null;
+    for (int i = 0; i < size; i++) elements[i] = null;
     size = 0;
   }
 
@@ -193,8 +188,7 @@ public class CustomArrayList<E> implements List<E> {
     E oldValue = (E) elements[index];
 
     int numMoved = size - index - 1;
-    if (numMoved > 0)
-      System.arraycopy(elements, index + 1, elements, index, numMoved);
+    if (numMoved > 0) System.arraycopy(elements, index + 1, elements, index, numMoved);
 
     elements[--size] = null;
     return oldValue;
@@ -203,13 +197,9 @@ public class CustomArrayList<E> implements List<E> {
   @Override
   public int indexOf(Object o) {
     if (o == null) {
-      for (int i = 0; i < size; i++)
-        if (elements[i] == null)
-          return i;
+      for (int i = 0; i < size; i++) if (elements[i] == null) return i;
     } else {
-      for (int i = 0; i < size; i++)
-        if (o.equals(elements[i]))
-          return i;
+      for (int i = 0; i < size; i++) if (o.equals(elements[i])) return i;
     }
     return -1;
   }
@@ -217,13 +207,9 @@ public class CustomArrayList<E> implements List<E> {
   @Override
   public int lastIndexOf(Object o) {
     if (o == null) {
-      for (int i = size - 1; i >= 0; i--)
-        if (elements[i] == null)
-          return i;
+      for (int i = size - 1; i >= 0; i--) if (elements[i] == null) return i;
     } else {
-      for (int i = size - 1; i >= 0; i--)
-        if (o.equals(elements[i]))
-          return i;
+      for (int i = size - 1; i >= 0; i--) if (o.equals(elements[i])) return i;
     }
     return -1;
   }
@@ -249,8 +235,7 @@ public class CustomArrayList<E> implements List<E> {
 
       @Override
       public E next() {
-        if (cursor >= size)
-          throw new NoSuchElementException();
+        if (cursor >= size) throw new NoSuchElementException();
         lastRet = cursor++;
         return (E) elements[lastRet];
       }
@@ -262,8 +247,7 @@ public class CustomArrayList<E> implements List<E> {
 
       @Override
       public E previous() {
-        if (cursor <= 0)
-          throw new NoSuchElementException();
+        if (cursor <= 0) throw new NoSuchElementException();
         lastRet = --cursor;
         return (E) elements[lastRet];
       }
@@ -280,8 +264,7 @@ public class CustomArrayList<E> implements List<E> {
 
       @Override
       public void remove() {
-        if (lastRet < 0)
-          throw new IllegalStateException();
+        if (lastRet < 0) throw new IllegalStateException();
         CustomArrayList.this.remove(lastRet);
         cursor = lastRet;
         lastRet = -1;
@@ -289,8 +272,7 @@ public class CustomArrayList<E> implements List<E> {
 
       @Override
       public void set(E e) {
-        if (lastRet < 0)
-          throw new IllegalStateException();
+        if (lastRet < 0) throw new IllegalStateException();
         CustomArrayList.this.set(lastRet, e);
       }
 
@@ -306,8 +288,7 @@ public class CustomArrayList<E> implements List<E> {
   public List<E> subList(int fromIndex, int toIndex) {
     checkIndexForAdd(fromIndex);
     checkIndexForAdd(toIndex);
-    if (fromIndex > toIndex)
-      throw new IllegalArgumentException("fromIndex > toIndex");
+    if (fromIndex > toIndex) throw new IllegalArgumentException("fromIndex > toIndex");
     return new AbstractList<E>() {
       @Override
       public E get(int index) {
@@ -343,4 +324,3 @@ public class CustomArrayList<E> implements List<E> {
     }
   }
 }
-
