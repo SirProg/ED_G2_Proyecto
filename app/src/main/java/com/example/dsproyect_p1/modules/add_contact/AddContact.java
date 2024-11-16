@@ -59,7 +59,7 @@ public class AddContact extends AppCompatActivity {
             spinnerEtiqueta.setLayoutParams(new LinearLayout.LayoutParams(
                     0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    1)); // Peso 1
+                    1));
 
 
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
