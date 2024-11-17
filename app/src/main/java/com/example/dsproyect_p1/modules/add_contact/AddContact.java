@@ -61,7 +61,6 @@ public class AddContact extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
 
-
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                     R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
