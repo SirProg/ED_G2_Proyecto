@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/orden"
             android:layout_gravity="end"
+            android:backgroundTint="@color/on_Secondary"
             />
 
 
@@ -33,10 +34,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewContacts"
-        android:layout_width="409dp"
-        android:layout_height="623dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="59dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/Secondary"
         app:layout_constraintTop_toBottomOf="@+id/frameHeader"
         app:layout_constraintBottom_toTopOf="@+id/frameFooter"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/on_Secondary"
+        android:background="@color/on_Primary"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
-            android:backgroundTint="@color/on_Secondary"
+            android:backgroundTint="@color/on_Primary"
             android:text="Contactos"/>
 
         <Button
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="4dp"
-            android:backgroundTint="@color/on_Secondary"
+            android:backgroundTint="@color/on_Primary"
             android:text="Favoritos"/>
 
     </LinearLayout>

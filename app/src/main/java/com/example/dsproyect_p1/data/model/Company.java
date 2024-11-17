@@ -34,11 +34,6 @@ public class Company extends Contact {
       throw new IllegalArgumentException("First name cannot be null or empty");
     }
     this.name = name;
-    this.description = description;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public String getDescription() {

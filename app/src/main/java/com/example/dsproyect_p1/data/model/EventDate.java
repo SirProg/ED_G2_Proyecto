@@ -1,5 +1,7 @@
 package com.example.dsproyect_p1.data.model;
 
+import java.time.LocalDate;
+
 public class EventDate {
   private String label;
   private LocalDate date;
