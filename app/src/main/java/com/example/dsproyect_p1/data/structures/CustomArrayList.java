@@ -1,3 +1,4 @@
+package com.example.dsproyect_p1.data.structures;
 import java.util.*;
 
 public class CustomArrayList<E> implements List<E> {
