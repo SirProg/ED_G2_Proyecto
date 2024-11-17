@@ -19,6 +19,11 @@ public class CustomArrayList<E> implements List<E> {
     }
   }
 
+  public CustomArrayList(Collection<? extends E> collection) {
+    elements = collection.toArray();
+    size = elements.length;
+  }
+
   @Override
   public int size() {
     return size;
