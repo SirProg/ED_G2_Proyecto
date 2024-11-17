@@ -15,7 +15,7 @@
         android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/scrollViewContacts"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewContacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
@@ -25,44 +25,30 @@
             android:layout_height="wrap_content"
             android:text="@string/orden"
             android:layout_gravity="end"
+            android:backgroundTint="@color/on_Secondary"
             />
 
 
     </LinearLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollViewContacts"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewContacts"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/Primary"
-        app:layout_constraintTop_toBottomOf="@id/frameHeader"
-        app:layout_constraintBottom_toTopOf="@id/frameFooter"
+        android:background="@color/Secondary"
+        app:layout_constraintTop_toBottomOf="@+id/frameHeader"
+        app:layout_constraintBottom_toTopOf="@+id/frameFooter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TableLayout
-            android:id="@+id/contactsTable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            >
-
-            <TableRow
-                android:layout_width="wrap_content"
-                >
-
-            </TableRow>
-
-        </TableLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        />
 
     <LinearLayout
         android:id="@+id/frameFooter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/on_Secondary"
+        android:background="@color/on_Primary"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
@@ -72,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
+            android:backgroundTint="@color/on_Primary"
             android:text="Contactos"/>
 
         <Button
@@ -80,9 +67,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="4dp"
+            android:backgroundTint="@color/on_Primary"
             android:text="Favoritos"/>
 
     </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
