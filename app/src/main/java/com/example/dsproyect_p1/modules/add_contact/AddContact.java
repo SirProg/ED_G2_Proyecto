@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import android.widget.EditText;
 
 import android.app.DatePickerDialog;
-import android.widget.DatePicker;
+//import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
