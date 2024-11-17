@@ -67,7 +67,7 @@ public class AddContact extends AppCompatActivity {
             editTextTelefono.setLayoutParams(new LinearLayout.LayoutParams(
                     0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    1)); // Peso 2
+                    1));
             editTextTelefono.setHint("Teléfono");
             editTextTelefono.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
 
