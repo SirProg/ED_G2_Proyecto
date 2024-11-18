@@ -2,6 +2,7 @@ package com.example.dsproyect_p1.data.model;
 
 import com.example.dsproyect_p1.data.structures.*;
 import java.util.List;
+import java.util.UUID;
 
 public class Person extends Contact {
   private final String firstName;

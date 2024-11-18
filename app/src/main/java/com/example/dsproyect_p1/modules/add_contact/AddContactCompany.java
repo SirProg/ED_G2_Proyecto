@@ -32,7 +32,7 @@ import com.example.dsproyect_p1.data.structures.CustomArrayList;
 
 public class AddContactCompany extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
-    EditText name;
+    EditText name, descripcionCC, residenciaCC;
     Button cancelar, guardar;
 
     @Override
@@ -46,6 +46,8 @@ public class AddContactCompany extends AppCompatActivity {
             return insets;
         });
         name = findViewById(R.id.nombreID);
+        descripcionCC = findViewById(R.id.descripcionID);
+        residenciaCC = findViewById(R.id.residenciaID);
 
         cancelar = findViewById(R.id.cancelarCC);
         guardar = findViewById(R.id.guardarCC);
@@ -469,6 +471,11 @@ public class AddContactCompany extends AppCompatActivity {
             }
         }return listaRedSocial;
     }
+    public CustomArrayList<Contact> obtenerAsociados(){
+        CustomArrayList<Contact> listaAsociados = new CustomArrayList<>();
+
+        return listaAsociados;
+    }
 
     public void registarContacto(){
         CustomArrayList<Telephone> telefonos = obtenerTelefonos();
@@ -476,8 +483,11 @@ public class AddContactCompany extends AppCompatActivity {
         CustomArrayList<Address> direccion = obtenerDirecciones();
         CustomArrayList<EventDate> fechas = obtenerFecha();
         CustomArrayList<SocialMediaAccount> redes = obtenerSocialMedia();
+        CustomArrayList<Contact> asociados = obtenerAsociados();
         String nombre = name.getText().toString();
-        //Company company = new Company();
+        String descripcion = descripcionCC.getText().toString();
+        String resdencia = residenciaCC.getText().toString();
+        //Company company = new Company( ,nombre,descripcion,resdencia,telefonos,direccion,email,fechas,asociados,redes);
     }
 
 }

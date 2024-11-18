@@ -53,6 +53,19 @@
                 android:layout_height="wrap_content"
                 android:hint="Nombre" />
 
+            <EditText
+                android:id="@+id/descripcionID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripcion" />
+
+            <EditText
+                android:id="@+id/residenciaCC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Residencia" />
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

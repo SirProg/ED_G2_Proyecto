@@ -30,7 +30,7 @@ import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 
-public class AddContact extends AppCompatActivity {
+public class AddContactPersona extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
     EditText name, lastname, residencia;
     Button cancelar, guardar;
@@ -39,7 +39,7 @@ public class AddContact extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_contact);
+        setContentView(R.layout.activity_add_contact_persona);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -375,6 +375,11 @@ public class AddContact extends AppCompatActivity {
         });
 
     }
+    public CustomArrayList<Contact> obtenerAsociados(){
+        CustomArrayList<Contact> listaAsociados = new CustomArrayList<>();
+
+        return listaAsociados;
+    }
     public CustomArrayList<Telephone> obtenerTelefonos(){
         CustomArrayList<Telephone> listaTelefonos = new CustomArrayList<>();
         for(int i=0; i< contenerdorTelephone.getChildCount(); i++){
@@ -483,10 +488,11 @@ public class AddContact extends AppCompatActivity {
         CustomArrayList<Address> direccion = obtenerDirecciones();
         CustomArrayList<EventDate> fechas = obtenerFecha();
         CustomArrayList<SocialMediaAccount> redes = obtenerSocialMedia();
+        CustomArrayList<Contact> contactoAsociado = obtenerAsociados();
         String nombre = name.getText().toString();
         String apellido = lastname.getText().toString();
         String residenciaPais = residencia.getText().toString();
-        //Person person = new Person();
+        //Person person = new Person( ,nombre,apellido,residenciaPais,telefonos,direccion,email,fechas,contactoAsociado,redes);
     }
 
 }
