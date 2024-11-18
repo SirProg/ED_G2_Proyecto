@@ -4,6 +4,7 @@ import com.example.dsproyect_p1.data.api.PersonApi;
 import com.example.dsproyect_p1.data.models.Person;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public class PersonRepository {
   private PersonApi personApi;
@@ -13,18 +14,18 @@ public class PersonRepository {
   }
 
   public CompletableFuture<Person> getPerson(UUID id) {
-    personApi.getPerson(id);
+    return personApi.getPerson(id);
   }
 
   public CompletableFuture<List<Person>> getPersons() {
-    personApi.getPersons();
+    return personApi.getPersons();
   }
 
   public CompletableFuture<Void> savePerson(Person person) {
-    personApi.savePerson(person);
+    return personApi.savePerson(person);
   }
 
   public CompletableFuture<Void> deletePerson(UUID id) {
-    personApi.deletePerson(id);
+    return personApi.deletePerson(id);
   }
 }

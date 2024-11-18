@@ -15,14 +15,15 @@ import java.util.concurrent.Executors;
 
 public class LocalStoragePersonApi implements PersonApi {
 
+  private static final String filename = "persons.json";
   private final File file;
   private final Gson gson;
   private final Executor executor;
 
-  public LocalStoragePersonApi(Context context, String filename) {
+  public LocalStoragePersonApi(Context context) {
     this.file = new File(context.getFilesDir(), filename);
     this.gson = new Gson();
-    this.executor = Executors.newFixedThreadPool(4);
+    this.executor = Executors.newSingleThreadExecutor();
   }
 
   private List<Person> readPersonsFromFile() throws IOException {
@@ -47,11 +48,15 @@ public class LocalStoragePersonApi implements PersonApi {
   public CompletableFuture<Person> getPerson(UUID id) {
     return CompletableFuture.supplyAsync(
         () -> {
-          List<Person> persons = readPersonsFromFile();
-          return persons.stream()
-              .filter(person -> person.getId().equals(id))
-              .findFirst()
-              .orElseThrow(() -> new Exception("Person not found"));
+          try {
+            List<Person> persons = readPersonsFromFile();
+            return persons.stream()
+                .filter(person -> person.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Person not found"));
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to retrieve person", e);
+          }
         },
         executor);
   }
@@ -60,30 +65,57 @@ public class LocalStoragePersonApi implements PersonApi {
   public CompletableFuture<List<Person>> getPersons() {
     return CompletableFuture.supplyAsync(
         () -> {
-          List<Person> persons = readPersonsFromFile();
-          return persons;
+          try {
+            return readPersonsFromFile();
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to retrieve persons", e);
+          }
         },
         executor);
   }
 
   @Override
   public CompletableFuture<Void> savePerson(Person person) {
-    return CompletableFuture.supplyAsync(
+    return CompletableFuture.runAsync(
         () -> {
-          List<Person> persons = readPersonsFromFile();
-          persons.add(person);
-          writePersonsToFile(persons);
+          try {
+            List<Person> persons = readPersonsFromFile();
+            boolean updated = false;
+
+            for (int i = 0; i < persons.size(); i++) {
+              if (persons.get(i).getId().equals(person.getId())) {
+                persons.set(i, person);
+                updated = true;
+                break;
+              }
+            }
+
+            if (!updated) {
+              persons.add(person);
+            }
+
+            writePersonsToFile(persons);
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to save person", e);
+          }
         },
         executor);
   }
 
   @Override
   public CompletableFuture<Void> deletePerson(UUID id) {
-    return CompletableFuture.supplyAsync(
+    return CompletableFuture.runAsync(
         () -> {
-          List<Person> persons = readPersonsFromFile();
-          persons.remove(person);
-          writePersonsToFile(persons);
+          try {
+            List<Person> persons = readPersonsFromFile();
+            boolean removed = persons.removeIf(person -> person.getId().equals(id));
+            if (!removed) {
+              throw new RuntimeException("Person not found");
+            }
+            writePersonsToFile(persons);
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to delete person", e);
+          }
         },
         executor);
   }

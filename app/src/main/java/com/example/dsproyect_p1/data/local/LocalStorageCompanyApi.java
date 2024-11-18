@@ -57,11 +57,29 @@ public class LocalStorageCompanyApi implements CompanyApi {
   }
 
   public CompletableFuture<List<Company>> getCompanies() {
+    return CompletableFuture.supplyAsync(
+        () -> {
+          List<Company> companies = readPersonsFromFile();
+          return companies;
+        },
+        executor);
   }
 
   public CompletableFuture<Void> saveCompany(Company company) {
+    return CompletableFuture.supplyAsync(
+        () -> {
+          List<Company> companies = readPersonsFromFile();
+          companies.add(company);
+          writeCompaniesToFile(companies);
+        },
+        executor);
   }
 
   public CompletableFuture<Void> deleteCompany(UUID id) {
+    return CompletableFuture.supplyAsync(
+        () -> {
+          List<Company> companies = readPersonsFromFile();
+        },
+        executor);
   }
 }
