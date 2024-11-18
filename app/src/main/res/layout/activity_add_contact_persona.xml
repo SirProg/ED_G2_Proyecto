@@ -286,8 +286,6 @@
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
-
-
         </LinearLayout>
     </ScrollView>
 
@@ -308,8 +306,6 @@
             android:text="@string/close"
             android:textColor="@color/white"
             android:textStyle="bold" />
-
-
 
         <Button
             android:id="@+id/guardarC"

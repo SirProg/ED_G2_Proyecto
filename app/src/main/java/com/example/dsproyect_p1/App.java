@@ -9,7 +9,7 @@ public class App extends Application {
   private static PersonRepository personRepository;
   private static CompanyRepository companyRepository;
 
-  @override
+  @Override
   public void onCreate() {
     super.onCreate();
     PersonApi personApi = new LocalStoragePersonApi(this);

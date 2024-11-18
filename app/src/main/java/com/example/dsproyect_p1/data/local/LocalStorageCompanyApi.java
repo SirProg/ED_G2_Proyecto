@@ -1,5 +1,7 @@
 package com.example.dsproyect_p1.data.local;
 
+import android.content.Context;
+
 import com.example.dsproyect_p1.data.api.CompanyApi;
 import com.example.dsproyect_p1.data.model.Company;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
