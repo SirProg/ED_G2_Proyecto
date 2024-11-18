@@ -3,13 +3,14 @@ package com.example.dsproyect_p1.data.api;
 import com.example.dsproyect_p1.data.model.Person;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 public interface PersonApi {
-  public void getPerson(UUID id, Callback<Person> callback);
+  public CompletableFuture<Person> getPerson(UUID id);
 
-  public void getPersons(Callback<List<Person>> callback);
+  public CompletableFuture<List<Person>> getPersons();
 
-  public void savePerson(Person person, Callback<Void> callback);
+  public CompletableFuture<Void> savePerson(Person person);
 
-  public void deletePerson(UUID id, Callbback<Void> callback);
+  public CompletableFuture<Void> deletePerson(UUID id);
 }
