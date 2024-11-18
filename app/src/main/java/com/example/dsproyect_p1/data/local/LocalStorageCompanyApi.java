@@ -53,7 +53,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
           try {
             List<Company> companies = readCompaniesFromFile();
             return companies.stream()
-                .filter(companies -> companies.getId().equals(id))
+                .filter(company -> company.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Company not found"));
           } catch (IOException e) {
