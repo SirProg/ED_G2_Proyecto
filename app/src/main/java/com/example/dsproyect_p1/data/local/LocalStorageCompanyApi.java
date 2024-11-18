@@ -2,11 +2,11 @@ package com.example.dsproyect_p1.data.local;
 
 import com.example.dsproyect_p1.data.api.CompanyApi;
 import com.example.dsproyect_p1.data.model.Company;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -28,12 +28,12 @@ public class LocalStorageCompanyApi implements CompanyApi {
 
   private List<Company> readCompaniesFromFile() throws IOException {
     if (!file.exists()) {
-      return new ArrayList<>();
+      return new CustomArrayList<>();
     }
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
       Type listType = new TypeToken<List<Company>>() {}.getType();
       List<Company> companies = gson.fromJson(reader, listType);
-      return companies != null ? companies : new ArrayList<>();
+      return companies != null ? companies : new CustomArrayList<>();
     }
   }
 

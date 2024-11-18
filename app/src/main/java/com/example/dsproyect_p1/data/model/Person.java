@@ -1,6 +1,6 @@
 package com.example.dsproyect_p1.data.model;
 
-import com.example.dsproyect_p1.data.structures.*;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import java.util.List;
 import java.util.UUID;
 

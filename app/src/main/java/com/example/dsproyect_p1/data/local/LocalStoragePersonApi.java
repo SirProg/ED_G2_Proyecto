@@ -2,11 +2,11 @@ package com.example.dsproyect_p1.data.local;
 
 import com.example.dsproyect_p1.data.api.PersonApi;
 import com.example.dsproyect_p1.data.model.Person;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -28,13 +28,12 @@ public class LocalStoragePersonApi implements PersonApi {
 
   private List<Person> readPersonsFromFile() throws IOException {
     if (!file.exists()) {
-      return new ArrayList<>();
+      return new CustomArrayList<>();
     }
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-      Type listType = new TypeToken<List<Person>>() {
-      }.getType();
+      Type listType = new TypeToken<List<Person>>() {}.getType();
       List<Person> persons = gson.fromJson(reader, listType);
-      return persons != null ? persons : new ArrayList<>();
+      return persons != null ? persons : new CustomArrayList<>();
     }
   }
 

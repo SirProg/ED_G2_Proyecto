@@ -1,6 +1,6 @@
 package com.example.dsproyect_p1.data.model;
 
-import com.example.dsproyect_p1.data.structures.*;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -28,16 +28,20 @@ public abstract class Contact {
       List<SocialMediaAccount> socialMediaAccounts) {
     this.id = id != null ? id : UUID.randomUUID();
     this.residencyCountry = residencyCountry != null ? residencyCountry : "";
-    this.telephones = telephones != null ? new CustomArrayList<>(telephones) : new CustomArrayList<>();
+    this.telephones =
+        telephones != null ? new CustomArrayList<>(telephones) : new CustomArrayList<>();
     this.addresses = addresses != null ? new CustomArrayList<>(addresses) : new CustomArrayList<>();
     this.emails = emails != null ? new CustomArrayList<>(emails) : new CustomArrayList<>();
-    this.eventDates = eventDates != null ? new CustomArrayList<>(eventDates) : new CustomArrayList<>();
-    this.associateContacts = associateContacts != null
-        ? new CustomArrayList<>(associateContacts)
-        : new CustomArrayList<>();
-    this.socialMediaAccounts = socialMediaAccounts != null
-        ? new CustomArrayList<>(socialMediaAccounts)
-        : new CustomArrayList<>();
+    this.eventDates =
+        eventDates != null ? new CustomArrayList<>(eventDates) : new CustomArrayList<>();
+    this.associateContacts =
+        associateContacts != null
+            ? new CustomArrayList<>(associateContacts)
+            : new CustomArrayList<>();
+    this.socialMediaAccounts =
+        socialMediaAccounts != null
+            ? new CustomArrayList<>(socialMediaAccounts)
+            : new CustomArrayList<>();
   }
 
   public UUID getId() {
@@ -74,10 +78,8 @@ public abstract class Contact {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (!(o instanceof Contact))
-      return false;
+    if (this == o) return true;
+    if (!(o instanceof Contact)) return false;
     Contact contact = (Contact) o;
     return id.equals(contact.id);
   }
