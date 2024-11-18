@@ -23,7 +23,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
   public LocalStorageCompanyApi(Context context) {
     this.file = new File(context.getFilesDir(), filename);
     this.gson = new Gson();
-    this.executor = Executors.newFixedThreadPool(4);
+    this.executor = Executors.newSingleThreadExecutor();
   }
 
   private List<Company> readCompaniesFromFile() throws IOException {
@@ -47,11 +47,15 @@ public class LocalStorageCompanyApi implements CompanyApi {
   public CompletableFuture<Company> getCompany(UUID id) {
     return CompletableFuture.supplyAsync(
         () -> {
-          List<Company> companies = readPersonsFromFile();
-          return companies.stream()
-              .filter(person -> companies.getId().equals(id))
-              .findFirst()
-              .orElseThrow(() -> new Exception("Company not found"));
+          try {
+            List<Company> companies = readCompaniesFromFile();
+            return companies.stream()
+                .filter(companies -> companies.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Company not found"));
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to retrieve company", e);
+          }
         },
         executor);
   }
@@ -59,26 +63,55 @@ public class LocalStorageCompanyApi implements CompanyApi {
   public CompletableFuture<List<Company>> getCompanies() {
     return CompletableFuture.supplyAsync(
         () -> {
-          List<Company> companies = readPersonsFromFile();
-          return companies;
+          try {
+            return readCompaniesFromFile();
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to retrieve companies", e);
+          }
         },
         executor);
   }
 
   public CompletableFuture<Void> saveCompany(Company company) {
-    return CompletableFuture.supplyAsync(
+    return CompletableFuture.runAsync(
         () -> {
-          List<Company> companies = readPersonsFromFile();
-          companies.add(company);
-          writeCompaniesToFile(companies);
+          try {
+            List<Company> companies = readCompaniesFromFile();
+            boolean updated = false;
+
+            for (int i = 0; i < companies.size(); i++) {
+              if (companies.get(i).getId().equals(company.getId())) {
+                companies.set(i, company);
+                updated = true;
+                break;
+              }
+            }
+
+            if (!updated) {
+              companies.add(company);
+            }
+
+            writeCompaniesToFile(companies);
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to save company", e);
+          }
         },
         executor);
   }
 
   public CompletableFuture<Void> deleteCompany(UUID id) {
-    return CompletableFuture.supplyAsync(
+    return CompletableFuture.runAsync(
         () -> {
-          List<Company> companies = readPersonsFromFile();
+          try {
+            List<Company> companies = readCompaniesFromFile();
+            boolean removed = companies.removeIf(company -> company.getId().equals(id));
+            if (!removed) {
+              throw new RuntimeException("Company not found");
+            }
+            writeCompaniesToFile(companies);
+          } catch (IOException e) {
+            throw new RuntimeException("Failed to delete company", e);
+          }
         },
         executor);
   }
