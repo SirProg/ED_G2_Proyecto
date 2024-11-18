@@ -7,6 +7,7 @@ import com.example.dsproyect_p1.data.model.Person;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import javax.inject.Inject;
 
 public class LocalStoragePersonApi implements PersonApi {
 
@@ -22,7 +24,8 @@ public class LocalStoragePersonApi implements PersonApi {
   private final Gson gson;
   private final Executor executor;
 
-  public LocalStoragePersonApi(Context context) {
+  @Inject
+  public LocalStoragePersonApi(@ApplicationContext Context context) {
     this.file = new File(context.getFilesDir(), filename);
     this.gson = new Gson();
     this.executor = Executors.newSingleThreadExecutor();

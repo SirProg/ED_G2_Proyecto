@@ -7,6 +7,7 @@ import com.example.dsproyect_p1.data.model.Company;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import javax.inject.Inject;
 
 public class LocalStorageCompanyApi implements CompanyApi {
 
@@ -22,7 +24,8 @@ public class LocalStorageCompanyApi implements CompanyApi {
   private final Gson gson;
   private final Executor executor;
 
-  public LocalStorageCompanyApi(Context context) {
+  @Inject
+  public LocalStorageCompanyApi(@ApplicationContext Context context) {
     this.file = new File(context.getFilesDir(), filename);
     this.gson = new Gson();
     this.executor = Executors.newSingleThreadExecutor();
@@ -52,7 +55,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
           try {
             List<Company> companies = readCompaniesFromFile();
             return companies.stream()
-                .filter(companies -> companies.getId().equals(id))
+                .filter(company -> company.getId().equals(id))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Company not found"));
           } catch (IOException e) {

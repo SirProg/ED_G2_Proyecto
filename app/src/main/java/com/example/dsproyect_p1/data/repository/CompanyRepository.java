@@ -5,27 +5,31 @@ import com.example.dsproyect_p1.data.model.Company;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class CompanyRepository {
   private CompanyApi companyApi;
 
-  public companyRepository(CompanyApi companyApi) {
+  @Inject
+  public CompanyRepository(CompanyApi companyApi) {
     this.companyApi = companyApi;
   }
 
   public CompletableFuture<Company> getCompany(UUID id) {
-    companyApi.getCompany(id);
+    return companyApi.getCompany(id);
   }
 
   public CompletableFuture<List<Company>> getCompanies() {
-    companyApi.getCompanies();
+    return companyApi.getCompanies();
   }
 
   public CompletableFuture<Void> saveCompany(Company company) {
-    companyApi.saveCompany(company);
+    return companyApi.saveCompany(company);
   }
 
   public CompletableFuture<Void> deleteCompany(UUID id) {
-    companyApi.deleteCompany(id);
+    return companyApi.deleteCompany(id);
   }
 }
