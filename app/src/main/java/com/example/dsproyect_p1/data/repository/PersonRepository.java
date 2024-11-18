@@ -5,10 +5,14 @@ import com.example.dsproyect_p1.data.models.Person;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class PersonRepository {
   private PersonApi personApi;
 
+  @Inject
   public PersonRepository(PersonApi personApi) {
     this.personApi = personApi;
   }

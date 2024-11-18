@@ -5,11 +5,15 @@ import com.example.dsproyect_p1.data.api.CompanyApi;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class CompanyRepository {
   private CompanyApi companyApi;
 
-  public companyRepository(CompanyApi companyApi) {
+  @Inject
+  public CompanyRepository(CompanyApi companyApi) {
     this.companyApi = companyApi;
   }
 
