@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.EditText;
 
 import android.app.DatePickerDialog;
+import android.util.Log;
 
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ import com.example.dsproyect_p1.MainActivity;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
+import com.example.dsproyect_p1.data.api.*;
 
 public class AddContactPersona extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
@@ -101,7 +103,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             editTextTelefono.setHint("Teléfono");
-            editTextTelefono.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
+            editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -148,7 +150,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             editTextAsociado.setHint("Teléfono");
-            editTextAsociado.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
+            editTextAsociado.setInputType(InputType.TYPE_CLASS_PHONE);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -197,7 +199,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1)); // Peso 2
             editTextEmail.setHint("E-mail");
-            editTextEmail.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+            editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -292,7 +294,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             editTextSocial.setHint("Red Social");
-            editTextSocial.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+            editTextSocial.setInputType(InputType.TYPE_CLASS_TEXT);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -492,7 +494,18 @@ public class AddContactPersona extends AppCompatActivity {
         String nombre = name.getText().toString();
         String apellido = lastname.getText().toString();
         String residenciaPais = residencia.getText().toString();
-        //Person person = new Person( ,nombre,apellido,residenciaPais,telefonos,direccion,email,fechas,contactoAsociado,redes);
+        Person person = new Person(null ,nombre,apellido,residenciaPais,telefonos,direccion,email,fechas,contactoAsociado,redes);
+        PersonApi personApi = null;
+        personApi.savePerson(person)
+                .thenRun(() -> {
+                    // Success handling
+                    Log.d("PersonApi", "Person saved successfully.");
+                })
+                .exceptionally(ex -> {
+                    // Error handling
+                    Log.e("PersonApi", "Failed to save person.", ex);
+                    return null;
+                });
     }
 
 }

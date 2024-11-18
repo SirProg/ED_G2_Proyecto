@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +28,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.MainActivity;
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.data.api.CompanyApi;
+import com.example.dsproyect_p1.data.api.PersonApi;
 import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 
@@ -487,7 +490,18 @@ public class AddContactCompany extends AppCompatActivity {
         String nombre = name.getText().toString();
         String descripcion = descripcionCC.getText().toString();
         String resdencia = residenciaCC.getText().toString();
-        //Company company = new Company( ,nombre,descripcion,resdencia,telefonos,direccion,email,fechas,asociados,redes);
+        Company company = new Company(null ,nombre,descripcion,resdencia,telefonos,direccion,email,fechas,asociados,redes);
+        CompanyApi companyApi = null;
+        companyApi.saveCompany(company)
+                .thenRun(() -> {
+                    // Success handling
+                    Log.d("PersonApi", "Company saved successfully.");
+                })
+                .exceptionally(ex -> {
+                    // Error handling
+                    Log.e("PersonApi", "Failed to save company.", ex);
+                    return null;
+                });
     }
 
 }
