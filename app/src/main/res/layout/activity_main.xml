@@ -72,6 +72,15 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/openPopUpAdd"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:backgroundTint="@color/add"
+        app:layout_constraintBottom_toTopOf="@+id/frameFooter"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="10dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

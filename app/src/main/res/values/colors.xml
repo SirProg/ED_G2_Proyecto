@@ -18,8 +18,10 @@
     <color name="on_Delete">#690005</color>
     <color name="Delete">#ffb4ab</color>
 
-    <color name="add">#4CAF50</color>
+    <color name="add">#529055</color>
     <color name="extra">#515a5a</color>
-    <color name="cancelar">#e74c3c</color>
+    <color name="cancelar">#95524B</color>
+
+    <color name="separete_bloc">#444559</color>
 
 </resources>
