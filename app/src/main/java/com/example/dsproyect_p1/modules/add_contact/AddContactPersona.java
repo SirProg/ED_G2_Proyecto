@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.EditText;
 
 import android.app.DatePickerDialog;
+import android.util.Log;
 
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ import com.example.dsproyect_p1.MainActivity;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
+import com.example.dsproyect_p1.data.api.*;
 
 public class AddContactPersona extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
@@ -101,7 +103,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             editTextTelefono.setHint("Teléfono");
-            editTextTelefono.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
+            editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -131,16 +133,13 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT));
             nuevoAsociado.setPadding(0, 16, 0, 16);
 
-            /*Spinner spinnerEtiqueta = new Spinner(this);
-            spinnerEtiqueta.setLayoutParams(new LinearLayout.LayoutParams(
+            EditText editTextNameAsociado = new EditText(this);
+            editTextNameAsociado.setLayoutParams(new LinearLayout.LayoutParams(
                     0,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
-
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinnerEtiqueta.setAdapter(adapter);*/
+            editTextNameAsociado.setHint("Nombre");
+            editTextNameAsociado.setInputType(InputType.TYPE_CLASS_TEXT);
 
             EditText editTextAsociado = new EditText(this);
             editTextAsociado.setLayoutParams(new LinearLayout.LayoutParams(
@@ -148,7 +147,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             editTextAsociado.setHint("Teléfono");
-            editTextAsociado.setInputType(android.text.InputType.TYPE_CLASS_PHONE);
+            editTextAsociado.setInputType(InputType.TYPE_CLASS_PHONE);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -158,8 +157,9 @@ public class AddContactPersona extends AppCompatActivity {
             botonEliminar.setTextColor(Color.WHITE);
 
             botonEliminar.setOnClickListener(b -> contenedorAsociados.removeView(nuevoAsociado));
+
+            nuevoAsociado.addView(editTextNameAsociado);
             nuevoAsociado.addView(editTextAsociado);
-            //nuevoAsociado.addView(spinnerEtiqueta);
             nuevoAsociado.addView(botonEliminar);
 
             contenedorAsociados.addView(nuevoAsociado, contenedorAsociados.getChildCount() - 1);
@@ -197,7 +197,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1)); // Peso 2
             editTextEmail.setHint("E-mail");
-            editTextEmail.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+            editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -292,7 +292,7 @@ public class AddContactPersona extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1));
             editTextSocial.setHint("Red Social");
-            editTextSocial.setInputType(android.text.InputType.TYPE_CLASS_TEXT);
+            editTextSocial.setInputType(InputType.TYPE_CLASS_TEXT);
 
             Button botonEliminar = new Button(this);
             botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
@@ -375,11 +375,7 @@ public class AddContactPersona extends AppCompatActivity {
         });
 
     }
-    public CustomArrayList<Contact> obtenerAsociados(){
-        CustomArrayList<Contact> listaAsociados = new CustomArrayList<>();
 
-        return listaAsociados;
-    }
     public CustomArrayList<Telephone> obtenerTelefonos(){
         CustomArrayList<Telephone> listaTelefonos = new CustomArrayList<>();
         for(int i=0; i< contenerdorTelephone.getChildCount(); i++){
@@ -481,6 +477,23 @@ public class AddContactPersona extends AppCompatActivity {
             }
         }return listaRedSocial;
     }
+    public CustomArrayList<AssociateContact> obtenerAsociados(){
+        CustomArrayList<AssociateContact> listaAsociados = new CustomArrayList<>();
+        for(int i=0; i< contenedorAsociados.getChildCount(); i++){
+            View vista = contenedorAsociados.getChildAt(i);
+            if(vista instanceof LinearLayout){
+                LinearLayout llAsociado = (LinearLayout) vista;
+                EditText editTextnombre = (EditText) llAsociado.getChildAt(0);
+                String nombre = editTextnombre.getText().toString();
+                EditText editTextnumero = (EditText) llAsociado.getChildAt(0);
+                String numero = editTextnumero.getText().toString();
+                if(!nombre.isEmpty()){
+                    listaAsociados.add(new AssociateContact(nombre,numero));
+                }
+            }
+
+    }return listaAsociados;
+    }
 
     public void registarContacto(){
         CustomArrayList<Telephone> telefonos = obtenerTelefonos();
@@ -488,11 +501,22 @@ public class AddContactPersona extends AppCompatActivity {
         CustomArrayList<Address> direccion = obtenerDirecciones();
         CustomArrayList<EventDate> fechas = obtenerFecha();
         CustomArrayList<SocialMediaAccount> redes = obtenerSocialMedia();
-        CustomArrayList<Contact> contactoAsociado = obtenerAsociados();
+        CustomArrayList<AssociateContact> asociados = obtenerAsociados();
         String nombre = name.getText().toString();
         String apellido = lastname.getText().toString();
         String residenciaPais = residencia.getText().toString();
-        //Person person = new Person( ,nombre,apellido,residenciaPais,telefonos,direccion,email,fechas,contactoAsociado,redes);
+        Person person = new Person(null ,nombre,apellido,residenciaPais,telefonos,direccion,email,fechas,asociados,redes);
+        PersonApi personApi = null;
+        personApi.savePerson(person)
+                .thenRun(() -> {
+                    // Success handling
+                    Log.d("PersonApi", "Person saved successfully.");
+                })
+                .exceptionally(ex -> {
+                    // Error handling
+                    Log.e("PersonApi", "Failed to save person.", ex);
+                    return null;
+                });
     }
 
 }

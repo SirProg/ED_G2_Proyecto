@@ -1,7 +1,7 @@
 package com.example.dsproyect_p1.data.repository;
 
 import com.example.dsproyect_p1.data.api.CompanyApi;
-import com.example.dsproyect_p1.data.models.Company;
+//import com.example.dsproyect_p1.data.models.Company;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
