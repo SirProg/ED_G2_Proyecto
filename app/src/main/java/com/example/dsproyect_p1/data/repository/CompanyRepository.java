@@ -14,18 +14,18 @@ public class CompanyRepository {
   }
 
   public CompletableFuture<Company> getCompany(UUID id) {
-    companyApi.getCompany(id);
+    return companyApi.getCompany(id);
   }
 
   public CompletableFuture<List<Company>> getCompanies() {
-    companyApi.getCompanies();
+    return companyApi.getCompanies();
   }
 
   public CompletableFuture<Void> saveCompany(Company company) {
-    companyApi.saveCompany(company);
+    return companyApi.saveCompany(company);
   }
 
   public CompletableFuture<Void> deleteCompany(UUID id) {
-    companyApi.deleteCompany(id);
+    return companyApi.deleteCompany(id);
   }
 }
