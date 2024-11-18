@@ -30,29 +30,25 @@ import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 
-public class AddContact extends AppCompatActivity {
+public class AddContactCompany extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
-    EditText name, lastname, residencia;
+    EditText name;
     Button cancelar, guardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_contact);
-
+        setContentView(R.layout.activity_add_contact_company);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        name = findViewById(R.id.nombreID);
 
-        name = findViewById(R.id.nameid);
-        lastname = findViewById(R.id.lastNameID);
-        residencia = findViewById(R.id.residenciaID);
-
-        cancelar = findViewById(R.id.cancelarC);
-        guardar = findViewById(R.id.guardarC);
+        cancelar = findViewById(R.id.cancelarCC);
+        guardar = findViewById(R.id.guardarCC);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +58,6 @@ public class AddContact extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,10 +65,9 @@ public class AddContact extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         //------------------------------Telefono-----------------------------------------------------------
-        contenerdorTelephone = findViewById(R.id.contenedorTelefonos);
-        Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelefono);
+        contenerdorTelephone = findViewById(R.id.contenedorTelefonos1);
+        Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelefono1);
 
         buttonAgregarTelefono.setOnClickListener(v -> {
 
@@ -91,7 +85,7 @@ public class AddContact extends AppCompatActivity {
                     1));
 
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
+                    R.array.etiquetas_telefonoC, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerEtiqueta.setAdapter(adapter);
 
@@ -118,9 +112,10 @@ public class AddContact extends AppCompatActivity {
             contenerdorTelephone.addView(nuevoTelefono, contenerdorTelephone.getChildCount() - 1);
 
         });
+
         //------------------------------Contactos asociados----------------------------------------------------------
-        contenedorAsociados = findViewById(R.id.contenedorAsociados);
-        Button buttonAgregarAsociados = findViewById(R.id.buttonAgregarAsociados);
+        contenedorAsociados = findViewById(R.id.contenedorAsociadosC);
+        Button buttonAgregarAsociados = findViewById(R.id.buttonAgregarAsociadosC);
 
         buttonAgregarAsociados.setOnClickListener(v -> {
 
@@ -167,8 +162,8 @@ public class AddContact extends AppCompatActivity {
         });
 
         //----------------------------E-mail----------------------------------------------------------------
-        contenedorEmail = findViewById(R.id.contenedorCorreos);
-        Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmail);
+        contenedorEmail = findViewById(R.id.contenedorCorreos1);
+        Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmail1);
 
         buttonAgregarEmail.setOnClickListener(v -> {
 
@@ -213,12 +208,11 @@ public class AddContact extends AppCompatActivity {
             nuevoEmail.addView(botonEliminar);
 
             contenedorEmail.addView(nuevoEmail, contenedorEmail.getChildCount() - 1);
-
         });
 
         //----------------------------Direccion----------------------------------------------------------------
-        contenedorAdress = findViewById(R.id.contenedorDireccion);
-        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarDireccion);
+        contenedorAdress = findViewById(R.id.contenedorDireccion1);
+        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarDireccion1);
 
         buttonAgreganDireccion.setOnClickListener(v -> {
             LinearLayout nuevaDireccion = new LinearLayout(this);
@@ -235,7 +229,7 @@ public class AddContact extends AppCompatActivity {
                     1)); // Peso 1
 
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
+                    R.array.etiquetas_direccionC, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerEtiqueta.setAdapter(adapter);
 
@@ -264,8 +258,8 @@ public class AddContact extends AppCompatActivity {
         });
 
         //----------------------------Red Social----------------------------------------------------------------
-        contenedorSocialMedia = findViewById(R.id.contenedorRedSocial);
-        Button buttonAgregarSocial = findViewById(R.id.buttonAgregarRedSocial);
+        contenedorSocialMedia = findViewById(R.id.contenedorSocialMdia);
+        Button buttonAgregarSocial = findViewById(R.id.buttonAgregarRedSocial1);
 
         buttonAgregarSocial.setOnClickListener(v -> {
             LinearLayout nuevoSocial = new LinearLayout(this);
@@ -311,8 +305,8 @@ public class AddContact extends AppCompatActivity {
         });
 
         //-------------------------------------------Fecha----------------------------------------------------
-        contenedorDate = findViewById(R.id.contenedorFecha);
-        Button buttonAgregarFecha = findViewById(R.id.buttonAgregarFecha);
+        contenedorDate = findViewById(R.id.contenedorFecha1);
+        Button buttonAgregarFecha = findViewById(R.id.buttonAgregarFecha1);
 
         buttonAgregarFecha.setOnClickListener(v -> {
             LinearLayout nuevaFecha = new LinearLayout(this);
@@ -329,7 +323,7 @@ public class AddContact extends AppCompatActivity {
                     1));
 
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                    R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
+                    R.array.etiquetas_fechaC, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerEtiqueta.setAdapter(adapter);
 
@@ -373,7 +367,6 @@ public class AddContact extends AppCompatActivity {
 
             contenedorDate.addView(nuevaFecha, contenedorDate.getChildCount() - 1);
         });
-
     }
     public CustomArrayList<Telephone> obtenerTelefonos(){
         CustomArrayList<Telephone> listaTelefonos = new CustomArrayList<>();
@@ -484,9 +477,7 @@ public class AddContact extends AppCompatActivity {
         CustomArrayList<EventDate> fechas = obtenerFecha();
         CustomArrayList<SocialMediaAccount> redes = obtenerSocialMedia();
         String nombre = name.getText().toString();
-        String apellido = lastname.getText().toString();
-        String residenciaPais = residencia.getText().toString();
-        //Person person = new Person();
+        //Company company = new Company();
     }
 
 }

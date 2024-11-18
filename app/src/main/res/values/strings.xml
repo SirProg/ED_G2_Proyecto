@@ -10,6 +10,11 @@
         <item>Trabajo</item>
         <item>Personal</item>
     </string-array>
+    <string-array name="etiquetas_telefonoC">
+        <item>Empresa</item>
+        <item>Directo</item>
+        <item>Secretaria</item>
+    </string-array>
     <string-array name="etiquetas_email">
         <item>Personal</item>
         <item>Trabajo</item>
@@ -19,16 +24,25 @@
         <item>Trabajo</item>
         <item>Otro</item>
     </string-array>
+    <string-array name="etiquetas_direccionC">
+        <item>Trabajo</item>
+        <item>Otro</item>
+    </string-array>
     <string-array name="etiquetas_fecha">
         <item>Cumpleaños</item>
         <item>Aniversario</item>
+        <item>Otro</item>
+    </string-array>
+    <string-array name="etiquetas_fechaC">
+        <item>Reunión</item>
         <item>Otro</item>
     </string-array>
     <string-array name="etiquetas_RedSocial">
         <item>Facebook</item>
         <item>Instagram</item>
         <item>Twitter</item>
-        <item>Otro</item>
+        <item>YouTube</item>
     </string-array>
+
 
 </resources>
