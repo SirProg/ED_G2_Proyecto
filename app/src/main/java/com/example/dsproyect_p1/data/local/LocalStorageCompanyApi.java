@@ -31,8 +31,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
       return new ArrayList<>();
     }
     try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-      Type listType = new TypeToken<List<Company>>() {
-      }.getType();
+      Type listType = new TypeToken<List<Company>>() {}.getType();
       List<Company> companies = gson.fromJson(reader, listType);
       return companies != null ? companies : new ArrayList<>();
     }
@@ -44,6 +43,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
     }
   }
 
+  @Override
   public CompletableFuture<Company> getCompany(UUID id) {
     return CompletableFuture.supplyAsync(
         () -> {
@@ -60,6 +60,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
         executor);
   }
 
+  @Override
   public CompletableFuture<List<Company>> getCompanies() {
     return CompletableFuture.supplyAsync(
         () -> {
@@ -72,6 +73,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
         executor);
   }
 
+  @Override
   public CompletableFuture<Void> saveCompany(Company company) {
     return CompletableFuture.runAsync(
         () -> {
@@ -99,6 +101,7 @@ public class LocalStorageCompanyApi implements CompanyApi {
         executor);
   }
 
+  @Override
   public CompletableFuture<Void> deleteCompany(UUID id) {
     return CompletableFuture.runAsync(
         () -> {
