@@ -1,6 +1,5 @@
 package com.example.dsproyect_p1.data.repository;
 
-import com.example.dsproyect_p1.data.api.Callback;
 import com.example.dsproyect_p1.data.api.CompanyApi;
 import com.example.dsproyect_p1.data.models.Company;
 import java.util.List;
@@ -13,19 +12,19 @@ public class CompanyRepository {
     this.companyApi = companyApi;
   }
 
-  public void getCompany(UUID id, Callback<Company> callback) {
-    companyApi.getCompany(id, callback);
+  public CompletableFuture<Company> getCompany(UUID id) {
+    companyApi.getCompany(id);
   }
 
-  public void getCompanies(Callback<List<Company>> callback) {
-    companyApi.getCompanies(callback);
+  public CompletableFuture<List<Company>> getCompanies() {
+    companyApi.getCompanies();
   }
 
-  public void saveCompany(Company company, Callback<Void> callback) {
-    companyApi.saveCompany(company, callback);
+  public CompletableFuture<Void> saveCompany(Company company) {
+    companyApi.saveCompany(company);
   }
 
-  public void deleteCompany(UUID id, Callback<Void> callback) {
-    companyApi.deleteCompany(id, callback);
+  public CompletableFuture<Void> deleteCompany(UUID id) {
+    companyApi.deleteCompany(id);
   }
 }

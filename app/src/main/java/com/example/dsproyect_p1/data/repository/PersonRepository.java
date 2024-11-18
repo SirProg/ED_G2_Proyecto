@@ -1,6 +1,5 @@
 package com.example.dsproyect_p1.data.repository;
 
-import com.example.dsproyect_p1.data.api.Callback;
 import com.example.dsproyect_p1.data.api.PersonApi;
 import com.example.dsproyect_p1.data.models.Person;
 import java.util.List;
@@ -13,19 +12,19 @@ public class PersonRepository {
     this.personApi = personApi;
   }
 
-  public void getPerson(UUID id, Callback<Person> callback) {
-    personApi.getPerson(id, callback);
+  public CompletableFuture<Person> getPerson(UUID id) {
+    personApi.getPerson(id);
   }
 
-  public void getPersons(Callback<List<Person>> callback) {
-    personApi.getPersons(callback);
+  public CompletableFuture<List<Person>> getPersons() {
+    personApi.getPersons();
   }
 
-  public void savePerson(Person person, Callback<Void> callback) {
-    personApi.savePerson(person, callback);
+  public CompletableFuture<Void> savePerson(Person person) {
+    personApi.savePerson(person);
   }
 
-  public void deletePerson(UUID id, Callback<Void> callback) {
-    personApi.deletePerson(id, callback);
+  public CompletableFuture<Void> deletePerson(UUID id) {
+    personApi.deletePerson(id);
   }
 }
