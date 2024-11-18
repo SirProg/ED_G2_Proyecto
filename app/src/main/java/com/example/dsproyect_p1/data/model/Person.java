@@ -1,6 +1,6 @@
 package com.example.dsproyect_p1.data.model;
 
-import com.example.dsproyect_p1.data.structures.*;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +17,7 @@ public class Person extends Contact {
       List<Address> addresses,
       List<Email> emails,
       List<EventDate> eventDates,
-      List<Contact> associateContacts,
+      List<AssociateContact> associateContacts,
       List<SocialMediaAccount> socialMediaAccounts) {
     super(
         id,
@@ -54,7 +54,7 @@ public class Person extends Contact {
       List<Address> newAddresses,
       List<Email> newEmails,
       List<EventDate> newEventDates,
-      List<Contact> newAssociateContacts,
+      List<AssociateContact> newAssociateContacts,
       List<SocialMediaAccount> newSocialMediaAccounts) {
 
     return new Person(

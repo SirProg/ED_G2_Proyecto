@@ -1,8 +1,9 @@
 package com.example.dsproyect_p1.data.model;
 
-import com.example.dsproyect_p1.data.structures.*;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Contact {
@@ -13,7 +14,7 @@ public abstract class Contact {
   private final List<Address> addresses;
   private final List<Email> emails;
   private final List<EventDate> eventDates;
-  private final List<Contact> associateContacts;
+  private final List<AssociateContact> associateContacts;
   private final List<SocialMediaAccount> socialMediaAccounts;
 
   public Contact(
@@ -23,7 +24,7 @@ public abstract class Contact {
       List<Address> addresses,
       List<Email> emails,
       List<EventDate> eventDates,
-      List<Contact> associateContacts,
+      List<AssociateContact> associateContacts,
       List<SocialMediaAccount> socialMediaAccounts) {
     this.id = id != null ? id : UUID.randomUUID();
     this.residencyCountry = residencyCountry != null ? residencyCountry : "";
@@ -67,7 +68,7 @@ public abstract class Contact {
     return Collections.unmodifiableList(eventDates);
   }
 
-  public List<Contact> getAssociateContacts() {
+  public List<AssociateContact> getAssociateContacts() {
     return Collections.unmodifiableList(associateContacts);
   }
 

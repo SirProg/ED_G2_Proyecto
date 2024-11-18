@@ -1,6 +1,6 @@
 package com.example.dsproyect_p1.data.model;
 
-import com.example.dsproyect_p1.data.structures.*;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +17,7 @@ public class Company extends Contact {
       List<Address> addresses,
       List<Email> emails,
       List<EventDate> eventDates,
-      List<Contact> associateContacts,
+      List<AssociateContact> associateContacts,
       List<SocialMediaAccount> socialMediaAccounts) {
     super(
         id,
@@ -29,12 +29,17 @@ public class Company extends Contact {
         associateContacts,
         socialMediaAccounts);
     if (name == null || name.isEmpty()) {
-      throw new IllegalArgumentException("First name cannot be null or empty");
+      throw new IllegalArgumentException("Name cannot be null or empty");
     }
     if (description == null || description.isEmpty()) {
-      throw new IllegalArgumentException("First name cannot be null or empty");
+      throw new IllegalArgumentException("Description cannot be null or empty");
     }
     this.name = name;
+    this.description = description;
+  }
+
+  public String getName() {
+    return name;
   }
 
   public String getDescription() {
@@ -49,7 +54,7 @@ public class Company extends Contact {
       List<Address> newAddresses,
       List<Email> newEmails,
       List<EventDate> newEventDates,
-      List<Contact> newAssociateContacts,
+      List<AssociateContact> newAssociateContacts,
       List<SocialMediaAccount> newSocialMediaAccounts) {
 
     return new Company(

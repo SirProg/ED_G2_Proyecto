@@ -10,11 +10,11 @@ public class SocialMediaAccount {
     this.user = user;
   }
 
-public SocialMedia getSocialMedia() {
-	return socialMedia;
-}
+  public SocialMedia getSocialMedia() {
+    return socialMedia;
+  }
 
-public String getUser() {
-	return user;
-}
+  public String getUser() {
+    return user;
+  }
 }
