@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.add_contact;
+package com.example.dsproyect_p1.modules.add_person;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -32,7 +32,7 @@ import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.example.dsproyect_p1.data.api.*;
 
-public class AddContactPersona extends AppCompatActivity {
+public class AddPersonActivity extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
     EditText name, lastname, residencia;
     Button cancelar, guardar;

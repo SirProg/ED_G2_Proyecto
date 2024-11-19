@@ -17,7 +17,7 @@
             android:name=".modules.contact_details.CompanyDetails"
             android:exported="false" />
         <activity
-            android:name=".modules.add_contact.AddContactCompany"
+            android:name=".modules.add_company.AddCompanyActivity"
             android:exported="true" />
         <activity
             android:name=".modules.contacts_overview.view.ViewContact"
@@ -29,7 +29,7 @@
             android:name=".modules.contact_details.ContactDetails"
             android:exported="false" />
         <activity
-            android:name=".modules.add_contact.AddContactPersona"
+            android:name=".modules.add_person.AddPersonActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

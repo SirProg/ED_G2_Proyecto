@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.modules.adapter.AdapterRecyclerView;
-import com.example.dsproyect_p1.modules.add_contact.AddContactCompany;
-import com.example.dsproyect_p1.modules.add_contact.AddContactPersona;
+import com.example.dsproyect_p1.modules.add_company.AddCompanyActivity;
+import com.example.dsproyect_p1.modules.add_person.AddPersonActivity;
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
   private Button btnAddContact;
   private AdapterRecyclerView adapterRecyclerView;
 
-  @Inject PersonRepository personRepository;
+  @Inject
+  PersonRepository personRepository;
+  @Inject
+  CompanyRepository companyRepository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -90,21 +93,19 @@ public class MainActivity extends AppCompatActivity {
   }
 
   public void openPopupMenuAdd(View anchorView) {
-    View viewPopup =
-        LayoutInflater.from(MainActivity.this).inflate(R.layout.menu_item_addcontact, null);
-    PopupWindow popupWindow =
-        new PopupWindow(
-            viewPopup,
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT,
-            true);
+    View viewPopup = LayoutInflater.from(MainActivity.this).inflate(R.layout.menu_item_addcontact, null);
+    PopupWindow popupWindow = new PopupWindow(
+        viewPopup,
+        LinearLayout.LayoutParams.WRAP_CONTENT,
+        ViewGroup.LayoutParams.WRAP_CONTENT,
+        true);
 
     ImageButton iBtnPerson = viewPopup.findViewById(R.id.addPerson);
     iBtnPerson.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Intent intent = new Intent(MainActivity.this, AddContactPersona.class);
+            Intent intent = new Intent(MainActivity.this, AddPersonActivity.class);
             startActivity(intent);
             popupWindow.dismiss();
           }
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
             popupWindow.dismiss();
-            Intent intent = new Intent(MainActivity.this, AddContactCompany.class);
+            Intent intent = new Intent(MainActivity.this, AddCompanyActivity.class);
             startActivity(intent);
           }
         });
