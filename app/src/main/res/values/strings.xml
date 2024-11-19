@@ -43,6 +43,7 @@
         <item>Twitter</item>
         <item>YouTube</item>
     </string-array>
+    <string name="title_activity_company_details">CompanyDetails</string>
 
 
 </resources>
