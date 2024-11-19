@@ -19,6 +19,7 @@ import android.widget.TextView;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.concurrent.CompletableFuture;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class AddContactCompany extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
     EditText name, descripcionCC, residenciaCC;
     Button cancelar, guardar;
+    private CompanyApi companyApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -502,7 +504,9 @@ public class AddContactCompany extends AppCompatActivity {
         String descripcion = descripcionCC.getText().toString();
         String resdencia = residenciaCC.getText().toString();
         Company company = new Company(null ,nombre,descripcion,resdencia,telefonos,direccion,email,fechas,asociados,redes);
-        CompanyApi companyApi = null;
+
+
+
         companyApi.saveCompany(company)
                 .thenRun(() -> {
                     // Success handling

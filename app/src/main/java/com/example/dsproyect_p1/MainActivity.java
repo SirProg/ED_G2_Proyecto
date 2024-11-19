@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dsproyect_p1.modules.adapter.AdapterRecyclerView;
-import com.example.dsproyect_p1.modules.add_contact.AddContact;
+import com.example.dsproyect_p1.modules.add_contact.*;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         iBtnPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddContact.class);
+                Intent intent = new Intent(MainActivity.this, AddContactPersona.class);
                 startActivity(intent);
             }
         });
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 popupWindow.dismiss();
-                Intent intent = new Intent(MainActivity.this, AddContact.class);
+                Intent intent = new Intent(MainActivity.this, AddContactCompany.class);
                 startActivity(intent);
             }
         });

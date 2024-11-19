@@ -36,6 +36,7 @@ public class AddContactPersona extends AppCompatActivity {
     private LinearLayout contenerdorTelephone, contenedorAdress, contenedorEmail, contenedorDate, contenedorSocialMedia, contenedorAsociados;
     EditText name, lastname, residencia;
     Button cancelar, guardar;
+    PersonApi personApi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -506,7 +507,7 @@ public class AddContactPersona extends AppCompatActivity {
         String apellido = lastname.getText().toString();
         String residenciaPais = residencia.getText().toString();
         Person person = new Person(null ,nombre,apellido,residenciaPais,telefonos,direccion,email,fechas,asociados,redes);
-        PersonApi personApi = null;
+
         personApi.savePerson(person)
                 .thenRun(() -> {
                     // Success handling
