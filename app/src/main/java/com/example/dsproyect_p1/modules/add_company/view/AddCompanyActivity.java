@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.add_company;
+package com.example.dsproyect_p1.modules.add_company.view;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.example.dsproyect_p1.MainActivity;
+import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.api.CompanyApi;
 import com.example.dsproyect_p1.data.model.*;
@@ -61,7 +61,7 @@ public class AddCompanyActivity extends AppCompatActivity {
           @Override
           public void onClick(View view) {
             registarContacto();
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), ContactsOverviewActivity.class);
             startActivity(i);
           }
         });
@@ -69,7 +69,7 @@ public class AddCompanyActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            Intent i = new Intent(getApplicationContext(), ContactsOverviewActivity.class);
             startActivity(i);
           }
         });

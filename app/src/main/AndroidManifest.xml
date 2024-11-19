@@ -17,11 +17,8 @@
             android:name=".modules.contact_details.CompanyDetails"
             android:exported="false" />
         <activity
-            android:name=".modules.add_company.AddCompanyActivity"
+            android:name=".modules.add_company.view.AddCompanyActivity"
             android:exported="true" />
-        <activity
-            android:name=".modules.contacts_overview.view.ViewContact"
-            android:exported="false" />
         <activity
             android:name=".modules.edit_contact.EditContact"
             android:exported="false" />
@@ -29,10 +26,10 @@
             android:name=".modules.contact_details.ContactDetails"
             android:exported="false" />
         <activity
-            android:name=".modules.add_person.AddPersonActivity"
+            android:name=".modules.add_person.view.AddPersonActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".modules.contacts_overview.view.UsersOverviewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

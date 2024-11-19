@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Primary"
-    tools:context=".modules.add_person.AddPersonActivity">
+    tools:context=".modules.add_person.view.AddPersonActivity">
 
     <LinearLayout
         android:id="@+id/headerAddContact"

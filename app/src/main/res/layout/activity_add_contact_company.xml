@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Primary"
-    tools:context=".modules.add_company.AddCompanyActivity">
+    tools:context=".modules.add_company.view.AddCompanyActivity">
 
     <ScrollView
         android:id="@+id/scroll1"
