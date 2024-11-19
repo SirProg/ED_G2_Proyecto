@@ -317,8 +317,6 @@
                     android:backgroundTint="@color/on_Tertiary" />
             </LinearLayout>
 
-
-
         </LinearLayout>
     </ScrollView>
 
@@ -341,8 +339,6 @@
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginEnd="5dp" />
-
-
 
         <Button
             android:id="@+id/guardarC"

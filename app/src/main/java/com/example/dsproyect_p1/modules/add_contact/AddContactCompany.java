@@ -491,7 +491,6 @@ public class AddContactCompany extends AppCompatActivity {
 
         }return listaAsociados;
     }
-
     public void registarContacto(){
         CustomArrayList<Telephone> telefonos = obtenerTelefonos();
         CustomArrayList<Email> email = obtenerEmail();
