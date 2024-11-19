@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.data.di;
+package com.example.dsproyect_p1.di;
 
 import com.example.dsproyect_p1.data.api.*;
 import com.example.dsproyect_p1.data.local.*;
