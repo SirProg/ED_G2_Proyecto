@@ -1,6 +1,7 @@
 package com.example.dsproyect_p1.modules.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.modules.contact_details.ContactDetails;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder>{
     Context context;
@@ -32,7 +34,8 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, ContactDetails.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -43,12 +46,14 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
+        Context contextViewHolder;
         private TextView nameContact;
         private ImageView imagenContact;
         private LinearLayout linearLayout;
 
         public ViewHolder(View view){
             super(view);
+            this.contextViewHolder = view.getContext();
             // Initializes the TextView according to the id
             this.nameContact = itemView.findViewById(R.id.tvNombreContact);
             this.imagenContact = itemView.findViewById(R.id.ivContact);
@@ -65,8 +70,6 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
         this.mDataSet = contact;
         this.context = context;
     }
-
-
 
 
 }

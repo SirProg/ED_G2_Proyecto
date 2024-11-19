@@ -1,6 +1,8 @@
 package com.example.dsproyect_p1.modules.contact_details;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,9 +11,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.modules.add_contact.AddContact;
 
 public class ContactDetails extends AppCompatActivity {
-
+    Intent intentPrimary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,5 +25,14 @@ public class ContactDetails extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+    }
+
+    public void closeDetail(View view){
+        finish();
+    }
+
+    public void editContact(View view){
+
     }
 }

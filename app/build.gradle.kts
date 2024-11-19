@@ -1,6 +1,5 @@
 plugins {
   alias(libs.plugins.android.application)
-  id("kotlin-kapt")
   id("com.google.dagger.hilt.android")
 }
 
@@ -48,10 +47,5 @@ dependencies {
 
   // Hilt for Dependency Injection
   implementation("com.google.dagger:hilt-android:2.51.1")
-  kapt("com.google.dagger:hilt-android-compiler:2.51.1")
-}
-
-// Allow references to generated code
-kapt {
-  correctErrorTypes = true
+  annotationProcessor("com.google.dagger:hilt-android-compiler:2.51.1")
 }

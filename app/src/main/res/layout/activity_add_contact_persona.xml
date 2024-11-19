@@ -8,14 +8,37 @@
     android:background="@color/Primary"
     tools:context=".modules.add_contact.AddContactPersona">
 
+    <LinearLayout
+        android:id="@+id/headerAddContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:background="@color/on_Primary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir Contacto"
+            android:textColor="@color/textColorPrimary"
+            android:textSize="18sp"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerAddContact"
         app:layout_constraintBottom_toTopOf="@+id/inferior"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/Secondary"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,7 +72,9 @@
                 android:id="@+id/nameid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre" />
+                android:hint="Nombre"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/lastNameID"
@@ -71,7 +96,8 @@
                     android:layout_weight="1"
                     android:text="Teléfono:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
@@ -81,7 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="8dp"
+                >
 
 
                 <Button
@@ -89,9 +116,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/extra"
                     android:text="Añadir número de teléfono"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/textColorPrimary"
+                    android:backgroundTint="@color/on_Tertiary"/>
             </LinearLayout>
 
             <EditText
@@ -114,7 +141,8 @@
                     android:layout_weight="1"
                     android:text="E-mail:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
@@ -130,9 +158,9 @@
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/extra"
                     android:text="+ Añadir E-mail"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/textColorPrimary"
+                    android:backgroundTint="@color/on_Tertiary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -150,7 +178,8 @@
                     android:layout_weight="1"
                     android:text="Dirección:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
@@ -168,9 +197,9 @@
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/extra"
-                    android:text="Añadir Direccion"
-                    android:textColor="#FFFFFF" />
+                    android:text="+ Añadir Direccion"
+                    android:textColor="@color/textColorPrimary"
+                    android:backgroundTint="@color/on_Tertiary" />
             </LinearLayout>
 
             <LinearLayout
@@ -205,7 +234,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/extra"
+                    android:backgroundTint="@color/on_Tertiary"
                     android:text="Añadir contacto asociado"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
@@ -225,7 +254,8 @@
                     android:layout_weight="1"
                     android:text="Fechas:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
@@ -243,9 +273,9 @@
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/extra"
                     android:text="Añadir Fecha"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/textColorPrimary"
+                    android:backgroundTint="@color/on_Tertiary" />
             </LinearLayout>
 
             <LinearLayout
@@ -263,7 +293,8 @@
                     android:layout_weight="1"
                     android:text="Red Social:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
@@ -281,9 +312,9 @@
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/extra"
                     android:text="Añadir Red Social"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/textColorPrimary"
+                    android:backgroundTint="@color/on_Tertiary" />
             </LinearLayout>
 
         </LinearLayout>
@@ -294,6 +325,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/on_Primary"
+        android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -305,7 +337,8 @@
             android:backgroundTint="@color/cancelar"
             android:text="@string/close"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp" />
 
         <Button
             android:id="@+id/guardarC"
@@ -315,7 +348,8 @@
             android:backgroundTint="@color/add"
             android:text="@string/add"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
