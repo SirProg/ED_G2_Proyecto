@@ -22,6 +22,7 @@ import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
 import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.PersonRecyclerView;
+import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.CompanyRecyclerView;
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +34,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
   private PersonRecyclerView personRecyclerView;
+  private CompanyRecyclerView companyRecyclerView;
 
   @Inject
   PersonRepository personRepository;
@@ -43,7 +45,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
-    setContentView(R.layout.activity_contacts_overview);
+    setContentView(R.layout.activity_main);
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(R.id.main),
         (v, insets) -> {
@@ -58,7 +60,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
     personRecyclerView = new PersonRecyclerView(this, List.of());
     recyclerView.setAdapter(personRecyclerView);
 
-    fetchContacts();
+    fetchPersons();
 
     btnAddContact = findViewById(R.id.openPopUpAdd);
     btnAddContact.setOnClickListener(
@@ -70,7 +72,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
         });
   }
 
-  private void fetchContacts() {
+  private void fetchPersons() {
     CompletableFuture<List<Person>> future = personRepository.getPersons();
     future
         .thenAccept(
@@ -87,7 +89,32 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                   () -> {
                     Toast.makeText(
                         ContactsOverviewActivity.this,
-                        "Failed to load contacts",
+                        "Failed to load persons",
+                        Toast.LENGTH_SHORT)
+                        .show();
+                  });
+              return null;
+            });
+  }
+
+  private void fetchCompanies() {
+    CompletableFuture<List<Company>> future = companyRepository.getCompanies();
+    future
+        .thenAccept(
+            companies -> {
+              runOnUiThread(
+                  () -> {
+                    companyRecyclerView = new CompanyRecyclerView(ContactsOverviewActivity.this, companies);
+                    recyclerView.setAdapter(companyRecyclerView);
+                  });
+            })
+        .exceptionally(
+            ex -> {
+              runOnUiThread(
+                  () -> {
+                    Toast.makeText(
+                        ContactsOverviewActivity.this,
+                        "Failed to load companies",
                         Toast.LENGTH_SHORT)
                         .show();
                   });
