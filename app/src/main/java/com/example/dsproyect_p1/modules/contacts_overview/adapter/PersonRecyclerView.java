@@ -15,18 +15,18 @@ import com.example.dsproyect_p1.data.model.Person;
 import com.example.dsproyect_p1.modules.person_details.view.PersonDetailsActivity;
 import java.util.List;
 
-public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
+public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.ViewHolder> {
   private Context context;
   private List<Person> personList;
 
-  public AdapterRecyclerView(Context context, List<Person> persons) {
+  public PersonRecyclerView(Context context, List<Person> persons) {
     this.context = context;
     this.personList = persons;
   }
 
   @NonNull
   @Override
-  public AdapterRecyclerView.ViewHolder onCreateViewHolder(
+  public PersonRecyclerView.ViewHolder onCreateViewHolder(
       @NonNull ViewGroup parent, int viewType) {
     View view =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_contact, parent, false);

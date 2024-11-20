@@ -19,9 +19,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.data.repository.*;
-import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.AdapterRecyclerView;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
+import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.PersonRecyclerView;
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -32,7 +32,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
   private RecyclerView recyclerView;
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
-  private AdapterRecyclerView adapterRecyclerView;
+  private PersonRecyclerView personRecyclerView;
 
   @Inject
   PersonRepository personRepository;
@@ -55,8 +55,8 @@ public class ContactsOverviewActivity extends AppCompatActivity {
     recyclerView = findViewById(R.id.recyclerViewContacts);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-    adapterRecyclerView = new AdapterRecyclerView(this, List.of());
-    recyclerView.setAdapter(adapterRecyclerView);
+    personRecyclerView = new PersonRecyclerView(this, List.of());
+    recyclerView.setAdapter(personRecyclerView);
 
     fetchContacts();
 
@@ -77,8 +77,8 @@ public class ContactsOverviewActivity extends AppCompatActivity {
             persons -> {
               runOnUiThread(
                   () -> {
-                    adapterRecyclerView = new AdapterRecyclerView(ContactsOverviewActivity.this, persons);
-                    recyclerView.setAdapter(adapterRecyclerView);
+                    personRecyclerView = new PersonRecyclerView(ContactsOverviewActivity.this, persons);
+                    recyclerView.setAdapter(personRecyclerView);
                   });
             })
         .exceptionally(
