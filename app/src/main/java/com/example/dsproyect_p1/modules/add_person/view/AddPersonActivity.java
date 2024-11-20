@@ -41,7 +41,7 @@ public class AddPersonActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
-    setContentView(R.layout.activity_add_contact_persona);
+    setContentView(R.layout.activity_add_person);
 
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(R.id.main),
