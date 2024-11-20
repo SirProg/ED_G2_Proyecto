@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.contact_details;
+package com.example.dsproyect_p1.modules.company_details.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.modules.edit_contact.EditContact;
 
-public class CompanyDetails extends AppCompatActivity {
+public class CompanyDetailsActivity extends AppCompatActivity {
     LinearLayout telephone, adress, email, eventDate, associateContact, socialMedia;
     TextView name, description, residencyCountry;
     @Override
@@ -221,7 +221,7 @@ public class CompanyDetails extends AppCompatActivity {
     }
 
     public void editContact(View view){
-        Intent intent = new Intent(CompanyDetails.this, EditContact.class);
+        Intent intent = new Intent(CompanyDetailsActivity.this, EditContact.class);
         startActivity(intent);
     }
 }

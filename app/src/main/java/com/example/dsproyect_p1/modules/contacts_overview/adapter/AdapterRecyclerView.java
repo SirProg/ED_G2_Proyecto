@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Person;
-import com.example.dsproyect_p1.modules.contact_details.ContactDetails;
+import com.example.dsproyect_p1.modules.person_details.view.PersonDetailsActivity;
 import java.util.List;
 
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
@@ -39,7 +39,7 @@ public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerVie
     holder.nameContact.setText(person.getFirstName() + " " + person.getLastName());
     holder.linearLayout.setOnClickListener(
         v -> {
-          Intent intent = new Intent(context, ContactDetails.class);
+          Intent intent = new Intent(context, PersonDetailsActivity.class);
           intent.putExtra("PERSON_ID", person.getId().toString());
           context.startActivity(intent);
         });
