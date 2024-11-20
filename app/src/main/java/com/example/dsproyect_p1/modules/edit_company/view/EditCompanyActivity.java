@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.edit_contact;
+package com.example.dsproyect_p1.modules.edit_company.view;
 
 import android.os.Bundle;
 
@@ -10,13 +10,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
 
-public class EditContact extends AppCompatActivity {
+public class EditCompanyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_edit_contact);
+        setContentView(R.layout.activity_edit_company);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

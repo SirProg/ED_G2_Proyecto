@@ -20,7 +20,10 @@
             android:name=".modules.add_company.view.AddCompanyActivity"
             android:exported="true" />
         <activity
-            android:name=".modules.edit_contact.EditContact"
+            android:name=".modules.edit_person.view.EditPersonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".modules.edit_company.view.EditCompanyActivity"
             android:exported="false" />
         <activity
             android:name=".modules.person_details.view.PersonDetailsActivity"

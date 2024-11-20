@@ -15,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.modules.edit_contact.EditContact;
+import com.example.dsproyect_p1.modules.edit_company.view.EditCompanyActivity;
 
 public class CompanyDetailsActivity extends AppCompatActivity {
     LinearLayout telephone, adress, email, eventDate, associateContact, socialMedia;
@@ -221,7 +221,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
     }
 
     public void editContact(View view){
-        Intent intent = new Intent(CompanyDetailsActivity.this, EditContact.class);
+        Intent intent = new Intent(CompanyDetailsActivity.this, EditCompanyActivity.class);
         startActivity(intent);
     }
 }

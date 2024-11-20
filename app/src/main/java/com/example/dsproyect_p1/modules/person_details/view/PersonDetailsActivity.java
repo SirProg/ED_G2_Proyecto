@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.modules.edit_contact.EditContact;
+import com.example.dsproyect_p1.modules.edit_person.view.EditPersonActivity;
 
 public class PersonDetailsActivity extends AppCompatActivity {
   LinearLayout telephone, emails, adress;
@@ -124,7 +124,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
   }
 
   public void editContact(View view) {
-    Intent intent = new Intent(PersonDetailsActivity.this, EditContact.class);
+    Intent intent = new Intent(PersonDetailsActivity.this, EditPersonActivity.class);
     startActivity(intent);
   }
 }
