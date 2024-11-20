@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.data.repository.*;
-import com.example.dsproyect_p1.modules.adapter.AdapterRecyclerView;
+import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.AdapterRecyclerView;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
 import dagger.hilt.android.AndroidEntryPoint;
