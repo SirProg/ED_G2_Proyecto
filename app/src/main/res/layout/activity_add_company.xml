@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Primary"
+    android:background="@color/Secondary"
     tools:context=".modules.add_company.view.AddCompanyActivity">
 
     <ScrollView
@@ -303,7 +303,8 @@
         android:layout_height="wrap_content"
         android:background="@color/on_Primary"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="5dp">
 
         <Button
             android:id="@+id/cancelarCC"
@@ -313,7 +314,8 @@
             android:backgroundTint="@color/cancelar"
             android:text="@string/close"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginEnd="5dp"/>
 
         <Button
             android:id="@+id/guardarCC"
@@ -323,7 +325,8 @@
             android:backgroundTint="@color/add"
             android:text="@string/add"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"/>
     </LinearLayout>
 
 

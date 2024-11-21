@@ -32,7 +32,7 @@
             android:name=".modules.add_person.view.AddPersonActivity"
             android:exported="true" />
         <activity
-            android:name=".modules.contacts_overview.view.UsersOverviewActivity"
+            android:name=".modules.contacts_overview.view.ContactsOverviewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
