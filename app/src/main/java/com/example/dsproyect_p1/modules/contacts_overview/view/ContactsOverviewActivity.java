@@ -18,11 +18,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
 import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.PersonRecyclerView;
 import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.CompanyRecyclerView;
+import com.example.dsproyect_p1.data.model.Person;
+import com.example.dsproyect_p1.data.model.Company;
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -45,7 +49,7 @@ public class ContactsOverviewActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_contacts_overview);
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(R.id.main),
         (v, insets) -> {
