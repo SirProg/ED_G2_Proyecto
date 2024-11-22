@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.contacts_overview.view.adapter;
+package com.example.dsproyect_p1.modules.contacts_overview.adapter;
 
 import android.content.Context;
 import android.content.Intent;

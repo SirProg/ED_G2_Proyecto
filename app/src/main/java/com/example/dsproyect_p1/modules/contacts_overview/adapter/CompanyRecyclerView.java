@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.contacts_overview.view.adapter;
+package com.example.dsproyect_p1.modules.contacts_overview.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,10 +18,16 @@ import java.util.List;
 public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerView.ViewHolder> {
   private Context context;
   private List<Company> companyList;
+  final CompanyRecyclerView.onItemClickListener listener;
 
-  public CompanyRecyclerView(Context context, List<Company> companies) {
+  public interface onItemClickListener{
+    void onItemClick(Company company);
+  }
+
+  public CompanyRecyclerView(Context context, List<Company> companies, CompanyRecyclerView.onItemClickListener listener) {
     this.context = context;
     this.companyList = companies;
+    this.listener = listener;
   }
 
   @NonNull
@@ -42,6 +48,7 @@ public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerVie
           intent.putExtra("PERSON_ID", company.getId().toString());
           context.startActivity(intent);
         });
+
   }
 
   @Override
@@ -61,6 +68,16 @@ public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerVie
       this.nameContact = itemView.findViewById(R.id.tvNombreContact);
       this.imagenContact = itemView.findViewById(R.id.ivContact);
       this.linearLayout = itemView.findViewById(R.id.linearLayoutContact);
+    }
+
+    public void binData(final Company company){
+      nameContact.setText(company.getName());
+      itemView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+          listener.onItemClick(company);
+        }
+      });
     }
 
     public TextView getTextView() {

@@ -23,10 +23,13 @@ import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
-import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.PersonRecyclerView;
-import com.example.dsproyect_p1.modules.contacts_overview.view.adapter.CompanyRecyclerView;
+import com.example.dsproyect_p1.modules.company_details.view.CompanyDetailsActivity;
+import com.example.dsproyect_p1.modules.contacts_overview.adapter.PersonRecyclerView;
+import com.example.dsproyect_p1.modules.contacts_overview.adapter.CompanyRecyclerView;
 import com.example.dsproyect_p1.data.model.Person;
 import com.example.dsproyect_p1.data.model.Company;
+import com.example.dsproyect_p1.modules.person_details.view.PersonDetailsActivity;
+
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,7 +37,7 @@ import javax.inject.Inject;
 
 @AndroidEntryPoint
 public class ContactsOverviewActivity extends AppCompatActivity {
-  private RecyclerView recyclerView;
+  private RecyclerView recyclerView, recyclerViewCompany;
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
   private PersonRecyclerView personRecyclerView;
@@ -66,6 +69,19 @@ public class ContactsOverviewActivity extends AppCompatActivity {
 
     fetchPersons();
 
+    recyclerViewCompany = findViewById(R.id.recyclerViewCompany);
+    recyclerViewCompany.setLayoutManager(new LinearLayoutManager(this));
+
+    companyRecyclerView = new CompanyRecyclerView(this, List.of(), new CompanyRecyclerView.onItemClickListener() {
+        @Override
+        public void onItemClick(Company company) {
+            moveToDescriptionCompany(company);
+        }
+    });
+    recyclerViewCompany.setAdapter(companyRecyclerView);
+
+    fetchCompanies();
+
     btnAddContact = findViewById(R.id.openPopUpAdd);
     btnAddContact.setOnClickListener(
         new View.OnClickListener() {
@@ -75,6 +91,18 @@ public class ContactsOverviewActivity extends AppCompatActivity {
           }
         });
   }
+
+  public void moveToDescriptionCompany(Company company){
+        Intent intent = new Intent(ContactsOverviewActivity.this, CompanyDetailsActivity.class);
+        intent.putExtra("CompanyDetailsActivity", company);
+        startActivity(intent);
+  }
+
+    public void moveToDescriptionPerson(Person person){
+        Intent intent = new Intent(ContactsOverviewActivity.this, PersonDetailsActivity.class);
+        intent.putExtra("CompanyDetailsActivity", person);
+        startActivity(intent);
+    }
 
   private void fetchPersons() {
     CompletableFuture<List<Person>> future = personRepository.getPersons();
@@ -108,7 +136,12 @@ public class ContactsOverviewActivity extends AppCompatActivity {
             companies -> {
               runOnUiThread(
                   () -> {
-                    companyRecyclerView = new CompanyRecyclerView(ContactsOverviewActivity.this, companies);
+                    companyRecyclerView = new CompanyRecyclerView(ContactsOverviewActivity.this, companies, new CompanyRecyclerView.onItemClickListener() {
+                        @Override
+                        public void onItemClick(Company company) {
+                            moveToDescriptionCompany(company);
+                        }
+                    });
                     recyclerView.setAdapter(companyRecyclerView);
                   });
             })

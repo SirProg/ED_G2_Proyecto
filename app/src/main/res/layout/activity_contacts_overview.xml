@@ -31,17 +31,51 @@
 
     </LinearLayout>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewContacts"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/Secondary"
         app:layout_constraintTop_toBottomOf="@+id/frameHeader"
         app:layout_constraintBottom_toTopOf="@+id/frameFooter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Person Contacts"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:background="@color/Tertiary"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewContacts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/Secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Company Contacts"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:background="@color/Tertiary"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCompany"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/Secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/frameFooter"
