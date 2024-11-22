@@ -1,7 +1,5 @@
 package com.example.dsproyect_p1.modules.contacts_overview.adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Company;
-import com.example.dsproyect_p1.modules.company_details.view.CompanyDetailsActivity;
 import java.util.List;
 
 public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerView.ViewHolder> {
-  private Context context;
   private List<Company> companyList;
-  final CompanyRecyclerView.onItemClickListener listener;
+  private onItemClickListener listener;
 
-  public interface onItemClickListener{
+  public CompanyRecyclerView(List<Company> companies, onItemClickListener listener) {
+    this.companyList = companies;
+    this.listener = listener;
+  }
+
+  public interface onItemClickListener {
     void onItemClick(Company company);
   }
 
-  public CompanyRecyclerView(Context context, List<Company> companies, CompanyRecyclerView.onItemClickListener listener) {
-    this.context = context;
+  public void updateData(List<Company> companies) {
     this.companyList = companies;
-    this.listener = listener;
+    notifyDataSetChanged();
   }
 
   @NonNull
@@ -41,14 +41,7 @@ public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerVie
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     Company company = companyList.get(position);
-    holder.nameContact.setText(company.getName());
-    holder.linearLayout.setOnClickListener(
-        v -> {
-          Intent intent = new Intent(context, CompanyDetailsActivity.class);
-          intent.putExtra("PERSON_ID", company.getId().toString());
-          context.startActivity(intent);
-        });
-
+    holder.bindData(company, listener);
   }
 
   @Override
@@ -57,31 +50,25 @@ public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerVie
   }
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
-    Context contextViewHolder;
     private TextView nameContact;
-    private ImageView imagenContact;
+    private ImageView imageContact;
     private LinearLayout linearLayout;
 
     public ViewHolder(View view) {
       super(view);
-      this.contextViewHolder = view.getContext();
       this.nameContact = itemView.findViewById(R.id.tvNombreContact);
-      this.imagenContact = itemView.findViewById(R.id.ivContact);
+      this.imageContact = itemView.findViewById(R.id.ivContact);
       this.linearLayout = itemView.findViewById(R.id.linearLayoutContact);
     }
 
-    public void binData(final Company company){
+    public void bindData(final Company company, final onItemClickListener listener) {
       nameContact.setText(company.getName());
-      itemView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-          listener.onItemClick(company);
-        }
-      });
-    }
-
-    public TextView getTextView() {
-      return nameContact;
+      linearLayout.setOnClickListener(
+          view -> {
+            if (listener != null) {
+              listener.onItemClick(company);
+            }
+          });
     }
   }
 }

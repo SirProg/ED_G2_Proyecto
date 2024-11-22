@@ -1,7 +1,5 @@
 package com.example.dsproyect_p1.modules.contacts_overview.adapter;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,37 +10,37 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Person;
-import com.example.dsproyect_p1.modules.person_details.view.PersonDetailsActivity;
 import java.util.List;
 
 public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.ViewHolder> {
-  private Context context;
   private List<Person> personList;
+  private onItemClickListener listener;
 
-  public PersonRecyclerView(Context context, List<Person> persons) {
-    this.context = context;
+  public PersonRecyclerView(List<Person> persons, onItemClickListener listener) {
     this.personList = persons;
+    this.listener = listener;
+  }
+
+  public interface onItemClickListener {
+    void onItemClick(Person person);
+  }
+
+  public void updateData(List<Person> persons) {
+    this.personList = persons;
+    notifyDataSetChanged();
   }
 
   @NonNull
   @Override
-  public PersonRecyclerView.ViewHolder onCreateViewHolder(
-      @NonNull ViewGroup parent, int viewType) {
-    View view =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_contact, parent, false);
+  public PersonRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_contact, parent, false);
     return new ViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
     Person person = personList.get(position);
-    holder.nameContact.setText(person.getFirstName() + " " + person.getLastName());
-    holder.linearLayout.setOnClickListener(
-        v -> {
-          Intent intent = new Intent(context, PersonDetailsActivity.class);
-          intent.putExtra("PERSON_ID", person.getId().toString());
-          context.startActivity(intent);
-        });
+    holder.bindData(person, listener);
   }
 
   @Override
@@ -51,21 +49,25 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
   }
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
-    Context contextViewHolder;
     private TextView nameContact;
-    private ImageView imagenContact;
+    private ImageView imageContact;
     private LinearLayout linearLayout;
 
     public ViewHolder(View view) {
       super(view);
-      this.contextViewHolder = view.getContext();
       this.nameContact = itemView.findViewById(R.id.tvNombreContact);
-      this.imagenContact = itemView.findViewById(R.id.ivContact);
+      this.imageContact = itemView.findViewById(R.id.ivContact);
       this.linearLayout = itemView.findViewById(R.id.linearLayoutContact);
     }
 
-    public TextView getTextView() {
-      return nameContact;
+    public void bindData(final Person person, final onItemClickListener listener) {
+      nameContact.setText(person.getFirstName() + " " + person.getLastName());
+      linearLayout.setOnClickListener(
+          view -> {
+            if (listener != null) {
+              listener.onItemClick(person);
+            }
+          });
     }
   }
 }
