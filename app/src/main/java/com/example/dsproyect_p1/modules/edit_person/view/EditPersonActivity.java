@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.contacts_overview.view;
+package com.example.dsproyect_p1.modules.edit_person.view;
 
 import android.os.Bundle;
 
@@ -10,13 +10,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
 
-public class ViewContact extends AppCompatActivity {
+public class EditPersonActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_view_contact);
+        setContentView(R.layout.activity_edit_person);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);

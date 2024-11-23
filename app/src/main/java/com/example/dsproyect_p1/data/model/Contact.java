@@ -1,12 +1,14 @@
 package com.example.dsproyect_p1.data.model;
 
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
+
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Contact {
+public abstract class Contact implements Serializable {
 
   private final UUID id;
   private final String residencyCountry;

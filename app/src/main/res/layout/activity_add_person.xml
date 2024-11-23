@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Primary"
-    tools:context=".modules.add_contact.AddContactPersona">
+    tools:context=".modules.add_person.view.AddPersonActivity">
 
     <LinearLayout
         android:id="@+id/headerAddContact"
@@ -73,14 +73,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre"
-                android:textColorHint="@color/black"
                 android:textColor="@color/black"/>
 
             <EditText
                 android:id="@+id/lastNameID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido" />
+                android:hint="Apellido"
+                android:textColor="@color/black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,7 +216,8 @@
                     android:layout_weight="1"
                     android:text="Contactos asociados:"
                     android:textSize="18dp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
