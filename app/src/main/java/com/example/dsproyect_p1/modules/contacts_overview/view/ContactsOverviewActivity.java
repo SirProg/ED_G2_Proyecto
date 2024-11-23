@@ -60,6 +60,9 @@ public class ContactsOverviewActivity extends AppCompatActivity {
           return insets;
         });
 
+    injectPersons();
+    injectCompanies();
+
     recyclerView = findViewById(R.id.recyclerViewContacts);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -114,6 +117,34 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                   });
               return null;
             });
+  }
+
+  private void injectCompanies() {
+    Company company1 = new Company(null, "Chevrolet", null, null, null, null, null, null, null, null);
+    Company company2 = new Company(null, "Ferrari", null, null, null, null, null, null, null, null);
+    Company company3 = new Company(null, "Audi", null, null, null, null, null, null, null, null);
+    Company company4 = new Company(null, "Telconet", null, null, null, null, null, null, null, null);
+    Company company5 = new Company(null, "Mazda", null, null, null, null, null, null, null, null);
+    CompletableFuture<Void> future1 = companyRepository.saveCompany(company1);
+    CompletableFuture<Void> future2 = companyRepository.saveCompany(company2);
+    CompletableFuture<Void> future3 = companyRepository.saveCompany(company3);
+    CompletableFuture<Void> future4 = companyRepository.saveCompany(company4);
+    CompletableFuture<Void> future5 = companyRepository.saveCompany(company5);
+    CompletableFuture.allOf(future1, future2, future3, future4, future5).join();
+  }
+
+  private void injectPersons() {
+    Person person1 = new Person(null, "Juan", null, null, null, null, null, null, null, null);
+    Person person2 = new Person(null, "Julio", null, null, null, null, null, null, null, null);
+    Person person3 = new Person(null, "Kevin", null, null, null, null, null, null, null, null);
+    Person person4 = new Person(null, "Daniela", null, null, null, null, null, null, null, null);
+    Person person5 = new Person(null, "Juanfra", null, null, null, null, null, null, null, null);
+    CompletableFuture<Void> future1 = personRepository.savePerson(person1);
+    CompletableFuture<Void> future2 = personRepository.savePerson(person2);
+    CompletableFuture<Void> future3 = personRepository.savePerson(person3);
+    CompletableFuture<Void> future4 = personRepository.savePerson(person4);
+    CompletableFuture<Void> future5 = personRepository.savePerson(person5);
+    CompletableFuture.allOf(future1, future2, future3, future4, future5).join();
   }
 
   private void fetchCompanies() {

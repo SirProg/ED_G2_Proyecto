@@ -45,7 +45,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     textTelephoneC.setLayoutParams(
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-    textTelephoneC.setTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
+    textTelephoneC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
     textTelephoneC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     textTelephoneC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     textTelephoneC.setPadding(5, 5, 5, 5);
@@ -55,7 +55,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     textLabelC.setLayoutParams(
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-    textLabelC.setTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
+    textLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
     textLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     textLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     textLabelC.setPadding(5, 5, 5, 5);
@@ -71,7 +71,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     textAdressC.setLayoutParams(
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-    textAdressC.setTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
+    textAdressC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
     textAdressC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     textAdressC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     textAdressC.setPadding(5, 5, 5, 5);
@@ -82,7 +82,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     textAdressLabelC.setLayoutParams(
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-    textAdressLabelC.setTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
+    textAdressLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
     textAdressLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     textAdressLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     textAdressLabelC.setPadding(5, 5, 5, 5);
@@ -98,7 +98,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     textEmailC.setLayoutParams(
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-    textEmailC.setTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
+    textEmailC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
     textEmailC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     textEmailC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     textEmailC.setPadding(5, 5, 5, 5);
@@ -109,7 +109,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     textEmailLabelC.setLayoutParams(
         new LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-    textEmailLabelC.setTextColor(ContextCompat.getColor(this, R.color.textColorPrimary));
+    textEmailLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
     textEmailLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
     textEmailLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
     textEmailLabelC.setPadding(5, 5, 5, 5);

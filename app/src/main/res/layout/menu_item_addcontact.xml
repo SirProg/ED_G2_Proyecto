@@ -18,11 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Contact"
-            android:background="@color/on_Primary"
+            android:background="?attr/colorSecondary"
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
-            android:textColor="@color/textColorPrimary"/>
+            android:textColor="?attr/colorOnSecondary"/>
 
         <ImageButton
             android:id="@+id/addPerson"
@@ -42,7 +42,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:padding="0dp"
-            android:background="@color/white"
+            android:background="?attr/colorSurface"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:contentDescription="add company imagen"

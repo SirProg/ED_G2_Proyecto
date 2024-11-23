@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Primary"
+    android:background="?attr/colorPrimary"
     tools:context=".modules.add_person.view.AddPersonActivity">
 
     <LinearLayout
@@ -17,13 +17,13 @@
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="@color/on_Primary">
+        android:background="?attr/colorOnPrimary">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Añadir Contacto"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="?attr/colorPrimaryContainer"
             android:textSize="18sp"
             android:layout_gravity="center"/>
 
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/inferior"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/Secondary"
+        android:background="?attr/colorSecondary"
         >
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="@color/on_Primary"
+                android:background="?attr/colorOnPrimary"
                 android:paddingVertical="8dp">
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_weight="1"
                     android:text="Persona"
                     android:textSize="22dp"
-                    android:textColor="@color/white"
+                    android:textColor="?attr/colorSurface"
                     android:textAlignment="center"
                     android:textStyle="bold"/>
 
@@ -73,14 +73,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nombre"
-                android:textColor="@color/black"/>
+                android:textColor="?attr/colorSurfaceVariant"/>
 
             <EditText
                 android:id="@+id/lastNameID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Apellido"
-                android:textColor="@color/black"/>
+                android:textColor="?attr/colorSurfaceVariant"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                     android:text="Teléfono:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="?attr/colorSurfaceVariant"/>
 
 
             </LinearLayout>
@@ -117,8 +117,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="Añadir número de teléfono"
-                    android:textColor="@color/textColorPrimary"
-                    android:backgroundTint="@color/on_Tertiary"/>
+                    android:textColor="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorOnTertiary"/>
             </LinearLayout>
 
             <EditText
@@ -142,7 +142,7 @@
                     android:text="E-mail:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="?attr/colorSurfaceVariant"/>
 
 
             </LinearLayout>
@@ -159,8 +159,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="+ Añadir E-mail"
-                    android:textColor="@color/textColorPrimary"
-                    android:backgroundTint="@color/on_Tertiary"/>
+                    android:textColor="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorOnTertiary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -179,7 +179,7 @@
                     android:text="Dirección:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="?attr/colorSurfaceVariant"/>
 
 
             </LinearLayout>
@@ -198,8 +198,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="+ Añadir Direccion"
-                    android:textColor="@color/textColorPrimary"
-                    android:backgroundTint="@color/on_Tertiary" />
+                    android:textColor="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorOnTertiary" />
             </LinearLayout>
 
             <LinearLayout
@@ -217,7 +217,7 @@
                     android:text="Contactos asociados:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="?attr/colorSurfaceVariant"/>
 
 
             </LinearLayout>
@@ -235,7 +235,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="@color/on_Tertiary"
+                    android:backgroundTint="?attr/colorOnTertiary"
                     android:text="Añadir contacto asociado"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
@@ -256,7 +256,7 @@
                     android:text="Fechas:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="?attr/colorSurfaceVariant"/>
 
 
             </LinearLayout>
@@ -275,8 +275,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="Añadir Fecha"
-                    android:textColor="@color/textColorPrimary"
-                    android:backgroundTint="@color/on_Tertiary" />
+                    android:textColor="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorOnTertiary" />
             </LinearLayout>
 
             <LinearLayout
@@ -295,7 +295,7 @@
                     android:text="Red Social:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:textColor="?attr/colorSurfaceVariant"/>
 
 
             </LinearLayout>
@@ -314,8 +314,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="Añadir Red Social"
-                    android:textColor="@color/textColorPrimary"
-                    android:backgroundTint="@color/on_Tertiary" />
+                    android:textColor="?attr/colorPrimaryContainer"
+                    android:backgroundTint="?attr/colorOnTertiary" />
             </LinearLayout>
 
         </LinearLayout>
@@ -325,7 +325,7 @@
         android:id="@+id/inferior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/on_Primary"
+        android:background="?attr/colorOnPrimary"
         android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -335,9 +335,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/cancelar"
+            android:backgroundTint="?attr/colorOnError"
             android:text="@string/close"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorSurface"
             android:textStyle="bold"
             android:layout_marginEnd="5dp" />
 
@@ -346,9 +346,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/add"
+            android:backgroundTint="?attr/colorTertiary"
             android:text="@string/add"
-            android:textColor="@color/white"
+            android:textColor="?attr/colorSurface"
             android:textStyle="bold"
             android:layout_marginEnd="5dp" />
     </LinearLayout>

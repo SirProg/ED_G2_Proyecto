@@ -31,11 +31,8 @@ public class Person extends Contact {
     if (firstName == null || firstName.isEmpty()) {
       throw new IllegalArgumentException("First name cannot be null or empty");
     }
-    if (lastName == null || lastName.isEmpty()) {
-      throw new IllegalArgumentException("Last name cannot be null or empty");
-    }
     this.firstName = firstName;
-    this.lastName = lastName;
+    this.lastName = lastName != null ? lastName : "";
   }
 
   public String getFirstName() {

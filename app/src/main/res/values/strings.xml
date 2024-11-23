@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">DSProyect_P1</string>
-
     <string name="orden">Orden</string>
     <string name="Contactos">Contactos</string>
     <string name="add">Guardar</string>

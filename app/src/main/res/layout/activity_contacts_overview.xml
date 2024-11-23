@@ -11,7 +11,7 @@
         android:id="@+id/frameHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/on_Primary"
+        android:background="?attr/colorPrimary"
         android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/orden"
             android:layout_gravity="end"
-            android:backgroundTint="@color/on_Secondary"
+            android:backgroundTint="?attr/colorOnPrimary"
             />
 
 
@@ -43,14 +43,15 @@
             android:text="Person Contacts"
             android:textSize="18sp"
             android:textAlignment="center"
+            android:textColor="?attr/colorSurface"
             android:padding="5dp"
-            android:background="@color/Tertiary"/>
+            android:background="?attr/colorSecondary"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewContacts"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/Secondary"
+            android:background="?attr/colorOnSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -61,15 +62,16 @@
             android:text="Company Contacts"
             android:textSize="18sp"
             android:textAlignment="center"
+            android:textColor="?attr/colorSurface"
             android:padding="5dp"
-            android:background="@color/Tertiary"/>
+            android:background="?attr/colorTertiary"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCompany"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/Secondary"
+            android:background="?attr/colorSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -82,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/on_Primary"
+        android:background="?attr/colorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
@@ -92,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
-            android:backgroundTint="@color/on_Primary"
+            android:backgroundTint="?attr/colorOnPrimary"
             android:text="Contactos"/>
 
         <Button
@@ -101,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="4dp"
-            android:backgroundTint="@color/on_Primary"
+            android:backgroundTint="?attr/colorOnPrimary"
             android:text="Favoritos"/>
 
     </LinearLayout>
@@ -110,7 +112,7 @@
         android:id="@+id/openPopUpAdd"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:backgroundTint="@color/add"
+        android:backgroundTint="?attr/colorTertiary"
         app:layout_constraintBottom_toTopOf="@+id/frameFooter"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
