@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,11 +23,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.api.*;
 import com.example.dsproyect_p1.data.model.*;
+import com.example.dsproyect_p1.data.repository.PersonRepository;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+
+import javax.inject.Inject;
 
 public class AddPersonActivity extends AppCompatActivity {
   private LinearLayout contenerdorTelephone,
@@ -36,6 +41,8 @@ public class AddPersonActivity extends AppCompatActivity {
       contenedorAsociados;
   EditText name, lastname, residencia;
   Button cancelar, guardar;
+  @Inject
+  PersonRepository personRepository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -509,6 +516,11 @@ public class AddPersonActivity extends AppCompatActivity {
     String nombre = name.getText().toString();
     String apellido = lastname.getText().toString();
     String residenciaPais = residencia.getText().toString();
+
+    if(nombre.isEmpty() || apellido.isEmpty()){
+        Toast.makeText(this, "Name or LastName void", Toast.LENGTH_SHORT).show();
+        return;
+    }
     Person person = new Person(
         null,
         nombre,
@@ -520,6 +532,7 @@ public class AddPersonActivity extends AppCompatActivity {
         fechas,
         asociados,
         redes);
+    /*
     PersonApi personApi = null;
     personApi
         .savePerson(person)
@@ -534,5 +547,12 @@ public class AddPersonActivity extends AppCompatActivity {
               Log.e("PersonApi", "Failed to save person.", ex);
               return null;
             });
+    */
+    personRepository.savePerson(person).thenRun(()-> {
+        runOnUiThread(()->{
+            Toast.makeText(this, "Person saved successfully", Toast.LENGTH_SHORT).show();
+            finish();
+        });
+    });
   }
 }

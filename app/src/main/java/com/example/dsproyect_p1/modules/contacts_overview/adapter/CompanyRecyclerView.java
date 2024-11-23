@@ -22,7 +22,7 @@ public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerVie
   }
 
   public interface onItemClickListener {
-    void onItemClick(Company company);
+    void onItemClickCompany(Company company);
   }
 
   public void updateData(List<Company> companies) {
@@ -66,7 +66,7 @@ public class CompanyRecyclerView extends RecyclerView.Adapter<CompanyRecyclerVie
       linearLayout.setOnClickListener(
           view -> {
             if (listener != null) {
-              listener.onItemClick(company);
+              listener.onItemClickCompany(company);
             }
           });
     }

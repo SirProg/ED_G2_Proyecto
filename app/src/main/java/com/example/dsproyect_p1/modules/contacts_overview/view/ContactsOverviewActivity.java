@@ -22,6 +22,7 @@ import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Company;
 import com.example.dsproyect_p1.data.model.Person;
 import com.example.dsproyect_p1.data.repository.*;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
 import com.example.dsproyect_p1.modules.company_details.view.CompanyDetailsActivity;
@@ -34,12 +35,14 @@ import java.util.concurrent.CompletableFuture;
 import javax.inject.Inject;
 
 @AndroidEntryPoint
-public class ContactsOverviewActivity extends AppCompatActivity {
+public class ContactsOverviewActivity extends AppCompatActivity implements PersonRecyclerView.onItemClickListener, CompanyRecyclerView.onItemClickListener {
   private RecyclerView recyclerView, recyclerViewCompany;
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
   private PersonRecyclerView personRecyclerView;
   private CompanyRecyclerView companyRecyclerView;
+  private List<Person> persons = new CustomArrayList<>();
+  private List<Company> companies = new CustomArrayList<>();
 
   @Inject
   PersonRepository personRepository;
@@ -91,9 +94,15 @@ public class ContactsOverviewActivity extends AppCompatActivity {
     intent.putExtra("PersonDetailsActivity", person);
     startActivity(intent);
   }
+  @Override
+  protected void onResume() {
+      super.onResume();
+      fetchPersons();
+      fetchCompanies();
+  }
 
   private void fetchPersons() {
-    CompletableFuture<List<Person>> future = personRepository.getPersons();
+    /*CompletableFuture<List<Person>> future = personRepository.getPersons();
     future
         .thenAccept(
             persons -> {
@@ -114,9 +123,33 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                   });
               return null;
             });
+            */
+      personRepository.getPersons().thenAccept(loadPerson -> {
+          runOnUiThread(()-> {
+              persons.clear();
+              persons.addAll(loadPerson);
+              personRecyclerView.notifyDataSetChanged();
+          });
+      });
   }
 
+  @Override
+  public void onItemClickPerson(Person person){
+      Intent intent = new Intent(ContactsOverviewActivity.this, PersonDetailsActivity.class);
+      intent.putExtra("PERSON", person);
+      startActivity(intent);
+  }
+
+  @Override
+  public void onItemClickCompany(Company company){
+      Intent intent = new Intent(ContactsOverviewActivity.this, CompanyDetailsActivity.class);
+      intent.putExtra("COMPANY", company);
+      startActivity(intent);
+  }
+
+
   private void fetchCompanies() {
+    /*
     CompletableFuture<List<Company>> future = companyRepository.getCompanies();
     future
         .thenAccept(
@@ -138,6 +171,14 @@ public class ContactsOverviewActivity extends AppCompatActivity {
                   });
               return null;
             });
+     */
+      companyRepository.getCompanies().thenAccept(loadCompany -> {
+          runOnUiThread(()-> {
+              companies.clear();
+              companies.addAll(loadCompany);
+              companyRecyclerView.notifyDataSetChanged();
+          });
+      });
   }
 
   public void openPopupMenuAdd(View anchorView) {

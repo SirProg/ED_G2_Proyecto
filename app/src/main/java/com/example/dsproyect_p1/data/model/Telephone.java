@@ -8,4 +8,12 @@ public class Telephone {
     this.label = label;
     this.number = number;
   }
+
+  public String getLabel() {
+    return label;
+  }
+
+  public String getNumber() {
+    return number;
+  }
 }

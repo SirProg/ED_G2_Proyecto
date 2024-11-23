@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -506,6 +508,7 @@ public class AddCompanyActivity extends AppCompatActivity {
     String nombre = name.getText().toString();
     String descripcion = descripcionCC.getText().toString();
     String resdencia = residenciaCC.getText().toString();
+
     Company company = new Company(
         null,
         nombre,

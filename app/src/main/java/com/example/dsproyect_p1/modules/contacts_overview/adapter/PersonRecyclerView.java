@@ -22,7 +22,7 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
   }
 
   public interface onItemClickListener {
-    void onItemClick(Person person);
+    void onItemClickPerson(Person person);
   }
 
   public void updateData(List<Person> persons) {
@@ -61,11 +61,12 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
     }
 
     public void bindData(final Person person, final onItemClickListener listener) {
-      nameContact.setText(person.getFirstName() + " " + person.getLastName());
+      String name = person.getFirstName() + " " + person.getLastName();
+      nameContact.setText(name);
       linearLayout.setOnClickListener(
           view -> {
             if (listener != null) {
-              listener.onItemClick(person);
+              listener.onItemClickPerson(person);
             }
           });
     }
