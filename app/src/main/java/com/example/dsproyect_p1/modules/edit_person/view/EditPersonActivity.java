@@ -155,7 +155,7 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void addEditAddress(){
-        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarDireccion);
+        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarAddress);
 
         buttonAgreganDireccion.setOnClickListener(
                 v -> {
