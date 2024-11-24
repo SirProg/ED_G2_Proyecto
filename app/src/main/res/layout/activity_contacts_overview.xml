@@ -11,7 +11,7 @@
         android:id="@+id/frameHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/android:colorBackground"
         android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/orden"
             android:layout_gravity="end"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?attr/colorPrimary"
             />
 
 
@@ -43,15 +43,15 @@
             android:text="Person Contacts"
             android:textSize="18sp"
             android:textAlignment="center"
-            android:textColor="?attr/colorSurface"
+            android:textColor="?attr/colorOnBackground"
             android:padding="5dp"
-            android:background="?attr/colorSecondary"/>
+            android:background="?attr/android:colorBackground"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewContacts"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="?attr/colorOnSecondary"
+            android:background="?attr/android:colorBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -62,16 +62,16 @@
             android:text="Company Contacts"
             android:textSize="18sp"
             android:textAlignment="center"
-            android:textColor="?attr/colorSurface"
+            android:textColor="?attr/colorOnBackground"
             android:padding="5dp"
-            android:background="?attr/colorTertiary"/>
+            android:background="?attr/android:colorBackground"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewCompany"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="?attr/colorSecondary"
+            android:background="?attr/android:colorBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="?attr/colorOnPrimary"
+        android:background="?attr/android:colorBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Contactos"/>
 
         <Button
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="4dp"
-            android:backgroundTint="?attr/colorOnPrimary"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Favoritos"/>
 
     </LinearLayout>
@@ -112,7 +112,7 @@
         android:id="@+id/openPopUpAdd"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:backgroundTint="?attr/colorTertiary"
+        android:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/frameFooter"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
