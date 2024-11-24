@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/on_Primary">
+        android:background="?attr/colorOnPrimary">
 
         <TextView
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
-            android:textColor="@color/textColorPrimary"
+            android:textColor="?attr/colorOnSecondary"
             />
 
     </LinearLayout>
@@ -86,8 +86,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Phone Number"
-                        android:textColor="@color/textColorPrimary"
-                        android:backgroundTint="@color/on_Tertiary"/>
+                        android:textColor="?attr/colorOnSecondary"
+                        android:backgroundTint="?attr/colorOnTertiary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -116,8 +116,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Email"
-                        android:textColor="@color/textColorPrimary"
-                        android:backgroundTint="@color/on_Tertiary"/>
+                        android:textColor="?attr/colorOnSecondary"
+                        android:backgroundTint="?attr/colorOnTertiary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -144,8 +144,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Address"
-                        android:textColor="@color/textColorPrimary"
-                        android:backgroundTint="@color/on_Tertiary"/>
+                        android:textColor="?attr/colorSecondary"
+                        android:backgroundTint="?attr/colorOnTertiary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -173,8 +173,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Associated Contacts"
-                        android:textColor="@color/textColorPrimary"
-                        android:backgroundTint="@color/on_Tertiary"/>
+                        android:textColor="?attr/colorSecondary"
+                        android:backgroundTint="?attr/colorOnTertiary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -202,8 +202,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Date"
-                        android:textColor="@color/textColorPrimary"
-                        android:backgroundTint="@color/on_Tertiary"/>
+                        android:textColor="?attr/colorSecondary"
+                        android:backgroundTint="?attr/colorOnTertiary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -231,8 +231,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Social Media"
-                        android:textColor="@color/textColorPrimary"
-                        android:backgroundTint="@color/on_Tertiary"/>
+                        android:textColor="?attr/colorSecondary"
+                        android:backgroundTint="?attr/colorOnTertiary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -247,13 +247,13 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         android:padding="5dp"
-        android:background="@color/on_Primary">
+        android:background="?attr/colorOnPrimary">
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/cancelar"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Close"
             android:layout_marginEnd="5dp"/>
         <Button
@@ -261,7 +261,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Save"
-            android:backgroundTint="@color/add"
+            android:backgroundTint="?attr/colorSecondary"
             android:layout_marginStart="5dp"/>
 
     </LinearLayout>
