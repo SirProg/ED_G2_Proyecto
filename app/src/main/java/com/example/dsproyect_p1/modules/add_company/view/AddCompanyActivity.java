@@ -13,11 +13,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.dsproyect_p1.data.repository.CompanyRepository;
 import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.api.CompanyApi;
@@ -36,6 +40,7 @@ public class AddCompanyActivity extends AppCompatActivity {
       contenedorAsociados;
   EditText name, descripcionCC, residenciaCC;
   Button cancelar, guardar;
+  CompanyRepository companyRepository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -506,6 +511,7 @@ public class AddCompanyActivity extends AppCompatActivity {
     String nombre = name.getText().toString();
     String descripcion = descripcionCC.getText().toString();
     String resdencia = residenciaCC.getText().toString();
+
     Company company = new Company(
         null,
         nombre,
@@ -517,7 +523,7 @@ public class AddCompanyActivity extends AppCompatActivity {
         fechas,
         asociados,
         redes);
-    CompanyApi companyApi = null;
+    /*CompanyApi companyApi = null;
     companyApi
         .saveCompany(company)
         .thenRun(
@@ -530,6 +536,13 @@ public class AddCompanyActivity extends AppCompatActivity {
               // Error handling
               Log.e("PersonApi", "Failed to save company.", ex);
               return null;
-            });
+            });*/
+
+      companyRepository.saveCompany(company).thenRun(()-> {
+          runOnUiThread(()->{
+              Toast.makeText(this, "Company saved successfully", Toast.LENGTH_SHORT).show();
+              finish();
+          });
+      });
   }
 }

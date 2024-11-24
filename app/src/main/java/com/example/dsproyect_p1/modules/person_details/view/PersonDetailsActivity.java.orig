@@ -52,14 +52,91 @@ public class PersonDetailsActivity extends AppCompatActivity {
     lastName.setText(person.getLastName());
 
     telephone = findViewById(R.id.telephonesPerson);
+<<<<<<< HEAD
+
+    TextView textTelephoneC = new TextView(this);
+    textTelephoneC.setId(View.generateViewId());
+    textTelephoneC.setLayoutParams(
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    textTelephoneC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+    textTelephoneC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    textTelephoneC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    textTelephoneC.setPadding(5, 5, 5, 5);
+    textTelephoneC.setText("Teléfono: 123-456-7890");
+    TextView textLabelC = new TextView(this);
+    textLabelC.setId(View.generateViewId());
+    textLabelC.setLayoutParams(
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    textLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+    textLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    textLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    textLabelC.setPadding(5, 5, 5, 5);
+    textLabelC.setText("Etiqueta: Información de contacto");
+
+    telephone.addView(textTelephoneC);
+    telephone.addView(textLabelC);
+
+    adress = findViewById(R.id.adressesPerson);
+
+    TextView textAdressC = new TextView(this);
+    textAdressC.setId(View.generateViewId());
+    textAdressC.setLayoutParams(
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    textAdressC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+    textAdressC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    textAdressC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    textAdressC.setPadding(5, 5, 5, 5);
+    textAdressC.setText("Teléfono: 123-456-7890");
+
+    TextView textAdressLabelC = new TextView(this);
+    textAdressLabelC.setId(View.generateViewId());
+    textAdressLabelC.setLayoutParams(
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    textAdressLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+    textAdressLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    textAdressLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    textAdressLabelC.setPadding(5, 5, 5, 5);
+    textAdressLabelC.setText("Etiqueta: Información de contacto");
+
+    adress.addView(textAdressC);
+    adress.addView(textAdressLabelC);
+=======
     telephones = person.getTelephones();
 
     adress = findViewById(R.id.adressesPerson);
     addresses = person.getAddresses();
+>>>>>>> 86a3ca0b126026a7c084e58cfcfd83169859807e
 
     emails = findViewById(R.id.EmailsPerson);
     emailsList = person.getEmails();
 
+<<<<<<< HEAD
+    TextView textEmailC = new TextView(this);
+    textEmailC.setId(View.generateViewId());
+    textEmailC.setLayoutParams(
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    textEmailC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+    textEmailC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    textEmailC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    textEmailC.setPadding(5, 5, 5, 5);
+    textEmailC.setText("Teléfono: 123-456-7890");
+
+    TextView textEmailLabelC = new TextView(this);
+    textEmailLabelC.setId(View.generateViewId());
+    textEmailLabelC.setLayoutParams(
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+    textEmailLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+    textEmailLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+    textEmailLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+    textEmailLabelC.setPadding(5, 5, 5, 5);
+    textEmailLabelC.setText("Etiqueta: Información de contacto");
+=======
     loadPersonDetails();
   }
 
@@ -68,6 +145,7 @@ public class PersonDetailsActivity extends AppCompatActivity {
     super.onResume();
     loadPersonDetails();
   }
+>>>>>>> 86a3ca0b126026a7c084e58cfcfd83169859807e
 
   public void loadPersonDetails(){
 
