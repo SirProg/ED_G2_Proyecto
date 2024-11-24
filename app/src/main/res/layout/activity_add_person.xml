@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/android:colorBackground"
     tools:context=".modules.add_person.view.AddPersonActivity">
 
     <LinearLayout
@@ -17,13 +17,13 @@
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:background="?attr/colorOnPrimary">
+        android:background="?attr/android:colorBackground">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Añadir Contacto"
-            android:textColor="?attr/colorPrimaryContainer"
+            android:textColor="?attr/colorOnBackground"
             android:textSize="18sp"
             android:layout_gravity="center"/>
 
@@ -37,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/inferior"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="?attr/colorSecondary"
+        android:background="?attr/android:colorBackground"
         >
 
         <LinearLayout
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="?attr/colorOnPrimary"
+                android:background="?attr/android:colorBackground"
                 android:paddingVertical="8dp">
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_weight="1"
                     android:text="Persona"
                     android:textSize="22dp"
-                    android:textColor="?attr/colorSurface"
+                    android:textColor="?attr/colorOnBackground"
                     android:textAlignment="center"
                     android:textStyle="bold"/>
 
@@ -72,15 +72,19 @@
                 android:id="@+id/nameid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
-                android:textColor="?attr/colorSurfaceVariant"/>
+                android:hint="Nombre"/>
 
             <EditText
                 android:id="@+id/lastNameID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido"
-                android:textColor="?attr/colorSurfaceVariant"/>
+                android:hint="Apellido"/>
+
+            <EditText
+                android:id="@+id/residenciaID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Pais de residencia" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -97,7 +101,7 @@
                     android:text="Teléfono:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSurfaceVariant"/>
+                    android:textColor="?attr/colorOnBackground"/>
 
 
             </LinearLayout>
@@ -117,15 +121,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="Añadir número de teléfono"
-                    android:textColor="?attr/colorPrimaryContainer"
-                    android:backgroundTint="?attr/colorOnTertiary"/>
+                    android:textColor="?attr/colorOnPrimary"
+                    android:backgroundTint="?attr/colorPrimary"/>
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/residenciaID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Pais de residencia" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,7 +140,7 @@
                     android:text="E-mail:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSurfaceVariant"/>
+                    android:textColor="?attr/colorOnBackground"/>
 
 
             </LinearLayout>
@@ -159,8 +157,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="+ Añadir E-mail"
-                    android:textColor="?attr/colorPrimaryContainer"
-                    android:backgroundTint="?attr/colorOnTertiary"/>
+                    android:textColor="?attr/colorOnPrimary"
+                    android:backgroundTint="?attr/colorPrimary"/>
             </LinearLayout>
 
             <LinearLayout
@@ -179,7 +177,7 @@
                     android:text="Dirección:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSurfaceVariant"/>
+                    android:textColor="?attr/colorOnBackground"/>
 
 
             </LinearLayout>
@@ -198,8 +196,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="+ Añadir Direccion"
-                    android:textColor="?attr/colorPrimaryContainer"
-                    android:backgroundTint="?attr/colorOnTertiary" />
+                    android:textColor="?attr/colorOnPrimary"
+                    android:backgroundTint="?attr/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -217,7 +215,7 @@
                     android:text="Contactos asociados:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSurfaceVariant"/>
+                    android:textColor="?attr/colorOnBackground"/>
 
 
             </LinearLayout>
@@ -235,7 +233,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:backgroundTint="?attr/colorOnTertiary"
+                    android:backgroundTint="?attr/colorPrimary"
                     android:text="Añadir contacto asociado"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
@@ -256,7 +254,7 @@
                     android:text="Fechas:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSurfaceVariant"/>
+                    android:textColor="?attr/colorOnBackground"/>
 
 
             </LinearLayout>
@@ -275,8 +273,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="Añadir Fecha"
-                    android:textColor="?attr/colorPrimaryContainer"
-                    android:backgroundTint="?attr/colorOnTertiary" />
+                    android:textColor="?attr/colorOnPrimary"
+                    android:backgroundTint="?attr/colorPrimary" />
             </LinearLayout>
 
             <LinearLayout
@@ -295,7 +293,7 @@
                     android:text="Red Social:"
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="?attr/colorSurfaceVariant"/>
+                    android:textColor="?attr/colorOnBackground"/>
 
 
             </LinearLayout>
@@ -314,8 +312,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="Añadir Red Social"
-                    android:textColor="?attr/colorPrimaryContainer"
-                    android:backgroundTint="?attr/colorOnTertiary" />
+                    android:textColor="?attr/colorOnPrimary"
+                    android:backgroundTint="?attr/colorPrimary" />
             </LinearLayout>
 
         </LinearLayout>
@@ -335,9 +333,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="?attr/colorOnError"
+            android:backgroundTint="?attr/colorError"
             android:text="@string/close"
-            android:textColor="?attr/colorSurface"
+            android:textColor="?attr/colorOnError"
             android:textStyle="bold"
             android:layout_marginEnd="5dp" />
 
@@ -346,9 +344,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="?attr/colorTertiary"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="@string/add"
-            android:textColor="?attr/colorSurface"
+            android:textColor="?attr/colorOnSecondary"
             android:textStyle="bold"
             android:layout_marginEnd="5dp" />
     </LinearLayout>
