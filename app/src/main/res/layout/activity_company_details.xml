@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
-        android:background="?attr/colorOnPrimary"
+        android:background="?attr/android:colorBackground"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/idScrollViewDetailContact"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
             android:textSize="18sp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="?attr/colorPrimaryContainer"
+            android:textColor="?attr/colorOnBackground"
             />
     </LinearLayout>
 
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                         android:layout_weight="1"
                         android:padding="7dp"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -78,7 +78,7 @@
                         android:layout_weight="5"
                         android:padding="7dp"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorPrimaryContainer"/>
+                        android:textColor="?attr/colorOnSurface"/>
 
                 </LinearLayout>
 
@@ -93,7 +93,7 @@
                         android:text="Description: "
                         android:padding="7dp"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -103,7 +103,7 @@
                         android:layout_weight="5"
                         android:padding="7dp"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorPrimaryContainer"/>
+                        android:textColor="?attr/colorOnSurface"/>
 
                 </LinearLayout>
 
@@ -118,7 +118,7 @@
                         android:layout_weight="2"
                         android:padding="7dp"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold"/>
 
                     <TextView
@@ -128,7 +128,7 @@
                         android:layout_weight="5"
                         android:padding="7dp"
                         android:textSize="16sp"
-                        android:textColor="?attr/colorPrimaryContainer"/>
+                        android:textColor="?attr/colorOnSurface"/>
 
                 </LinearLayout>
 
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp"
                 >
 
@@ -153,7 +153,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Telephone"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -162,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Label"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp"
                 >
 
@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Adress"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -208,7 +208,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Label"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -232,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp"
                 >
 
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Email"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -254,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Label"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -278,7 +278,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp"
                 >
 
@@ -291,7 +291,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Event Date"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -300,7 +300,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Label"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -325,7 +325,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp"
                 >
 
@@ -338,7 +338,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Associate Contact"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -347,7 +347,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Telephone"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -371,7 +371,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="5dp"
-                android:background="?attr/colorTertiary"
+                android:background="?attr/colorSurface"
                 android:layout_marginBottom="10dp"
                 >
 
@@ -384,7 +384,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Social Media"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -393,7 +393,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="User"
-                        android:textColor="?attr/colorPrimaryContainer"
+                        android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"
                         android:textStyle="bold"/>
@@ -419,7 +419,7 @@
         android:id="@+id/idFooterDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorOnPrimary"
+        android:background="?attr/colorSurface"
         android:orientation="horizontal"
         android:padding="5dp"
 
@@ -446,7 +446,7 @@
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:onClick="editContact"
-            android:backgroundTint="?attr/colorTertiary"
+            android:backgroundTint="?attr/colorSecondary"
             android:text="Edit" />
 
     </LinearLayout>

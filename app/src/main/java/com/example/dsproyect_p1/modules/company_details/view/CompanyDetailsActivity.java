@@ -46,7 +46,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textTelephoneC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textTelephoneC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textTelephoneC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textTelephoneC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textTelephoneC.setPadding(5, 5, 5, 5);
@@ -57,7 +57,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textLabelC.setPadding(5, 5, 5, 5);
@@ -75,7 +75,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textAdressC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textAdressC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textAdressC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textAdressC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textAdressC.setPadding(5, 5, 5, 5);
@@ -87,7 +87,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textAdressLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textAdressLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textAdressLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textAdressLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textAdressLabelC.setPadding(5, 5, 5, 5);
@@ -105,7 +105,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textEmailC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textEmailC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textEmailC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textEmailC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textEmailC.setPadding(5, 5, 5, 5);
@@ -117,7 +117,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textEmailLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textEmailLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textEmailLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textEmailLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textEmailLabelC.setPadding(5, 5, 5, 5);
@@ -134,7 +134,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textEventDateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textEventDateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textEventDateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textEventDateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textEventDateC.setPadding(5, 5, 5, 5);
@@ -146,7 +146,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textEventDateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textEventDateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textEventDateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textEventDateLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textEventDateLabelC.setPadding(5, 5, 5, 5);
@@ -163,7 +163,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textAssociateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textAssociateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textAssociateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textAssociateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textAssociateC.setPadding(5, 5, 5, 5);
@@ -175,7 +175,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textAssociateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textAssociateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textAssociateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textAssociateLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textAssociateLabelC.setPadding(5, 5, 5, 5);
@@ -193,7 +193,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textSocialMediaC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textSocialMediaC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textSocialMediaC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textSocialMediaC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textSocialMediaC.setPadding(5, 5, 5, 5);
@@ -205,7 +205,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
         ));
-        textSocialMediaLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onPrimary));
+        textSocialMediaLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
         textSocialMediaLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textSocialMediaLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textSocialMediaLabelC.setPadding(5, 5, 5, 5);

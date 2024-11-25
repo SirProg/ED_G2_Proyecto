@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="?attr/colorOnPrimary">
+        android:background="?attr/android:colorBackground">
 
         <TextView
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
-            android:textColor="?attr/colorSecondary"
+            android:textColor="?attr/colorOnBackground"
             />
 
     </LinearLayout>
@@ -81,8 +81,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Phone Number"
-                        android:textColor="?attr/colorSecondary"
-                        android:backgroundTint="?attr/colorOnTertiary"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        android:backgroundTint="?attr/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -111,8 +111,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Email"
-                        android:textColor="?attr/colorSecondary"
-                        android:backgroundTint="?attr/colorOnTertiary"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        android:backgroundTint="?attr/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -139,8 +139,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Address"
-                        android:textColor="?attr/colorSecondary"
-                        android:backgroundTint="?attr/colorOnTertiary"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        android:backgroundTint="?attr/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -168,8 +168,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Associated Contacts"
-                        android:textColor="?attr/colorSecondary"
-                        android:backgroundTint="?attr/colorOnTertiary"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        android:backgroundTint="?attr/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -197,8 +197,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Date"
-                        android:textColor="?attr/colorSecondary"
-                        android:backgroundTint="?attr/colorOnTertiary"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        android:backgroundTint="?attr/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -226,8 +226,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Social Media"
-                        android:textColor="?attr/colorSecondary"
-                        android:backgroundTint="?attr/colorOnTertiary"/>
+                        android:textColor="?attr/colorOnPrimary"
+                        android:backgroundTint="?attr/colorPrimary"/>
 
                 </LinearLayout>
             </LinearLayout>

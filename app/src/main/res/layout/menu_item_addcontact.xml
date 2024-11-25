@@ -18,11 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Add Contact"
-            android:background="?attr/colorSecondary"
+            android:background="?attr/colorSurface"
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
-            android:textColor="?attr/colorOnSecondary"/>
+            android:textColor="?attr/colorOnSurface"/>
 
         <ImageButton
             android:id="@+id/addPerson"
