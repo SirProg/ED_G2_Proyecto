@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public abstract class Contact implements Serializable {
   private final UUID id;
+  private final ContactType contactType;
   private final String name;
   private final String residencyCountry;
   private final List<Telephone> telephones;
@@ -21,6 +22,7 @@ public abstract class Contact implements Serializable {
 
   public Contact(
     UUID id,
+    ContactType contactType,
     String name,
     String residencyCountry,
     List<Telephone> telephones,
@@ -32,7 +34,11 @@ public abstract class Contact implements Serializable {
     if (name == null || name.isEmpty()) {
       throw new IllegalArgumentException("Name cannot be null or empty");
     }
+    if (contactType == null) {
+      throw new IllegalArgumentException("Contact type cannot be null or empty");
+    }
     this.id = id != null ? id : UUID.randomUUID();
+    this.contactType = contactType;
     this.name = name;
     this.residencyCountry = residencyCountry != null ? residencyCountry : "";
     this.telephones =
@@ -55,6 +61,13 @@ public abstract class Contact implements Serializable {
     return id;
   }
 
+  public ContactType getContactType() {
+    return contactType;
+  }
+
+  public String getName() {
+    return name;
+  }
   public String getResidencyCountry() {
     return residencyCountry;
   }
@@ -97,6 +110,7 @@ public abstract class Contact implements Serializable {
   }
 
   public Contact copyWith(
+    ContactType contactType,
     String name,
     String residencyCountry,
     List<Telephone> newTelephones,
@@ -108,6 +122,7 @@ public abstract class Contact implements Serializable {
 
     return new Contact(
       getId(),
+      contactType != null ? contactType : this.contactType,
       name != null ? name : this.name,
       residencyCountry != null ? residencyCountry : getResidencyCountry(),
       newTelephones != null ? new CustomArrayList<>(newTelephones) : getTelephones(),
