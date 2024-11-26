@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.company_details.view;
+package com.example.dsproyect_p1.modules.contact_details.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,16 +15,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.modules.edit_company.view.EditCompanyActivity;
+import com.example.dsproyect_p1.modules.edit_contact.view.EditContactActivity;
 
-public class CompanyDetailsActivity extends AppCompatActivity {
+public class ContactDetailsActivity extends AppCompatActivity {
     LinearLayout telephone, adress, email, eventDate, associateContact, socialMedia;
     TextView name, description, residencyCountry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_company_details);
+        setContentView(R.layout.activity_contact_details);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -38,7 +38,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         residencyCountry = findViewById(R.id.idResidencyDetailContatc);
         residencyCountry.setText("");
 
-        telephone = findViewById(R.id.telephonesCompany);
+        telephone = findViewById(R.id.telephonesContact);
 
         TextView textTelephoneC = new TextView(this);
         textTelephoneC.setId(View.generateViewId());
@@ -67,7 +67,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         telephone.addView(textLabelC);
 
 
-        adress = findViewById(R.id.adressesCompany);
+        adress = findViewById(R.id.adressesContact);
 
         TextView textAdressC = new TextView(this);
         textAdressC.setId(View.generateViewId());
@@ -97,7 +97,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
         adress.addView(textAdressLabelC);
 
 
-        email = findViewById(R.id.EmailsCompany);
+        email = findViewById(R.id.EmailsContact);
 
         TextView textEmailC = new TextView(this);
         textEmailC.setId(View.generateViewId());
@@ -221,7 +221,7 @@ public class CompanyDetailsActivity extends AppCompatActivity {
     }
 
     public void editContact(View view){
-        Intent intent = new Intent(CompanyDetailsActivity.this, EditCompanyActivity.class);
+        Intent intent = new Intent(ContactDetailsActivity.this, EditContactActivity.class);
         startActivity(intent);
     }
 }

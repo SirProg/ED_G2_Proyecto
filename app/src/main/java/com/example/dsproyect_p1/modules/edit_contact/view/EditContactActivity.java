@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.edit_person.view;
+package com.example.dsproyect_p1.modules.edit_contact.view;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
@@ -19,38 +19,34 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Person;
+import com.example.dsproyect_p1.modules.edit_person.view.EditPersonActivity;
 
 import java.util.Calendar;
 
-public class EditPersonActivity extends AppCompatActivity {
+public class EditContactActivity extends AppCompatActivity {
     LinearLayout telephone, email, address, socialMedia, associatedContacts, date;
-    TextView name, lastName, residency;
-    Person personEdit;
+    TextView name, residency;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_edit_person);
+        setContentView(R.layout.activity_edit_contact);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        @SuppressWarnings("deprecation")
-        Person person = (Person) getIntent().getSerializableExtra("PERSON_EDIT");
-
-        name = findViewById(R.id.editPersonName);
-        lastName = findViewById(R.id.editPersonLastName);
-        residency = findViewById(R.id.editPersonResidency);
-
-        telephone = findViewById(R.id.editPersonTelephone);
-        email = findViewById(R.id.editPersonEmail);
-        address = findViewById(R.id.editPersonAddress);
-        socialMedia = findViewById(R.id.editPersonSocialMedia);
-        associatedContacts = findViewById(R.id.editPersonAssociatedContact);
-        date = findViewById(R.id.editPersonDate);
+        name = findViewById(R.id.editContactName);
+        residency = findViewById(R.id.editContactResidency);
+        telephone = findViewById(R.id.editContactTelephone);
+        email = findViewById(R.id.editContactEmail);
+        address = findViewById(R.id.editContactnAddress);
+        socialMedia = findViewById(R.id.editContactSocialMedia);
+        associatedContacts = findViewById(R.id.editContactAssociatedContact);
+        date = findViewById(R.id.editContactDate);
         loadData();
         addEditTelephone();
         addEditDate();
@@ -58,13 +54,11 @@ public class EditPersonActivity extends AppCompatActivity {
         addEditEmail();
         addEditSocialMedia();
     }
-
     public void loadData(){
 
     }
-
     public void addEditTelephone(){
-        Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelephone);
+        Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelephoneC);
 
         buttonAgregarTelefono.setOnClickListener(
                 v -> {
@@ -90,7 +84,7 @@ public class EditPersonActivity extends AppCompatActivity {
                     editTextTelefono.setHint("Teléfono");
                     editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
 
-                    Button botonEliminar = new Button(EditPersonActivity.this);
+                    Button botonEliminar = new Button(EditContactActivity.this);
                     botonEliminar.setLayoutParams(
                             new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
                     botonEliminar.setText("x");
@@ -108,7 +102,7 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void addEditEmail(){
-        Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmail);
+        Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmailC);
 
         buttonAgregarEmail.setOnClickListener(
                 v -> {
@@ -136,7 +130,7 @@ public class EditPersonActivity extends AppCompatActivity {
                     editTextEmail.setHint("E-mail");
                     editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
 
-                    Button botonEliminar = new Button(EditPersonActivity.this);
+                    Button botonEliminar = new Button(EditContactActivity.this);
                     botonEliminar.setLayoutParams(
                             new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
                     botonEliminar.setText("x");
@@ -153,9 +147,8 @@ public class EditPersonActivity extends AppCompatActivity {
                     email.addView(nuevoEmail, email.getChildCount() - 1);
                 });
     }
-
     public void addEditAddress(){
-        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarAddress);
+        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarAddressC);
 
         buttonAgreganDireccion.setOnClickListener(
                 v -> {
@@ -201,7 +194,7 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void addEditDate(){
-        Button buttonAgregarFecha = findViewById(R.id.buttonAgregarFecha);
+        Button buttonAgregarFecha = findViewById(R.id.buttonAgregarDateC);
 
         buttonAgregarFecha.setOnClickListener(
                 v -> {
@@ -268,7 +261,7 @@ public class EditPersonActivity extends AppCompatActivity {
     }
 
     public void addEditSocialMedia(){
-        Button buttonAgregarSocial = findViewById(R.id.buttonAgregarRedSocial);
+        Button buttonAgregarSocial = findViewById(R.id.buttonAgregarSocialMediaC);
 
         buttonAgregarSocial.setOnClickListener(
                 v -> {
@@ -311,4 +304,7 @@ public class EditPersonActivity extends AppCompatActivity {
                     socialMedia.addView(nuevoSocial, socialMedia.getChildCount() - 1);
                 });
     }
+
+
+
 }
