@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public abstract class Contact implements Serializable {
-
   private final UUID id;
+  private final String name;
   private final String residencyCountry;
   private final List<Telephone> telephones;
   private final List<Address> addresses;
@@ -20,30 +20,35 @@ public abstract class Contact implements Serializable {
   private final List<SocialMediaAccount> socialMediaAccounts;
 
   public Contact(
-      UUID id,
-      String residencyCountry,
-      List<Telephone> telephones,
-      List<Address> addresses,
-      List<Email> emails,
-      List<EventDate> eventDates,
-      List<AssociateContact> associateContacts,
-      List<SocialMediaAccount> socialMediaAccounts) {
+    UUID id,
+    String name,
+    String residencyCountry,
+    List<Telephone> telephones,
+    List<Address> addresses,
+    List<Email> emails,
+    List<EventDate> eventDates,
+    List<AssociateContact> associateContacts,
+    List<SocialMediaAccount> socialMediaAccounts) {
+    if (name == null || name.isEmpty()) {
+      throw new IllegalArgumentException("Name cannot be null or empty");
+    }
     this.id = id != null ? id : UUID.randomUUID();
+    this.name = name;
     this.residencyCountry = residencyCountry != null ? residencyCountry : "";
     this.telephones =
-        telephones != null ? new CustomArrayList<>(telephones) : new CustomArrayList<>();
+      telephones != null ? new CustomArrayList<>(telephones) : new CustomArrayList<>();
     this.addresses = addresses != null ? new CustomArrayList<>(addresses) : new CustomArrayList<>();
     this.emails = emails != null ? new CustomArrayList<>(emails) : new CustomArrayList<>();
     this.eventDates =
-        eventDates != null ? new CustomArrayList<>(eventDates) : new CustomArrayList<>();
+      eventDates != null ? new CustomArrayList<>(eventDates) : new CustomArrayList<>();
     this.associateContacts =
-        associateContacts != null
-            ? new CustomArrayList<>(associateContacts)
-            : new CustomArrayList<>();
+      associateContacts != null
+        ? new CustomArrayList<>(associateContacts)
+        : new CustomArrayList<>();
     this.socialMediaAccounts =
-        socialMediaAccounts != null
-            ? new CustomArrayList<>(socialMediaAccounts)
-            : new CustomArrayList<>();
+      socialMediaAccounts != null
+        ? new CustomArrayList<>(socialMediaAccounts)
+        : new CustomArrayList<>();
   }
 
   public UUID getId() {
@@ -89,5 +94,31 @@ public abstract class Contact implements Serializable {
   @Override
   public int hashCode() {
     return Objects.hash(id);
+  }
+
+  public Contact copyWith(
+    String name,
+    String residencyCountry,
+    List<Telephone> newTelephones,
+    List<Address> newAddresses,
+    List<Email> newEmails,
+    List<EventDate> newEventDates,
+    List<AssociateContact> newAssociateContacts,
+    List<SocialMediaAccount> newSocialMediaAccounts) {
+
+    return new Contact(
+      getId(),
+      name != null ? name : this.name,
+      residencyCountry != null ? residencyCountry : getResidencyCountry(),
+      newTelephones != null ? new CustomArrayList<>(newTelephones) : getTelephones(),
+      newAddresses != null ? new CustomArrayList<>(newAddresses) : getAddresses(),
+      newEmails != null ? new CustomArrayList<>(newEmails) : getEmails(),
+      newEventDates != null ? new CustomArrayList<>(newEventDates) : getEventDates(),
+      newAssociateContacts != null
+      ? new CustomArrayList<>(newAssociateContacts)
+      : getAssociateContacts(),
+      newSocialMediaAccounts != null
+      ? new CustomArrayList<>(newSocialMediaAccounts)
+      : getSocialMediaAccounts());
   }
 }

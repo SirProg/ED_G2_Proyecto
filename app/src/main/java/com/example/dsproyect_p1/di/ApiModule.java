@@ -13,11 +13,8 @@ import javax.inject.Singleton;
 @InstallIn(SingletonComponent.class)
 public abstract class ApiModule {
 
-  @Binds
-  @Singleton
-  public abstract PersonApi bindPersonApi(LocalStoragePersonApi personApi);
 
   @Binds
   @Singleton
-  public abstract CompanyApi bindCompanyApi(LocalStorageCompanyApi companyApi);
+  public abstract ContactApi bindContactApi(LocalStorageContactApi contactApi);
 }
