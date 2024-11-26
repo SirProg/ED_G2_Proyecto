@@ -9,43 +9,44 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.data.model.Person;
+import com.example.dsproyect_p1.data.model.Contact;
 import java.util.List;
 
-public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.ViewHolder> {
-  private List<Person> personList;
+public class ContactRecyclerView extends RecyclerView.Adapter<ContactRecyclerView.ViewHolder> {
+  private List<Contact> contactList;
   private onItemClickListener listener;
 
-  public PersonRecyclerView(List<Person> persons, onItemClickListener listener) {
-    this.personList = persons;
+  public ContactRecyclerView(List<Contact> contacts, onItemClickListener listener) {
+    this.contactList = contacts;
     this.listener = listener;
   }
 
   public interface onItemClickListener {
-    void onItemClickPerson(Person person);
+    void onItemClickContact(Contact contact);
   }
 
-  public void updateData(List<Person> persons) {
-    this.personList = persons;
+  public void updateData(List<Contact> contacts) {
+    this.contactList = contacts;
     notifyDataSetChanged();
   }
 
   @NonNull
   @Override
-  public PersonRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public ContactRecyclerView.ViewHolder onCreateViewHolder(
+      @NonNull ViewGroup parent, int viewType) {
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card_contact, parent, false);
     return new ViewHolder(view);
   }
 
   @Override
   public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    Person person = personList.get(position);
-    holder.bindData(person, listener);
+    Contact contact = contactList.get(position);
+    holder.bindData(contact, listener);
   }
 
   @Override
   public int getItemCount() {
-    return personList.size();
+    return contactList.size();
   }
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,13 +61,12 @@ public class PersonRecyclerView extends RecyclerView.Adapter<PersonRecyclerView.
       this.linearLayout = itemView.findViewById(R.id.linearLayoutContact);
     }
 
-    public void bindData(final Person person, final onItemClickListener listener) {
-      String name = person.getFirstName() + " " + person.getLastName();
-      nameContact.setText(name);
+    public void bindData(final Contact contact, final onItemClickListener listener) {
+      nameContact.setText(contact.getName());
       linearLayout.setOnClickListener(
           view -> {
             if (listener != null) {
-              listener.onItemClickPerson(person);
+              listener.onItemClickContact(contact);
             }
           });
     }

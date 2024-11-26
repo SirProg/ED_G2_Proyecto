@@ -19,14 +19,11 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.data.model.Company;
-import com.example.dsproyect_p1.data.model.Person;
-import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
-import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
-import com.example.dsproyect_p1.modules.company_details.view.CompanyDetailsActivity;
-import com.example.dsproyect_p1.modules.contacts_overview.adapter.CompanyRecyclerView;
-import com.example.dsproyect_p1.modules.contacts_overview.adapter.PersonRecyclerView;
-
+import com.example.dsproyect_p1.data.model.Contact;
+import com.example.dsproyect_p1.data.repository.*;
+import com.example.dsproyect_p1.modules.add_contact.view.AddContactActivity;
+import com.example.dsproyect_p1.modules.contact_details.view.ContactDetailsActivity;
+import com.example.dsproyect_p1.modules.contacts_overview.adapter.ContactRecyclerView;
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -34,17 +31,14 @@ import javax.inject.Inject;
 
 @AndroidEntryPoint
 public class ContactsOverviewActivity extends AppCompatActivity
-    implements PersonRecyclerView.onItemClickListener, CompanyRecyclerView.onItemClickListener {
-  private RecyclerView recyclerView, recyclerViewCompany;
+    implements  ContactRecyclerView.onItemClickListener {
+  private RecyclerView recyclerView, recyclerViewContact;
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
-  private PersonRecyclerView personRecyclerView;
-  private CompanyRecyclerView companyRecyclerView;
+  private ContactRecyclerView contactRecyclerView;
 
   @Inject
-  PersonRepository personRepository;
-  @Inject
-  CompanyRepository companyRepository;
+  ContactRepository contactRepository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,56 +54,67 @@ public class ContactsOverviewActivity extends AppCompatActivity
           return insets;
         });
 
-    injectPersons();
-    injectCompanies();
+    injectContacts();
 
     recyclerView = findViewById(R.id.recyclerViewContacts);
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-    personRecyclerView = new PersonRecyclerView(List.of(), person -> moveToDescriptionPerson(person));
-    recyclerView.setAdapter(personRecyclerView);
 
-    fetchPersons();
 
-    recyclerViewCompany = findViewById(R.id.recyclerViewCompany);
-    recyclerViewCompany.setLayoutManager(new LinearLayoutManager(this));
+    recyclerViewContact = findViewById(R.id.recyclerViewContact);
+    recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
 
-    companyRecyclerView = new CompanyRecyclerView(List.of(), company -> moveToDescriptionCompany(company));
-    recyclerViewCompany.setAdapter(companyRecyclerView);
+    contactRecyclerView = new ContactRecyclerView(List.of(), contact -> moveToDescriptionContact(contact));
+    recyclerViewContact.setAdapter(contactRecyclerView);
 
-    fetchCompanies();
+    fetchContacts();
 
     btnAddContact = findViewById(R.id.openPopUpAdd);
     btnAddContact.setOnClickListener(view -> openPopupMenuAdd(btnAddContact));
   }
 
-  public void moveToDescriptionCompany(Company company) {
-    Intent intent = new Intent(ContactsOverviewActivity.this, CompanyDetailsActivity.class);
-    intent.putExtra("CompanyDetailsActivity", company);
+  public void moveToDescriptionContact(Contact contact) {
+    Intent intent = new Intent(ContactsOverviewActivity.this, ContactDetailsActivity.class);
+    intent.putExtra("ContactDetailsActivity", contact);
     startActivity(intent);
   }
 
-  public void moveToDescriptionPerson(Person person) {
-    Intent intent = new Intent(ContactsOverviewActivity.this, PersonDetailsActivity.class);
-    intent.putExtra("PersonDetailsActivity", person);
-    startActivity(intent);
-  }
 
   @Override
   protected void onResume() {
     super.onResume();
-    fetchPersons();
-    fetchCompanies();
+    fetchContacts();
   }
 
-  private void fetchPersons() {
-    CompletableFuture<List<Person>> future = personRepository.getPersons();
+  private void injectContacts() {
+    Contact contact1 = new Contact(null, "Chevrolet", null, null, null, null, null, null, null, null);
+    Contact contact2 = new Contact(null, "Ferrari", null, null, null, null, null, null, null, null);
+    Contact contact3 = new Contact(null, "Audi", null, null, null, null, null, null, null, null);
+    Contact contact4 = new Contact(null, "Telconet", null, null, null, null, null, null, null, null);
+    Contact contact5 = new Contact(null, "Mazda", null, null, null, null, null, null, null, null);
+    CompletableFuture<Void> future1 = contactRepository.saveContact(contact1);
+    CompletableFuture<Void> future2 = contactRepository.saveContact(contact2);
+    CompletableFuture<Void> future3 = contactRepository.saveContact(contact3);
+    CompletableFuture<Void> future4 = contactRepository.saveContact(contact4);
+    CompletableFuture<Void> future5 = contactRepository.saveContact(contact5);
+    CompletableFuture.allOf(future1, future2, future3, future4, future5).join();
+  }
+
+  @Override
+  public void onItemClickContact(Contact contact) {
+    Intent intent = new Intent(ContactsOverviewActivity.this, ContactDetailsActivity.class);
+    intent.putExtra("COMPANY", contact);
+    startActivity(intent);
+  }
+
+  private void fetchContacts() {
+    CompletableFuture<List<Contact>> future = contactRepository.getContacts();
     future
         .thenAccept(
-            persons -> {
+            contacts -> {
               runOnUiThread(
                   () -> {
-                    personRecyclerView.updateData(persons);
+                    contactRecyclerView.updateData(contacts);
                   });
             })
         .exceptionally(
@@ -118,73 +123,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
                   () -> {
                     Toast.makeText(
                         ContactsOverviewActivity.this,
-                        "Failed to load persons",
-                        Toast.LENGTH_SHORT)
-                        .show();
-                  });
-              return null;
-            });
-  }
-
-  private void injectCompanies() {
-    Company company1 = new Company(null, "Chevrolet", null, null, null, null, null, null, null, null);
-    Company company2 = new Company(null, "Ferrari", null, null, null, null, null, null, null, null);
-    Company company3 = new Company(null, "Audi", null, null, null, null, null, null, null, null);
-    Company company4 = new Company(null, "Telconet", null, null, null, null, null, null, null, null);
-    Company company5 = new Company(null, "Mazda", null, null, null, null, null, null, null, null);
-    CompletableFuture<Void> future1 = companyRepository.saveCompany(company1);
-    CompletableFuture<Void> future2 = companyRepository.saveCompany(company2);
-    CompletableFuture<Void> future3 = companyRepository.saveCompany(company3);
-    CompletableFuture<Void> future4 = companyRepository.saveCompany(company4);
-    CompletableFuture<Void> future5 = companyRepository.saveCompany(company5);
-    CompletableFuture.allOf(future1, future2, future3, future4, future5).join();
-  }
-
-  private void injectPersons() {
-    Person person1 = new Person(null, "Juan", null, null, null, null, null, null, null, null);
-    Person person2 = new Person(null, "Julio", null, null, null, null, null, null, null, null);
-    Person person3 = new Person(null, "Kevin", null, null, null, null, null, null, null, null);
-    Person person4 = new Person(null, "Daniela", null, null, null, null, null, null, null, null);
-    Person person5 = new Person(null, "Juanfra", null, null, null, null, null, null, null, null);
-    CompletableFuture<Void> future1 = personRepository.savePerson(person1);
-    CompletableFuture<Void> future2 = personRepository.savePerson(person2);
-    CompletableFuture<Void> future3 = personRepository.savePerson(person3);
-    CompletableFuture<Void> future4 = personRepository.savePerson(person4);
-    CompletableFuture<Void> future5 = personRepository.savePerson(person5);
-    CompletableFuture.allOf(future1, future2, future3, future4, future5).join();
-  }
-
-  @Override
-  public void onItemClickPerson(Person person) {
-    Intent intent = new Intent(ContactsOverviewActivity.this, PersonDetailsActivity.class);
-    intent.putExtra("PERSON", person);
-    startActivity(intent);
-  }
-
-  @Override
-  public void onItemClickCompany(Company company) {
-    Intent intent = new Intent(ContactsOverviewActivity.this, CompanyDetailsActivity.class);
-    intent.putExtra("COMPANY", company);
-    startActivity(intent);
-  }
-
-  private void fetchCompanies() {
-    CompletableFuture<List<Company>> future = companyRepository.getCompanies();
-    future
-        .thenAccept(
-            companies -> {
-              runOnUiThread(
-                  () -> {
-                    companyRecyclerView.updateData(companies);
-                  });
-            })
-        .exceptionally(
-            ex -> {
-              runOnUiThread(
-                  () -> {
-                    Toast.makeText(
-                        ContactsOverviewActivity.this,
-                        "Failed to load companies",
+                        "Failed to load contacts",
                         Toast.LENGTH_SHORT)
                         .show();
                   });
@@ -201,24 +140,14 @@ public class ContactsOverviewActivity extends AppCompatActivity
         ViewGroup.LayoutParams.WRAP_CONTENT,
         true);
 
-    ImageButton iBtnPerson = viewPopup.findViewById(R.id.addPerson);
-    iBtnPerson.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            Intent intent = new Intent(ContactsOverviewActivity.this, AddPersonActivity.class);
-            startActivity(intent);
-            popupWindow.dismiss();
-          }
-        });
 
-    ImageButton iBtnCompany = viewPopup.findViewById(R.id.addCompany);
-    iBtnCompany.setOnClickListener(
+    ImageButton iBtnContact = viewPopup.findViewById(R.id.addContact);
+    iBtnContact.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             popupWindow.dismiss();
-            Intent intent = new Intent(ContactsOverviewActivity.this, AddCompanyActivity.class);
+            Intent intent = new Intent(ContactsOverviewActivity.this, AddContactActivity.class);
             startActivity(intent);
           }
         });

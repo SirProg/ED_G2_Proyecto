@@ -1,4 +1,4 @@
-package com.example.dsproyect_p1.modules.add_company.view;
+package com.example.dsproyect_p1.modules.add_contact.view;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -21,32 +21,32 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.dsproyect_p1.data.repository.CompanyRepository;
+import com.example.dsproyect_p1.data.repository.ContactRepository;
 import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.data.api.CompanyApi;
+import com.example.dsproyect_p1.data.api.ContactApi;
 import com.example.dsproyect_p1.data.model.*;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class AddCompanyActivity extends AppCompatActivity {
+public class AddContactActivity extends AppCompatActivity {
   private LinearLayout contenerdorTelephone,
       contenedorAdress,
       contenedorEmail,
       contenedorDate,
       contenedorSocialMedia,
       contenedorAsociados;
-  EditText name, descripcionCC, residenciaCC;
+  EditText name, residenciaCC;
   Button cancelar, guardar;
-  CompanyRepository companyRepository;
+  ContactRepository contactRepository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
-    setContentView(R.layout.activity_add_company);
+    setContentView(R.layout.activity_add_contact);
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(R.id.main),
         (v, insets) -> {
@@ -55,7 +55,6 @@ public class AddCompanyActivity extends AppCompatActivity {
           return insets;
         });
     name = findViewById(R.id.nombreID);
-    descripcionCC = findViewById(R.id.descripcionID);
     residenciaCC = findViewById(R.id.residenciaCC);
 
     cancelar = findViewById(R.id.cancelarCC);
@@ -523,24 +522,10 @@ public class AddCompanyActivity extends AppCompatActivity {
         fechas,
         asociados,
         redes);
-    /*CompanyApi companyApi = null;
-    companyApi
-        .saveCompany(company)
-        .thenRun(
-            () -> {
-              // Success handling
-              Log.d("PersonApi", "Company saved successfully.");
-            })
-        .exceptionally(
-            ex -> {
-              // Error handling
-              Log.e("PersonApi", "Failed to save company.", ex);
-              return null;
-            });*/
 
-      companyRepository.saveCompany(company).thenRun(()-> {
+      contactRepository.saveContact(contact).thenRun(()-> {
           runOnUiThread(()->{
-              Toast.makeText(this, "Company saved successfully", Toast.LENGTH_SHORT).show();
+              Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
               finish();
           });
       });
