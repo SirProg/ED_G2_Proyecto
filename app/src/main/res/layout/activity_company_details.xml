@@ -82,30 +82,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="Description: "
-                        android:padding="7dp"
-                        android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:id="@+id/idDescriptionDetailContatc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:padding="7dp"
-                        android:textSize="16sp"
-                        android:textColor="?attr/colorOnSurface"/>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -198,7 +174,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Adress"
+                        android:text="Address"
                         android:textColor="?attr/colorOnSurface"
                         android:textSize="16sp"
                         android:textAlignment="center"

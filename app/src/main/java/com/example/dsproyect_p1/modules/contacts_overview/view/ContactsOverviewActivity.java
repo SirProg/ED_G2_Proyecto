@@ -21,13 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Company;
 import com.example.dsproyect_p1.data.model.Person;
-import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.modules.add_company.view.AddCompanyActivity;
 import com.example.dsproyect_p1.modules.add_person.view.AddPersonActivity;
 import com.example.dsproyect_p1.modules.company_details.view.CompanyDetailsActivity;
 import com.example.dsproyect_p1.modules.contacts_overview.adapter.CompanyRecyclerView;
 import com.example.dsproyect_p1.modules.contacts_overview.adapter.PersonRecyclerView;
-import com.example.dsproyect_p1.modules.person_details.view.PersonDetailsActivity;
+
 import dagger.hilt.android.AndroidEntryPoint;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

@@ -15,7 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.modules.edit_company.view.EditCompanyActivity;
 
 public class CompanyDetailsActivity extends AppCompatActivity {
     LinearLayout telephone, adress, email, eventDate, associateContact, socialMedia;
