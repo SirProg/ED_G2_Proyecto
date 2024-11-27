@@ -6,6 +6,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,16 +16,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.data.model.Contact;
 import com.example.dsproyect_p1.modules.edit_contact.view.EditContactActivity;
 
 public class ContactDetailsActivity extends AppCompatActivity {
-    LinearLayout telephone, adress, email, eventDate, associateContact, socialMedia;
-    TextView name, description, residencyCountry;
+    LinearLayout telephoneContent, adressContent, email, eventDateContent, associateContactContent, socialMediaContent;
+    TextView name, residencyCountry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_contact_details);
+        setContentView(R.layout.activity_contacts_details);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -32,14 +34,35 @@ public class ContactDetailsActivity extends AppCompatActivity {
         });
 
         name = findViewById(R.id.idNameDetailContatc);
-        name.setText("");
-        description = findViewById(R.id.idDescriptionDetailContatc);
-        description.setText("");
         residencyCountry = findViewById(R.id.idResidencyDetailContatc);
-        residencyCountry.setText("");
+        telephoneContent = findViewById(R.id.idTelephoneContact);
+        adressContent = findViewById(R.id.idAddressContact);
+        email = findViewById(R.id.idEmailContact);
+        eventDateContent = findViewById(R.id.idEventDateContact);
+        associateContactContent = findViewById(R.id.idAssociateContact);
+        socialMediaContent = findViewById(R.id.idSocialMediaContact);
 
-        telephone = findViewById(R.id.telephonesContact);
+        Contact contact = getIntent().getParcelableExtra("ContactDetailsActivity", Contact.class);
+        if(contact != null){
+            loadContact(contact);
+        }else{
+            Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
 
+    public void loadContact(Contact contact){
+        name.setText(contact.getName());
+        residencyCountry.setText(contact.getResidencyCountry());
+        loadTelephone(contact);
+        loadEmails(contact);
+        loadAddress(contact);
+        loadEventDates(contact);
+        loadAssociateContacts(contact);
+        loadSocialMedia(contact);
+    }
+
+    public void loadTelephone(Contact contact){
         TextView textTelephoneC = new TextView(this);
         textTelephoneC.setId(View.generateViewId());
         textTelephoneC.setLayoutParams(new LinearLayout.LayoutParams(
@@ -63,12 +86,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
         textLabelC.setPadding(5, 5, 5, 5);
         textLabelC.setText("Etiqueta: Información de contacto");
 
-        telephone.addView(textTelephoneC);
-        telephone.addView(textLabelC);
+        telephoneContent.addView(textTelephoneC);
+        telephoneContent.addView(textLabelC);
+    }
 
-
-        adress = findViewById(R.id.adressesContact);
-
+    public void loadAddress(Contact contact){
         TextView textAdressC = new TextView(this);
         textAdressC.setId(View.generateViewId());
         textAdressC.setLayoutParams(new LinearLayout.LayoutParams(
@@ -93,12 +115,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
         textAdressLabelC.setPadding(5, 5, 5, 5);
         textAdressLabelC.setText("Etiqueta: Información de contacto");
 
-        adress.addView(textAdressC);
-        adress.addView(textAdressLabelC);
+        adressContent.addView(textAdressC);
+        adressContent.addView(textAdressLabelC);
+    }
 
-
-        email = findViewById(R.id.EmailsContact);
-
+    public void loadEmails(Contact contact){
         TextView textEmailC = new TextView(this);
         textEmailC.setId(View.generateViewId());
         textEmailC.setLayoutParams(new LinearLayout.LayoutParams(
@@ -125,68 +146,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         email.addView(textEmailC);
         email.addView(textEmailLabelC);
+    }
 
-        eventDate = findViewById(R.id.idEventDateContact);
-
-        TextView textEventDateC = new TextView(this);
-        textEventDateC.setId(View.generateViewId());
-        textEventDateC.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        textEventDateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
-        textEventDateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        textEventDateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textEventDateC.setPadding(5, 5, 5, 5);
-        textEventDateC.setText("Teléfono: 123-456-7890");
-
-        TextView textEventDateLabelC = new TextView(this);
-        textEventDateLabelC.setId(View.generateViewId());
-        textEventDateLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        textEventDateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
-        textEventDateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        textEventDateLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textEventDateLabelC.setPadding(5, 5, 5, 5);
-        textEmailLabelC.setText("Etiqueta: Información de contacto");
-
-        eventDate.addView(textEventDateC);
-        eventDate.addView(textEventDateLabelC);
-
-        associateContact = findViewById(R.id.idAssociateContact);
-
-        TextView textAssociateC = new TextView(this);
-        textAssociateC.setId(View.generateViewId());
-        textAssociateC.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        textAssociateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
-        textAssociateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        textAssociateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textAssociateC.setPadding(5, 5, 5, 5);
-        textAssociateC.setText("Teléfono: 123-456-7890");
-
-        TextView textAssociateLabelC = new TextView(this);
-        textAssociateLabelC.setId(View.generateViewId());
-        textAssociateLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        textAssociateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
-        textAssociateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-        textAssociateLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textAssociateLabelC.setPadding(5, 5, 5, 5);
-        textAssociateLabelC.setText("Etiqueta: Información de contacto");
-
-        associateContact.addView(textAssociateC);
-        associateContact.addView(textAssociateLabelC);
-
-
-        socialMedia = findViewById(R.id.idSocialMediaContact);
-
+    public void loadSocialMedia(Contact contact){
         TextView textSocialMediaC = new TextView(this);
         textSocialMediaC.setId(View.generateViewId());
         textSocialMediaC.setLayoutParams(new LinearLayout.LayoutParams(
@@ -211,9 +173,66 @@ public class ContactDetailsActivity extends AppCompatActivity {
         textSocialMediaLabelC.setPadding(5, 5, 5, 5);
         textSocialMediaLabelC.setText("Etiqueta: Información de contacto");
 
-        socialMedia.addView(textSocialMediaC);
-        socialMedia.addView(textSocialMediaLabelC);
+        socialMediaContent.addView(textSocialMediaC);
+        socialMediaContent.addView(textSocialMediaLabelC);
+    }
 
+    public void loadAssociateContacts(Contact contact){
+        TextView textAssociateC = new TextView(this);
+        textAssociateC.setId(View.generateViewId());
+        textAssociateC.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        textAssociateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
+        textAssociateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        textAssociateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textAssociateC.setPadding(5, 5, 5, 5);
+        textAssociateC.setText("Teléfono: 123-456-7890");
+
+        TextView textAssociateLabelC = new TextView(this);
+        textAssociateLabelC.setId(View.generateViewId());
+        textAssociateLabelC.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        textAssociateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
+        textAssociateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        textAssociateLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textAssociateLabelC.setPadding(5, 5, 5, 5);
+        textAssociateLabelC.setText("Etiqueta: Información de contacto");
+
+        associateContactContent.addView(textAssociateC);
+        associateContactContent.addView(textAssociateLabelC);
+    }
+
+    public void loadEventDates(Contact contact){
+        TextView textEventDateC = new TextView(this);
+        textEventDateC.setId(View.generateViewId());
+        textEventDateC.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        textEventDateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
+        textEventDateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        textEventDateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textEventDateC.setPadding(5, 5, 5, 5);
+        textEventDateC.setText("Teléfono: 123-456-7890");
+
+        TextView textEventDateLabelC = new TextView(this);
+        textEventDateLabelC.setId(View.generateViewId());
+        textEventDateLabelC.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        textEventDateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
+        textEventDateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        textEventDateLabelC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textEventDateLabelC.setPadding(5, 5, 5, 5);
+        textEventDateLabelC.setText("Etiqueta: Información de contacto");
+
+        eventDateContent.addView(textEventDateC);
+        eventDateContent.addView(textEventDateLabelC);
     }
 
     public void closeDetail(View view){

@@ -41,12 +41,13 @@ public class AddContactActivity extends AppCompatActivity {
   EditText name, residenciaCC;
   Button cancelar, guardar;
   ContactRepository contactRepository;
+  ContactType contactType;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
-    setContentView(R.layout.activity_add_contact);
+    setContentView(R.layout.activity_add_contacts);
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(R.id.main),
         (v, insets) -> {
@@ -54,11 +55,14 @@ public class AddContactActivity extends AppCompatActivity {
           v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
           return insets;
         });
-    name = findViewById(R.id.nombreID);
-    residenciaCC = findViewById(R.id.residenciaCC);
 
-    cancelar = findViewById(R.id.cancelarCC);
-    guardar = findViewById(R.id.guardarCC);
+
+
+    name = findViewById(R.id.nombreID);
+    residenciaCC = findViewById(R.id.residenciaID);
+
+    cancelar = findViewById(R.id.cancelarC);
+    guardar = findViewById(R.id.guardarC);
 
     guardar.setOnClickListener(
         new View.OnClickListener() {
@@ -78,8 +82,8 @@ public class AddContactActivity extends AppCompatActivity {
           }
         });
     // ------------------------------Telefono-----------------------------------------------------------
-    contenerdorTelephone = findViewById(R.id.contenedorTelefonos1);
-    Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelefono1);
+    contenerdorTelephone = findViewById(R.id.contenedorTelefonos);
+    Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelefono);
 
     buttonAgregarTelefono.setOnClickListener(
         v -> {
@@ -123,8 +127,8 @@ public class AddContactActivity extends AppCompatActivity {
 
     // ------------------------------Contactos
     // asociados----------------------------------------------------------
-    contenedorAsociados = findViewById(R.id.contenedorAsociadosC);
-    Button buttonAgregarAsociados = findViewById(R.id.buttonAgregarAsociadosC);
+    contenedorAsociados = findViewById(R.id.contenedorAsociados);
+    Button buttonAgregarAsociados = findViewById(R.id.buttonAgregarAsociados);
 
     buttonAgregarAsociados.setOnClickListener(
         v -> {
@@ -165,8 +169,8 @@ public class AddContactActivity extends AppCompatActivity {
         });
 
     // ----------------------------E-mail----------------------------------------------------------------
-    contenedorEmail = findViewById(R.id.contenedorCorreos1);
-    Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmail1);
+    contenedorEmail = findViewById(R.id.contenedorCorreos);
+    Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmail);
 
     buttonAgregarEmail.setOnClickListener(
         v -> {
@@ -212,8 +216,8 @@ public class AddContactActivity extends AppCompatActivity {
         });
 
     // ----------------------------Direccion----------------------------------------------------------------
-    contenedorAdress = findViewById(R.id.contenedorDireccion1);
-    Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarDireccion1);
+    contenedorAdress = findViewById(R.id.contenedorDireccion);
+    Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarDireccion);
 
     buttonAgreganDireccion.setOnClickListener(
         v -> {
@@ -259,8 +263,8 @@ public class AddContactActivity extends AppCompatActivity {
 
     // ----------------------------Red
     // Social----------------------------------------------------------------
-    contenedorSocialMedia = findViewById(R.id.contenedorSocialMdia);
-    Button buttonAgregarSocial = findViewById(R.id.buttonAgregarRedSocial1);
+    contenedorSocialMedia = findViewById(R.id.contenedorRedSocial);
+    Button buttonAgregarSocial = findViewById(R.id.buttonAgregarRedSocial);
 
     buttonAgregarSocial.setOnClickListener(
         v -> {
@@ -304,8 +308,8 @@ public class AddContactActivity extends AppCompatActivity {
         });
 
     // -------------------------------------------Fecha----------------------------------------------------
-    contenedorDate = findViewById(R.id.contenedorFecha1);
-    Button buttonAgregarFecha = findViewById(R.id.buttonAgregarFecha1);
+    contenedorDate = findViewById(R.id.contenedorFecha);
+    Button buttonAgregarFecha = findViewById(R.id.buttonAgregarFecha);
 
     buttonAgregarFecha.setOnClickListener(
         v -> {
@@ -508,13 +512,12 @@ public class AddContactActivity extends AppCompatActivity {
     CustomArrayList<SocialMediaAccount> redes = obtenerSocialMedia();
     CustomArrayList<AssociateContact> asociados = obtenerAsociados();
     String nombre = name.getText().toString();
-    String descripcion = descripcionCC.getText().toString();
     String resdencia = residenciaCC.getText().toString();
 
-    Company company = new Company(
+    Contact contact = new Contact(
         null,
+        contactType,
         nombre,
-        descripcion,
         resdencia,
         telefonos,
         direccion,

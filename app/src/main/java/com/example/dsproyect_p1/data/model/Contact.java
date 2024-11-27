@@ -1,5 +1,10 @@
 package com.example.dsproyect_p1.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 
 import java.io.Serializable;
@@ -8,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public abstract class Contact implements Serializable {
+public class Contact implements Parcelable {
   private final UUID id;
   private final ContactType contactType;
   private final String name;
@@ -135,5 +140,49 @@ public abstract class Contact implements Serializable {
       newSocialMediaAccounts != null
       ? new CustomArrayList<>(newSocialMediaAccounts)
       : getSocialMediaAccounts());
+  }
+
+  protected Contact(Parcel in) {
+    id = (UUID) in.readSerializable();
+    contactType = ContactType.valueOf(in.readString());
+    name = in.readString();
+    residencyCountry = in.readString();
+    telephones = in.createTypedArrayList(Telephone.CREATOR);
+    addresses = in.createTypedArrayList(Address.CREATOR);
+    emails = in.createTypedArrayList(Email.CREATOR);
+    eventDates = in.createTypedArrayList(EventDate.CREATOR);
+    associateContacts = in.createTypedArrayList(AssociateContact.CREATOR);
+    socialMediaAccounts = in.createTypedArrayList(SocialMediaAccount.CREATOR);
+  }
+
+  public static final Creator<Contact> CREATOR = new Creator<Contact>() {
+    @Override
+    public Contact createFromParcel(Parcel in) {
+      return new Contact(in);
+    }
+
+    @Override
+    public Contact[] newArray(int size) {
+      return new Contact[size];
+    }
+  };
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(@NonNull Parcel dest, int flags) {
+    dest.writeSerializable(id);
+    dest.writeString(contactType.name());
+    dest.writeString(name);
+    dest.writeString(residencyCountry);
+    dest.writeTypedList(telephones);
+    dest.writeTypedList(addresses);
+    dest.writeTypedList(emails);
+    dest.writeTypedList(eventDates);
+    dest.writeTypedList(associateContacts);
+    dest.writeTypedList(socialMediaAccounts);
   }
 }

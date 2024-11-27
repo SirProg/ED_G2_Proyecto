@@ -22,7 +22,14 @@
             android:textSize="18sp"
             android:textAlignment="center"
             android:padding="10dp"
+            android:layout_margin="8dp"
             android:textColor="?attr/colorOnSurface"/>
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
         <ImageButton
             android:id="@+id/addPerson"
@@ -48,6 +55,12 @@
             android:contentDescription="add company imagen"
             android:src="@drawable/company_contact"
             />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
     </LinearLayout>
 
 </RelativeLayout>

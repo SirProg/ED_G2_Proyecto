@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Contact;
+import com.example.dsproyect_p1.data.model.ContactType;
 import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.modules.add_contact.view.AddContactActivity;
 import com.example.dsproyect_p1.modules.contact_details.view.ContactDetailsActivity;
@@ -32,7 +33,7 @@ import javax.inject.Inject;
 @AndroidEntryPoint
 public class ContactsOverviewActivity extends AppCompatActivity
     implements  ContactRecyclerView.onItemClickListener {
-  private RecyclerView recyclerView, recyclerViewContact;
+  private RecyclerView recyclerViewContact;
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
   private ContactRecyclerView contactRecyclerView;
@@ -56,12 +57,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
 
     injectContacts();
 
-    recyclerView = findViewById(R.id.recyclerViewContacts);
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-    recyclerViewContact = findViewById(R.id.recyclerViewContact);
+    recyclerViewContact = findViewById(R.id.recyclerViewContacts);
     recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
 
     contactRecyclerView = new ContactRecyclerView(List.of(), contact -> moveToDescriptionContact(contact));
@@ -87,17 +83,23 @@ public class ContactsOverviewActivity extends AppCompatActivity
   }
 
   private void injectContacts() {
-    Contact contact1 = new Contact(null, "Chevrolet", null, null, null, null, null, null, null, null);
-    Contact contact2 = new Contact(null, "Ferrari", null, null, null, null, null, null, null, null);
-    Contact contact3 = new Contact(null, "Audi", null, null, null, null, null, null, null, null);
-    Contact contact4 = new Contact(null, "Telconet", null, null, null, null, null, null, null, null);
-    Contact contact5 = new Contact(null, "Mazda", null, null, null, null, null, null, null, null);
+    Contact contact1 = new Contact(null, ContactType.COMPANY, "Chevrolet", null, null, null, null, null, null, null);
+    Contact contact2 = new Contact(null, ContactType.PERSON, "Juan", null, null, null, null, null, null, null);
+    Contact contact3 = new Contact(null, ContactType.COMPANY, "Ferrari", null, null, null, null, null, null, null);
+    Contact contact4 = new Contact(null, ContactType.PERSON, "Juafra", null, null, null, null, null, null, null);
+    Contact contact5 = new Contact(null, ContactType.COMPANY, "Telconet", null, null, null, null, null, null, null);
+    Contact contact6 = new Contact(null, ContactType.PERSON, "Kevin", null, null, null, null, null, null, null);
+    Contact contact7 = new Contact(null, ContactType.COMPANY, "Audi", null, null, null, null, null, null, null);
+    Contact contact8 = new Contact(null, ContactType.PERSON, "Daniela", null, null, null, null, null, null, null);
     CompletableFuture<Void> future1 = contactRepository.saveContact(contact1);
     CompletableFuture<Void> future2 = contactRepository.saveContact(contact2);
     CompletableFuture<Void> future3 = contactRepository.saveContact(contact3);
     CompletableFuture<Void> future4 = contactRepository.saveContact(contact4);
     CompletableFuture<Void> future5 = contactRepository.saveContact(contact5);
-    CompletableFuture.allOf(future1, future2, future3, future4, future5).join();
+    CompletableFuture<Void> future6 = contactRepository.saveContact(contact6);
+    CompletableFuture<Void> future7 = contactRepository.saveContact(contact7);
+    CompletableFuture<Void> future8 = contactRepository.saveContact(contact8);
+    CompletableFuture.allOf(future1, future2, future3, future4, future5,future6,future7,future8).join();
   }
 
   @Override
@@ -141,16 +143,28 @@ public class ContactsOverviewActivity extends AppCompatActivity
         true);
 
 
-    ImageButton iBtnContact = viewPopup.findViewById(R.id.addContact);
-    iBtnContact.setOnClickListener(
+    ImageButton iBtnContactPerson = viewPopup.findViewById(R.id.addPerson);
+    iBtnContactPerson.setOnClickListener(
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
             popupWindow.dismiss();
             Intent intent = new Intent(ContactsOverviewActivity.this, AddContactActivity.class);
+            intent.putExtra("ContactType", ContactType.PERSON);
             startActivity(intent);
           }
         });
+    ImageButton iBtnContactCompany = viewPopup.findViewById(R.id.addCompany);
+    iBtnContactCompany.setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                popupWindow.dismiss();
+                Intent intent = new Intent(ContactsOverviewActivity.this, AddContactActivity.class);
+                intent.putExtra("ContactType", ContactType.COMPANY);
+                startActivity(intent);
+              }
+            });
     popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
   }
 }

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.company_details.view.CompanyDetailsActivity">
+    tools:context=".modules.contact_details.view.ContactDetailsActivity">
 
     <LinearLayout
         android:id="@+id/idHeaderDetail"
@@ -111,7 +111,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/idTelephoneCompanyContact"
+                android:id="@+id/idTelephoneContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -154,10 +154,10 @@
 
             </LinearLayout>
 
-            <!-- Adress Person -->
+            <!-- Address  -->
 
             <LinearLayout
-                android:id="@+id/idAdressCompanyContact"
+                android:id="@+id/idAddressContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -201,7 +201,7 @@
 
             </LinearLayout>
 
-            <!-- Email company -->
+            <!-- Email  -->
             <LinearLayout
                 android:id="@+id/idEmailContact"
                 android:layout_width="match_parent"
@@ -247,7 +247,7 @@
 
             </LinearLayout>
 
-            <!-- EventDate company -->
+            <!-- EventDate -->
             <LinearLayout
                 android:id="@+id/idEventDateContact"
                 android:layout_width="match_parent"
@@ -294,7 +294,7 @@
             </LinearLayout>
 
 
-            <!-- Associate Contact company -->
+            <!-- Associate Contact -->
             <LinearLayout
                 android:id="@+id/idAssociateContact"
                 android:layout_width="match_parent"
@@ -340,7 +340,7 @@
 
             </LinearLayout>
 
-            <!-- Social Media Contact company -->
+            <!-- Social Media Contact -->
             <LinearLayout
                 android:id="@+id/idSocialMediaContact"
                 android:layout_width="match_parent"

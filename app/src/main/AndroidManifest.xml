@@ -14,23 +14,14 @@
         android:theme="@style/Theme.DSProyect_P1"
         tools:targetApi="31">
         <activity
-            android:name=".modules.company_details.view.CompanyDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".modules.add_company.view.AddCompanyActivity"
+            android:name=".modules.add_contact.view.AddContactActivity"
             android:exported="true" />
         <activity
-            android:name=".modules.edit_person.view.EditPersonActivity"
+            android:name=".modules.edit_contact.view.EditContactActivity"
             android:exported="false" />
         <activity
-            android:name=".modules.edit_company.view.EditCompanyActivity"
+            android:name=".modules.contact_details.view.ContactDetailsActivity"
             android:exported="false" />
-        <activity
-            android:name=".modules.person_details.view.PersonDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".modules.add_person.view.AddPersonActivity"
-            android:exported="true" />
         <activity
             android:name=".modules.contacts_overview.view.ContactsOverviewActivity"
             android:exported="true">

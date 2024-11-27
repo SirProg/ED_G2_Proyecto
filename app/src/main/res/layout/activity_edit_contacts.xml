@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.edit_person.view.EditPersonActivity">
+    tools:context=".modules.edit_contact.view.EditContactActivity">
 
     <LinearLayout
         android:id="@+id/headerEditPerson"
@@ -44,13 +44,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <EditText
-                    android:id="@+id/editPersonName"
+                    android:id="@+id/editName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
                     android:textSize="16sp"/>
                 <EditText
-                    android:id="@+id/editPersonResidency"
+                    android:id="@+id/editResidency"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Residency Country"
@@ -69,7 +69,7 @@
                     android:textStyle="bold"
                     />
                 <LinearLayout
-                    android:id="@+id/editPersonTelephone"
+                    android:id="@+id/editTelephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -99,7 +99,7 @@
                     android:textStyle="bold"
                     />
                 <LinearLayout
-                    android:id="@+id/editPersonEmail"
+                    android:id="@+id/editEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -128,7 +128,7 @@
                     android:textStyle="bold"
                     />
                 <LinearLayout
-                    android:id="@+id/editPersonAddress"
+                    android:id="@+id/editAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -157,7 +157,7 @@
                     android:textStyle="bold"
                     />
                 <LinearLayout
-                    android:id="@+id/editPersonAssociatedContact"
+                    android:id="@+id/editAssociatedContact"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -186,7 +186,7 @@
                     android:textStyle="bold"
                     />
                 <LinearLayout
-                    android:id="@+id/editPersonDate"
+                    android:id="@+id/editDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -215,7 +215,7 @@
                     android:textStyle="bold"
                     />
                 <LinearLayout
-                    android:id="@+id/editPersonSocialMedia"
+                    android:id="@+id/editSocialMedia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
