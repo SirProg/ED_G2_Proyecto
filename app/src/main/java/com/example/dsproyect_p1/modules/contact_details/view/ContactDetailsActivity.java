@@ -50,7 +50,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         associateContactContent = findViewById(R.id.idAssociateContact);
         socialMediaContent = findViewById(R.id.idSocialMediaContact);
 
-        Contact contact = getIntent().getParcelableExtra("ContactDetailsActivity", Contact.class);
+        Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
         if(contact != null){
             loadContact(contact);
         }else{

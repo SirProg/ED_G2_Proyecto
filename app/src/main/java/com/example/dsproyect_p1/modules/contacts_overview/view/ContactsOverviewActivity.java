@@ -83,7 +83,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
 
   public void moveToDescriptionContact(Contact contact) {
     Intent intent = new Intent(ContactsOverviewActivity.this, ContactDetailsActivity.class);
-    intent.putExtra("ContactDetailsActivity", contact);
+    intent.putExtra("CONTACT", contact);
     startActivity(intent);
   }
 
@@ -120,7 +120,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
   @Override
   public void onItemClickContact(Contact contact) {
     Intent intent = new Intent(ContactsOverviewActivity.this, ContactDetailsActivity.class);
-    intent.putExtra("COMPANY", contact);
+    intent.putExtra("CONTACT", contact);
     startActivity(intent);
   }
 
@@ -133,6 +133,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
                   () -> {
                     contactsList = contacts;
                     contactRecyclerView.updateData(contacts);
+                    Toast.makeText(this, "Se cargaron los datos", Toast.LENGTH_SHORT).show();
                   });
             })
         .exceptionally(
@@ -165,17 +166,17 @@ public class ContactsOverviewActivity extends AppCompatActivity
             case "Todos":
               updateRecyclerView(contactsList);
               break;
-            case "Nombre":
+            case "Nombres":
               List<Contact> sortedName = new CustomArrayList<>(contactsList);
               sortedName.sort(ContactComparators.BY_NAME);
               updateRecyclerView(sortedName);
               break;
-            case "Tipo":
+            case "Tipo Contacto":
               List<Contact> sortedType = new CustomArrayList<>(contactsList);
               sortedType.sort(ContactComparators.BY_CONTACT_TYPE);
               updateRecyclerView(sortedType);
               break;
-            case "País":
+            case "Pais":
               List<Contact> sortedCountry = new CustomArrayList<>(contactsList);
               sortedCountry.sort(ContactComparators.BY_RESIDENCY_COUNTRY);
               updateRecyclerView(sortedCountry);
