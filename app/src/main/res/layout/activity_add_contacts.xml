@@ -46,6 +46,26 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <RadioGroup
+                android:id="@+id/radioGroupSelected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonEmpresa"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Empresa"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonPersona"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Persona" />
+            </RadioGroup>
 
             <EditText
                 android:id="@+id/nombreID"

@@ -1,15 +1,19 @@
 package com.example.dsproyect_p1.modules.contacts_overview.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,11 +25,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Contact;
 import com.example.dsproyect_p1.data.model.ContactType;
+import com.example.dsproyect_p1.data.model.Telephone;
 import com.example.dsproyect_p1.data.repository.*;
+import com.example.dsproyect_p1.data.structures.ContactComparators;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.example.dsproyect_p1.modules.add_contact.view.AddContactActivity;
 import com.example.dsproyect_p1.modules.contact_details.view.ContactDetailsActivity;
 import com.example.dsproyect_p1.modules.contacts_overview.adapter.ContactRecyclerView;
 import dagger.hilt.android.AndroidEntryPoint;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javax.inject.Inject;
@@ -37,6 +46,8 @@ public class ContactsOverviewActivity extends AppCompatActivity
   private Button btnContacts, btnFavorite, btnOrder;
   private Button btnAddContact;
   private ContactRecyclerView contactRecyclerView;
+  private Spinner spinnerOrderBy;
+  private List<Contact> contactsList;
 
   @Inject
   ContactRepository contactRepository;
@@ -56,6 +67,10 @@ public class ContactsOverviewActivity extends AppCompatActivity
         });
 
     injectContacts();
+    spinnerOrderBy = findViewById(R.id.spinnerOrderBy);
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.order,android.R.layout.simple_spinner_item);
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spinnerOrderBy.setAdapter(adapter);
 
     recyclerViewContact = findViewById(R.id.recyclerViewContacts);
     recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
@@ -64,9 +79,6 @@ public class ContactsOverviewActivity extends AppCompatActivity
     recyclerViewContact.setAdapter(contactRecyclerView);
 
     fetchContacts();
-
-    btnAddContact = findViewById(R.id.openPopUpAdd);
-    btnAddContact.setOnClickListener(view -> openPopupMenuAdd(btnAddContact));
   }
 
   public void moveToDescriptionContact(Contact contact) {
@@ -83,14 +95,17 @@ public class ContactsOverviewActivity extends AppCompatActivity
   }
 
   private void injectContacts() {
-    Contact contact1 = new Contact(null, ContactType.COMPANY, "Chevrolet", null, null, null, null, null, null, null);
-    Contact contact2 = new Contact(null, ContactType.PERSON, "Juan", null, null, null, null, null, null, null);
-    Contact contact3 = new Contact(null, ContactType.COMPANY, "Ferrari", null, null, null, null, null, null, null);
-    Contact contact4 = new Contact(null, ContactType.PERSON, "Juafra", null, null, null, null, null, null, null);
-    Contact contact5 = new Contact(null, ContactType.COMPANY, "Telconet", null, null, null, null, null, null, null);
-    Contact contact6 = new Contact(null, ContactType.PERSON, "Kevin", null, null, null, null, null, null, null);
-    Contact contact7 = new Contact(null, ContactType.COMPANY, "Audi", null, null, null, null, null, null, null);
-    Contact contact8 = new Contact(null, ContactType.PERSON, "Daniela", null, null, null, null, null, null, null);
+    List<Telephone> telephones1 = new CustomArrayList<>();
+    telephones1.add(new Telephone("0932488380", "Casa"));
+    telephones1.add(new Telephone("0215487960", "Trabajo"));
+    Contact contact1 = new Contact(null, ContactType.COMPANY, "Chevrolet", "Ecuador", telephones1, null, null, null, null, null);
+    Contact contact2 = new Contact(null, ContactType.PERSON, "Juan", "Peru", null, null, null, null, null, null);
+    Contact contact3 = new Contact(null, ContactType.COMPANY, "Ferrari", "Ecuador", null, null, null, null, null, null);
+    Contact contact4 = new Contact(null, ContactType.PERSON, "Juafra", "Italia", null, null, null, null, null, null);
+    Contact contact5 = new Contact(null, ContactType.COMPANY, "Telconet", "Mexico", null, null, null, null, null, null);
+    Contact contact6 = new Contact(null, ContactType.PERSON, "Kevin", "Mexico", null, null, null, null, null, null);
+    Contact contact7 = new Contact(null, ContactType.COMPANY, "Audi", "Ecuador", null, null, null, null, null, null);
+    Contact contact8 = new Contact(null, ContactType.PERSON, "Daniela", "Panama", null, null, null, null, null, null);
     CompletableFuture<Void> future1 = contactRepository.saveContact(contact1);
     CompletableFuture<Void> future2 = contactRepository.saveContact(contact2);
     CompletableFuture<Void> future3 = contactRepository.saveContact(contact3);
@@ -116,6 +131,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
             contacts -> {
               runOnUiThread(
                   () -> {
+                    contactsList = contacts;
                     contactRecyclerView.updateData(contacts);
                   });
             })
@@ -133,38 +149,54 @@ public class ContactsOverviewActivity extends AppCompatActivity
             });
   }
 
-  public void openPopupMenuAdd(View anchorView) {
-    View viewPopup = LayoutInflater.from(ContactsOverviewActivity.this)
-        .inflate(R.layout.menu_item_addcontact, null);
-    PopupWindow popupWindow = new PopupWindow(
-        viewPopup,
-        LinearLayout.LayoutParams.WRAP_CONTENT,
-        ViewGroup.LayoutParams.WRAP_CONTENT,
-        true);
-
-
-    ImageButton iBtnContactPerson = viewPopup.findViewById(R.id.addPerson);
-    iBtnContactPerson.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            popupWindow.dismiss();
-            Intent intent = new Intent(ContactsOverviewActivity.this, AddContactActivity.class);
-            intent.putExtra("ContactType", ContactType.PERSON);
-            startActivity(intent);
-          }
-        });
-    ImageButton iBtnContactCompany = viewPopup.findViewById(R.id.addCompany);
-    iBtnContactCompany.setOnClickListener(
-            new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                popupWindow.dismiss();
-                Intent intent = new Intent(ContactsOverviewActivity.this, AddContactActivity.class);
-                intent.putExtra("ContactType", ContactType.COMPANY);
-                startActivity(intent);
-              }
-            });
-    popupWindow.showAtLocation(anchorView, Gravity.CENTER, 0, 0);
+  public void addContact(View view){
+    Intent intent = new Intent(ContactsOverviewActivity.this, AddContactActivity.class);
+    startActivity(intent);
   }
+
+  public void openSpinnerOrder(View view){
+    if(spinnerOrderBy.getVisibility() == View.GONE){
+      spinnerOrderBy.setVisibility(View.VISIBLE);
+      spinnerOrderBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+          String selectedItem = adapterView.getItemAtPosition(i).toString();
+          switch (selectedItem){
+            case "Todos":
+              updateRecyclerView(contactsList);
+              break;
+            case "Nombre":
+              List<Contact> sortedName = new CustomArrayList<>(contactsList);
+              sortedName.sort(ContactComparators.BY_NAME);
+              updateRecyclerView(sortedName);
+              break;
+            case "Tipo":
+              List<Contact> sortedType = new CustomArrayList<>(contactsList);
+              sortedType.sort(ContactComparators.BY_CONTACT_TYPE);
+              updateRecyclerView(sortedType);
+              break;
+            case "País":
+              List<Contact> sortedCountry = new CustomArrayList<>(contactsList);
+              sortedCountry.sort(ContactComparators.BY_RESIDENCY_COUNTRY);
+              updateRecyclerView(sortedCountry);
+              break;
+          }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+      });
+    }else{
+      spinnerOrderBy.setVisibility(View.GONE);
+    }
+  }
+
+  @SuppressLint("NotifyDataSetChanged")
+  public void updateRecyclerView(List<Contact> contacts){
+    contactRecyclerView.updateData(contacts);
+    contactRecyclerView.notifyDataSetChanged();
+  }
+
 }

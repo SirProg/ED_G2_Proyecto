@@ -40,6 +40,7 @@
             android:text="@string/orden"
             android:layout_gravity="end"
             android:backgroundTint="?attr/colorPrimary"
+            android:onClick="openSpinnerOrder"
             />
 
 
@@ -52,6 +53,18 @@
         app:layout_constraintTop_toBottomOf="@+id/frameHeader"
         app:layout_constraintBottom_toTopOf="@+id/frameFooter"
         android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinnerOrderBy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="?attr/android:colorBackground"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:visibility="gone"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewContacts"
             android:layout_width="match_parent"
@@ -102,6 +115,7 @@
         app:layout_constraintBottom_toTopOf="@+id/frameFooter"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
+        android:onClick="addContact"
         />
 
 

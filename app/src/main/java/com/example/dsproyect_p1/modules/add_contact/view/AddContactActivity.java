@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class AddContactActivity extends AppCompatActivity {
   private LinearLayout contenerdorTelephone,
       contenedorAdress,
@@ -40,8 +47,10 @@ public class AddContactActivity extends AppCompatActivity {
       contenedorAsociados;
   EditText name, residenciaCC;
   Button cancelar, guardar;
+  @Inject
   ContactRepository contactRepository;
   ContactType contactType;
+  RadioGroup radioGroup;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +65,17 @@ public class AddContactActivity extends AppCompatActivity {
           return insets;
         });
 
+    radioGroup = findViewById(R.id.radioGroupSelected);
 
+    radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+      if(checkedId == R.id.radioButtonEmpresa){
+          contactType = ContactType.COMPANY;
+          Toast.makeText(this, "Empresa", Toast.LENGTH_SHORT).show();
+      }else if(checkedId == R.id.radioButtonPersona) {
+          contactType = ContactType.PERSON;
+          Toast.makeText(this, "Persona", Toast.LENGTH_SHORT).show();
+      }
+    });
 
     name = findViewById(R.id.nombreID);
     residenciaCC = findViewById(R.id.residenciaID);

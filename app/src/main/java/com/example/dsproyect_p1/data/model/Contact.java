@@ -185,4 +185,5 @@ public class Contact implements Parcelable {
     dest.writeTypedList(associateContacts);
     dest.writeTypedList(socialMediaAccounts);
   }
+
 }
