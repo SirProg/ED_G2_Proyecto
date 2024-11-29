@@ -15,13 +15,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Address;
 import com.example.dsproyect_p1.data.model.AssociateContact;
@@ -34,19 +32,21 @@ import com.example.dsproyect_p1.data.model.SocialMediaAccount;
 import com.example.dsproyect_p1.data.model.Telephone;
 import com.example.dsproyect_p1.data.repository.ContactRepository;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
-
+import com.example.dsproyect_p1.modules.contact_details.view.ContactDetailsActivity;
+import dagger.hilt.android.AndroidEntryPoint;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
-
 import javax.inject.Inject;
-
-import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class EditContactActivity extends AppCompatActivity {
-  LinearLayout telephoneContent, emailContent, addressContent, socialMediaContent, associatedContactsContent,
+  LinearLayout telephoneContent,
+      emailContent,
+      addressContent,
+      socialMediaContent,
+      associatedContactsContent,
       eventDateContent;
   EditText name, residency;
   ContactType contactType;
@@ -59,24 +59,27 @@ public class EditContactActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
     setContentView(R.layout.activity_edit_contacts);
-    ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-      Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-      v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-      return insets;
-    });
+    ViewCompat.setOnApplyWindowInsetsListener(
+        findViewById(R.id.main),
+        (v, insets) -> {
+          Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+          v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+          return insets;
+        });
 
     Contact contact = getIntent().getParcelableExtra("EditContact", Contact.class);
 
     radioGroup = findViewById(R.id.radioGroupSelected);
-    radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-      if (checkedId == R.id.radioButtonEmpresa) {
-        contactType = ContactType.COMPANY;
-        Toast.makeText(this, "Empresa", Toast.LENGTH_SHORT).show();
-      } else if (checkedId == R.id.radioButtonPersona) {
-        contactType = ContactType.PERSON;
-        Toast.makeText(this, "Persona", Toast.LENGTH_SHORT).show();
-      }
-    });
+    radioGroup.setOnCheckedChangeListener(
+        (group, checkedId) -> {
+          if (checkedId == R.id.radioButtonEmpresa) {
+            contactType = ContactType.COMPANY;
+            Toast.makeText(this, "Empresa", Toast.LENGTH_SHORT).show();
+          } else if (checkedId == R.id.radioButtonPersona) {
+            contactType = ContactType.PERSON;
+            Toast.makeText(this, "Persona", Toast.LENGTH_SHORT).show();
+          }
+        });
 
     name = findViewById(R.id.editName);
     residency = findViewById(R.id.editResidency);
@@ -96,8 +99,10 @@ public class EditContactActivity extends AppCompatActivity {
 
   public void loadData(Contact contact) {
     name.setText(contact.getName());
-    radioGroup
-        .check(contact.getContactType() == ContactType.COMPANY ? R.id.radioButtonEmpresa : R.id.radioButtonPersona);
+    radioGroup.check(
+        contact.getContactType() == ContactType.COMPANY
+            ? R.id.radioButtonEmpresa
+            : R.id.radioButtonPersona);
     residency.setText(contact.getResidencyCountry());
     loadDataTelephone(contact.getTelephones());
     loadDataEmail(contact.getEmails());
@@ -148,7 +153,6 @@ public class EditContactActivity extends AppCompatActivity {
 
       telephoneContent.addView(nuevoTelefono, telephoneContent.getChildCount() - 1);
     }
-
   }
 
   public void loadDataEmail(List<Email> emails) {
@@ -162,8 +166,7 @@ public class EditContactActivity extends AppCompatActivity {
 
       Spinner spinnerEtiqueta = new Spinner(this);
       spinnerEtiqueta.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+          new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
       ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
           this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
@@ -173,8 +176,7 @@ public class EditContactActivity extends AppCompatActivity {
 
       EditText editTextEmail = new EditText(this);
       editTextEmail.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+          new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
       editTextEmail.setHint("E-mail");
       editTextEmail.setText(emailData.getEmail());
       editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -202,14 +204,13 @@ public class EditContactActivity extends AppCompatActivity {
       LinearLayout nuevaDireccion = new LinearLayout(this);
       nuevaDireccion.setOrientation(LinearLayout.HORIZONTAL);
       nuevaDireccion.setLayoutParams(
-          new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-              LinearLayout.LayoutParams.WRAP_CONTENT));
+          new LinearLayout.LayoutParams(
+              LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
       nuevaDireccion.setPadding(0, 16, 0, 16);
 
       Spinner spinnerEtiqueta = new Spinner(this);
       spinnerEtiqueta.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+          new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
       ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
           this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
@@ -219,8 +220,7 @@ public class EditContactActivity extends AppCompatActivity {
 
       EditText editTextDireccion = new EditText(this);
       editTextDireccion.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+          new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
       editTextDireccion.setHint("Dirección");
       editTextDireccion.setText(addressData.getDescription());
       editTextDireccion.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -362,16 +362,14 @@ public class EditContactActivity extends AppCompatActivity {
 
       EditText editTextName = new EditText(this);
       editTextName.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+          new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
       editTextName.setHint("Name");
       editTextName.setInputType(InputType.TYPE_CLASS_TEXT);
       editTextName.setText(associatedContactData.getName());
 
       EditText editTextTelephone = new EditText(this);
       editTextTelephone.setLayoutParams(
-          new LinearLayout.LayoutParams(
-              0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+          new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
       editTextTelephone.setHint("Telephone");
       editTextTelephone.setInputType(InputType.TYPE_CLASS_TEXT);
       editTextTelephone.setText(associatedContactData.getTelephone());
@@ -385,13 +383,15 @@ public class EditContactActivity extends AppCompatActivity {
       botonEliminar.setGravity(Gravity.CENTER);
       botonEliminar.setTextColor(Color.WHITE);
 
-      botonEliminar.setOnClickListener(b -> associatedContactsContent.removeView(newAssociateContact));
+      botonEliminar.setOnClickListener(
+          b -> associatedContactsContent.removeView(newAssociateContact));
 
       newAssociateContact.addView(editTextName);
       newAssociateContact.addView(editTextTelephone);
       newAssociateContact.addView(botonEliminar);
 
-      associatedContactsContent.addView(newAssociateContact, associatedContactsContent.getChildCount() - 1);
+      associatedContactsContent.addView(
+          newAssociateContact, associatedContactsContent.getChildCount() - 1);
     }
   }
 
@@ -418,8 +418,7 @@ public class EditContactActivity extends AppCompatActivity {
     editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
 
     Button botonEliminar = new Button(EditContactActivity.this);
-    botonEliminar.setLayoutParams(
-        new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+    botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
     botonEliminar.setText("x");
     botonEliminar.setTextSize(8);
     botonEliminar.setBackgroundColor(Color.RED);
@@ -443,8 +442,7 @@ public class EditContactActivity extends AppCompatActivity {
 
     Spinner spinnerEtiqueta = new Spinner(this);
     spinnerEtiqueta.setLayoutParams(
-        new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+        new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
         this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
@@ -453,14 +451,12 @@ public class EditContactActivity extends AppCompatActivity {
 
     EditText editTextEmail = new EditText(this);
     editTextEmail.setLayoutParams(
-        new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+        new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
     editTextEmail.setHint("E-mail");
     editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
 
     Button botonEliminar = new Button(EditContactActivity.this);
-    botonEliminar.setLayoutParams(
-        new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+    botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
     botonEliminar.setText("x");
     botonEliminar.setTextSize(8);
     botonEliminar.setBackgroundColor(Color.RED);
@@ -479,13 +475,13 @@ public class EditContactActivity extends AppCompatActivity {
     LinearLayout nuevaDireccion = new LinearLayout(this);
     nuevaDireccion.setOrientation(LinearLayout.HORIZONTAL);
     nuevaDireccion.setLayoutParams(
-        new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
     nuevaDireccion.setPadding(0, 16, 0, 16);
 
     Spinner spinnerEtiqueta = new Spinner(this);
     spinnerEtiqueta.setLayoutParams(
-        new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+        new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
     ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
         this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
@@ -494,8 +490,7 @@ public class EditContactActivity extends AppCompatActivity {
 
     EditText editTextDireccion = new EditText(this);
     editTextDireccion.setLayoutParams(
-        new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+        new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
     editTextDireccion.setHint("Dirección");
     editTextDireccion.setInputType(InputType.TYPE_CLASS_TEXT);
 
@@ -540,8 +535,7 @@ public class EditContactActivity extends AppCompatActivity {
     textViewFecha.setBackgroundResource(android.R.drawable.edit_text);
 
     Button botonEliminar = new Button(this);
-    botonEliminar.setLayoutParams(
-        new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+    botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
     botonEliminar.setText("x");
     botonEliminar.setTextSize(8);
     botonEliminar.setBackgroundColor(Color.RED);
@@ -601,8 +595,7 @@ public class EditContactActivity extends AppCompatActivity {
     editTextSocial.setInputType(InputType.TYPE_CLASS_TEXT);
 
     Button botonEliminar = new Button(this);
-    botonEliminar.setLayoutParams(
-        new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+    botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
     botonEliminar.setText("x");
     botonEliminar.setTextSize(8);
     botonEliminar.setBackgroundColor(Color.RED);
@@ -627,34 +620,33 @@ public class EditContactActivity extends AppCompatActivity {
 
     EditText editTextName = new EditText(this);
     editTextName.setLayoutParams(
-        new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
     editTextName.setHint("Name");
     editTextName.setInputType(InputType.TYPE_CLASS_TEXT);
 
     EditText editTextTelephone = new EditText(this);
     editTextTelephone.setLayoutParams(
-        new LinearLayout.LayoutParams(
-            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
     editTextTelephone.setHint("Telephone");
     editTextTelephone.setInputType(InputType.TYPE_CLASS_TEXT);
 
     Button botonEliminar = new Button(this);
-    botonEliminar.setLayoutParams(
-        new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+    botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
     botonEliminar.setText("x");
     botonEliminar.setTextSize(8);
     botonEliminar.setBackgroundColor(Color.RED);
     botonEliminar.setGravity(Gravity.CENTER);
     botonEliminar.setTextColor(Color.WHITE);
 
-    botonEliminar.setOnClickListener(b -> associatedContactsContent.removeView(newAssociateContact));
+    botonEliminar.setOnClickListener(
+        b -> associatedContactsContent.removeView(newAssociateContact));
 
     newAssociateContact.addView(editTextName);
     newAssociateContact.addView(editTextTelephone);
     newAssociateContact.addView(botonEliminar);
 
-    associatedContactsContent.addView(newAssociateContact, associatedContactsContent.getChildCount() - 1);
+    associatedContactsContent.addView(
+        newAssociateContact, associatedContactsContent.getChildCount() - 1);
   }
 
   public CustomArrayList<Telephone> obtenerTelefonos() {
@@ -803,14 +795,18 @@ public class EditContactActivity extends AppCompatActivity {
         obtenerFecha(),
         obtenerAsociados(),
         obtenerSocialMedia());
-    contactRepository.saveContact(newContact).thenRun(() -> {
-      runOnUiThread(() -> {
-        Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("UPDATED_CONTACT", newContact);
-        setResult(RESULT_OK, resultIntent);
-        finish();
-      });
-    });
+    contactRepository
+        .saveContact(newContact)
+        .thenRun(
+            () -> {
+              runOnUiThread(
+                  () -> {
+                    Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
+                    Intent resultIntent = new Intent(EditContactActivity.this, ContactDetailsActivity.class);
+                    resultIntent.putExtra("UPDATED_CONTACT", newContact);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                  });
+            });
   }
 }

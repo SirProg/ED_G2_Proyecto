@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Address;
@@ -38,9 +40,13 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class ContactDetailsActivity extends AppCompatActivity {
   LinearLayout telephoneContent, adressContent, emailContent, eventDateContent, associateContactContent,
       socialMediaContent;
+
   TextView name, residencyCountry;
+
   @Inject
   ContactRepository contactRepository;
+
+  private ActivityResultLauncher<Intent> launcher;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -61,19 +67,25 @@ public class ContactDetailsActivity extends AppCompatActivity {
     eventDateContent = findViewById(R.id.idEventDateContact);
     associateContactContent = findViewById(R.id.idAssociateContact);
     socialMediaContent = findViewById(R.id.idSocialMediaContact);
-
-  }
-
-  @Override
-  protected void onResume() {
-    super.onResume();
     Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
     if (contact != null) {
       loadContact(contact);
-    } else {
-      Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
-      return;
     }
+    launcher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+          if (result.getResultCode() == RESULT_OK) {
+            Intent data = result.getData();
+            Contact updatedContact = data.getParcelableExtra("UPDATED_CONTACT");
+            if (updatedContact != null) {
+              loadContact(updatedContact);
+            } else {
+              Toast.makeText(this, "Error: No contact data received", Toast.LENGTH_SHORT).show();
+            }
+
+          }
+        });
+
   }
 
   public void loadContact(Contact contact) {
@@ -350,22 +362,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
   public void editContact(View view) {
     Intent intent = new Intent(ContactDetailsActivity.this, EditContactActivity.class);
     intent.putExtra("EditContact", getIntent().getParcelableExtra("CONTACT", Contact.class));
-    startActivity(intent);
-  }
-
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    if (requestCode == 1 && resultCode == RESULT_OK) {
-      // Retrieve the updated contact
-      Contact updatedContact = data.getParcelableExtra("UPDATED_CONTACT");
-      if (updatedContact != null) {
-        // Update UI with the new contact details
-        loadContact(updatedContact);
-      } else {
-        Toast.makeText(this, "Error: No contact data received", Toast.LENGTH_SHORT).show();
-      }
-    }
+    launcher.launch(intent);
   }
 
 }
