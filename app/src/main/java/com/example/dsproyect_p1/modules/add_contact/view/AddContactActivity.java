@@ -524,26 +524,17 @@ public class AddContactActivity extends AppCompatActivity {
   }
 
   public void registarContacto() {
-    CustomArrayList<Telephone> telefonos = obtenerTelefonos();
-    CustomArrayList<Email> email = obtenerEmail();
-    CustomArrayList<Address> direccion = obtenerDirecciones();
-    CustomArrayList<EventDate> fechas = obtenerFecha();
-    CustomArrayList<SocialMediaAccount> redes = obtenerSocialMedia();
-    CustomArrayList<AssociateContact> asociados = obtenerAsociados();
-    String nombre = name.getText().toString();
-    String resdencia = residenciaCC.getText().toString();
-
     Contact contact = new Contact(
         null,
         contactType,
-        nombre,
-        resdencia,
-        telefonos,
-        direccion,
-        email,
-        fechas,
-        asociados,
-        redes);
+            name.getText().toString(),
+        residenciaCC.getText().toString(),
+        obtenerTelefonos(),
+        obtenerDirecciones(),
+        obtenerEmail(),
+        obtenerFecha(),
+        obtenerAsociados(),
+        obtenerSocialMedia());
 
       contactRepository.saveContact(contact).thenRun(()-> {
           runOnUiThread(()->{

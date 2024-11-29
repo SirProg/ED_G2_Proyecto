@@ -24,9 +24,11 @@ import com.example.dsproyect_p1.data.model.EventDate;
 import com.example.dsproyect_p1.data.model.SocialMediaAccount;
 import com.example.dsproyect_p1.data.model.Telephone;
 import com.example.dsproyect_p1.data.repository.ContactRepository;
+import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import com.example.dsproyect_p1.modules.edit_contact.view.EditContactActivity;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import javax.inject.Inject;
 
@@ -38,7 +40,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
     TextView name, residencyCountry;
     @Inject
     ContactRepository contactRepository;
-    Contact contactUse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +60,14 @@ public class ContactDetailsActivity extends AppCompatActivity {
         associateContactContent = findViewById(R.id.idAssociateContact);
         socialMediaContent = findViewById(R.id.idSocialMediaContact);
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
         if(contact != null){
-            contactUse = contact;
             loadContact(contact);
         }else{
             Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
@@ -69,11 +75,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        loadContact(contactUse);
-    }
 
     public void loadContact(Contact contact){
         name.setText(contact.getName());
@@ -262,6 +263,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     }
 
+
+
     public void loadAssociateContacts(List<AssociateContact> associateContacts){
         if(!associateContacts.isEmpty()){
             for(AssociateContact associateContact : associateContacts) {
@@ -302,6 +305,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 linearLayout.addView(textAssociateLabelC);
 
                 associateContactContent.addView(linearLayout);
+
+
             }
         }
     }
@@ -355,7 +360,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
     }
 
     public void deleteContact(View view){
-        contactRepository.deleteContact(contactUse.getId()).thenRun(()->{
+        contactRepository.deleteContact(getIntent().getParcelableExtra("CONTACT", Contact.class).getId()).thenRun(()->{
             runOnUiThread(() -> {
                 Toast.makeText(this, "Contacto eliminado", Toast.LENGTH_SHORT).show();
                 finish();
@@ -365,7 +370,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     public void editContact(View view){
         Intent intent = new Intent(ContactDetailsActivity.this, EditContactActivity.class);
-        intent.putExtra("EditContact", contactUse);
+        intent.putExtra("EditContact", getIntent().getParcelableExtra("CONTACT", Contact.class));
         startActivity(intent);
     }
 }

@@ -38,6 +38,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroupSelected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioButtonEmpresa"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Empresa"/>
+
+                <RadioButton
+                    android:id="@+id/radioButtonPersona"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Persona" />
+            </RadioGroup>
+
             <LinearLayout
                 android:id="@+id/editPerson"
                 android:layout_width="match_parent"
@@ -112,7 +134,8 @@
                         android:layout_gravity="start"
                         android:text="Add Email"
                         android:textColor="?attr/colorOnPrimary"
-                        android:backgroundTint="?attr/colorPrimary"/>
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:onClick="addEditEmail"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -140,7 +163,8 @@
                         android:layout_gravity="start"
                         android:text="Add Address"
                         android:textColor="?attr/colorOnPrimary"
-                        android:backgroundTint="?attr/colorPrimary"/>
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:onClick="addEditAddress"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -169,7 +193,9 @@
                         android:layout_gravity="start"
                         android:text="Add Associated Contacts"
                         android:textColor="?attr/colorOnPrimary"
-                        android:backgroundTint="?attr/colorPrimary"/>
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:onClick="addEditAssociateContact"
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -198,7 +224,8 @@
                         android:layout_gravity="start"
                         android:text="Add Date"
                         android:textColor="?attr/colorOnPrimary"
-                        android:backgroundTint="?attr/colorPrimary"/>
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:onClick="addEditDate"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -227,7 +254,8 @@
                         android:layout_gravity="start"
                         android:text="Add Social Media"
                         android:textColor="?attr/colorOnPrimary"
-                        android:backgroundTint="?attr/colorPrimary"/>
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:onClick="addEditSocialMedia"/>
 
                 </LinearLayout>
             </LinearLayout>
