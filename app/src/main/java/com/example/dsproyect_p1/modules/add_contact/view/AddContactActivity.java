@@ -40,7 +40,8 @@ public class AddContactActivity extends AppCompatActivity {
       contenedorAsociados;
   EditText name, residenciaCC;
   Button cancelar, guardar;
-  @Inject ContactRepository contactRepository;
+  @Inject
+  ContactRepository contactRepository;
   ContactType contactType;
   RadioGroup radioGroup;
 
@@ -116,9 +117,8 @@ public class AddContactActivity extends AppCompatActivity {
           spinnerEtiqueta.setLayoutParams(
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-          ArrayAdapter<CharSequence> adapter =
-              ArrayAdapter.createFromResource(
-                  this, R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+              this, R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -205,9 +205,8 @@ public class AddContactActivity extends AppCompatActivity {
               new LinearLayout.LayoutParams(
                   0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
-          ArrayAdapter<CharSequence> adapter =
-              ArrayAdapter.createFromResource(
-                  this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+              this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -253,9 +252,8 @@ public class AddContactActivity extends AppCompatActivity {
               new LinearLayout.LayoutParams(
                   0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
-          ArrayAdapter<CharSequence> adapter =
-              ArrayAdapter.createFromResource(
-                  this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+              this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -300,9 +298,8 @@ public class AddContactActivity extends AppCompatActivity {
           spinnerEtiqueta.setLayoutParams(
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-          ArrayAdapter<CharSequence> adapter =
-              ArrayAdapter.createFromResource(
-                  this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+              this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -346,9 +343,8 @@ public class AddContactActivity extends AppCompatActivity {
           spinnerEtiqueta.setLayoutParams(
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-          ArrayAdapter<CharSequence> adapter =
-              ArrayAdapter.createFromResource(
-                  this, R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+              this, R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -375,18 +371,16 @@ public class AddContactActivity extends AppCompatActivity {
                 int mes = calendario.get(Calendar.MONTH);
                 int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog =
-                    new DatePickerDialog(
-                        this,
-                        (view, year, monthOfYear, dayOfMonth) -> {
-                          String fechaSeleccionada =
-                              dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                          textViewFecha.setText(fechaSeleccionada);
-                          textViewFecha.setTextColor(Color.BLACK);
-                        },
-                        anio,
-                        mes,
-                        dia);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                    this,
+                    (view, year, monthOfYear, dayOfMonth) -> {
+                      String fechaSeleccionada = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                      textViewFecha.setText(fechaSeleccionada);
+                      textViewFecha.setTextColor(Color.BLACK);
+                    },
+                    anio,
+                    mes,
+                    dia);
                 datePickerDialog.show();
               });
 
@@ -529,18 +523,17 @@ public class AddContactActivity extends AppCompatActivity {
   }
 
   public void registarContacto() {
-    Contact contact =
-        new Contact(
-            null,
-            contactType,
-            name.getText().toString(),
-            residenciaCC.getText().toString(),
-            obtenerTelefonos(),
-            obtenerDirecciones(),
-            obtenerEmail(),
-            obtenerFecha(),
-            obtenerAsociados(),
-            obtenerSocialMedia());
+    Contact contact = new Contact(
+        null,
+        contactType,
+        name.getText().toString(),
+        residenciaCC.getText().toString(),
+        obtenerTelefonos(),
+        obtenerDirecciones(),
+        obtenerEmail(),
+        obtenerFecha(),
+        obtenerAsociados(),
+        obtenerSocialMedia());
 
     contactRepository
         .saveContact(contact)

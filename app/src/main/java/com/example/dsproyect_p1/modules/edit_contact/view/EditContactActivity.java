@@ -310,7 +310,6 @@ public class EditContactActivity extends AppCompatActivity {
           new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
       textViewFecha.setHint("Seleccionar fecha");
       textViewFecha.setPadding(16, 16, 16, 16);
-      textViewFecha.setBackgroundResource(android.R.drawable.edit_text);
       textViewFecha.setText(dateData.getDate().toString());
 
       Button botonEliminar = new Button(this);
@@ -792,7 +791,9 @@ public class EditContactActivity extends AppCompatActivity {
   }
 
   public void saveChange(View view) {
-    Contact contactEdit = getIntent().getParcelableExtra("CONTACT", Contact.class).copyWith(
+    Contact oldContact = getIntent().getParcelableExtra("EditContact", Contact.class);
+    Contact newContact = new Contact(
+        oldContact.getId(),
         contactType,
         name.getText().toString(),
         residency.getText().toString(),
@@ -802,12 +803,11 @@ public class EditContactActivity extends AppCompatActivity {
         obtenerFecha(),
         obtenerAsociados(),
         obtenerSocialMedia());
-
-    contactRepository.saveContact(contactEdit).thenRun(() -> {
+    contactRepository.saveContact(newContact).thenRun(() -> {
       runOnUiThread(() -> {
         Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
         Intent resultIntent = new Intent();
-        resultIntent.putExtra("UPDATED_CONTACT", contactEdit);
+        resultIntent.putExtra("UPDATED_CONTACT", newContact);
         setResult(RESULT_OK, resultIntent);
         finish();
       });
