@@ -4,12 +4,14 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.data.model.Contact;
 
 import java.util.Calendar;
 
@@ -37,6 +40,9 @@ public class EditContactActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Contact contact = getIntent().getParcelableExtra("EditContact", Contact.class);
+
         name = findViewById(R.id.editName);
         residency = findViewById(R.id.editResidency);
         telephone = findViewById(R.id.editTelephone);
@@ -45,21 +51,27 @@ public class EditContactActivity extends AppCompatActivity {
         socialMedia = findViewById(R.id.editSocialMedia);
         associatedContacts = findViewById(R.id.editAssociatedContact);
         date = findViewById(R.id.editDate);
-        loadData();
-        addEditTelephone();
+        if(contact != null){
+            loadData(contact);
+        }else{
+            Toast.makeText(this, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+    }
+    public void loadData(Contact contact){
+        name.setText(contact.getName());
+        residency.setText(contact.getResidencyCountry());
+        //addEditTelephone();
         addEditDate();
         addEditAddress();
         addEditEmail();
         addEditSocialMedia();
     }
-    public void loadData(){
+    public void addEditTelephone(View view){
+        //Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelephone);
 
-    }
-    public void addEditTelephone(){
-        Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelephone);
-
-        buttonAgregarTelefono.setOnClickListener(
-                v -> {
+        //buttonAgregarTelefono.setOnClickListener(
+                //v -> {
                     LinearLayout nuevoTelefono = new LinearLayout(this);
                     nuevoTelefono.setOrientation(LinearLayout.HORIZONTAL);
                     nuevoTelefono.setLayoutParams(
@@ -96,7 +108,7 @@ public class EditContactActivity extends AppCompatActivity {
                     nuevoTelefono.addView(botonEliminar);
 
                     telephone.addView(nuevoTelefono, telephone.getChildCount() - 1);
-                });
+                //});
     }
 
     public void addEditEmail(){
@@ -303,6 +315,11 @@ public class EditContactActivity extends AppCompatActivity {
                 });
     }
 
+    public void closeEdit(View view){
+        finish();
+    }
 
+    public void saveChange(View view){
 
+    }
 }

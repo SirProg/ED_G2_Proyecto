@@ -36,6 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import javax.inject.Inject;
 
@@ -96,17 +97,24 @@ public class ContactsOverviewActivity extends AppCompatActivity
 
   private void injectContacts() {
     List<Telephone> telephones1 = new CustomArrayList<>();
-    telephones1.add(new Telephone("0932488380", "Casa"));
-    telephones1.add(new Telephone("0215487960", "Trabajo"));
-    Contact contact1 = new Contact(null, ContactType.COMPANY, "Chevrolet", "Ecuador", telephones1, null, null, null, null, null);
-    Contact contact2 = new Contact(null, ContactType.PERSON, "Juan", "Peru", null, null, null, null, null, null);
-    Contact contact3 = new Contact(null, ContactType.COMPANY, "Ferrari", "Ecuador", null, null, null, null, null, null);
-    Contact contact4 = new Contact(null, ContactType.PERSON, "Juafra", "Italia", null, null, null, null, null, null);
-    Contact contact5 = new Contact(null, ContactType.COMPANY, "Telconet", "Mexico", null, null, null, null, null, null);
-    Contact contact6 = new Contact(null, ContactType.PERSON, "Kevin", "Mexico", null, null, null, null, null, null);
-    Contact contact7 = new Contact(null, ContactType.COMPANY, "Audi", "Ecuador", null, null, null, null, null, null);
-    Contact contact8 = new Contact(null, ContactType.PERSON, "Daniela", "Panama", null, null, null, null, null, null);
-    CompletableFuture<Void> future1 = contactRepository.saveContact(contact1);
+    telephones1.add(new Telephone("Casa", "0932488380"));
+    telephones1.add(new Telephone("Trabajo", "0215487960"));
+    UUID id1 = UUID.fromString("f47c0c7d-3e62-4560-8b93-2b9c7f3d4b08");
+    UUID id2 = UUID.fromString("f1c9ed5c-34d7-466e-a6f8-295cf7b3d4c7");
+    UUID id3 = UUID.fromString("e43232a2-ccd3-43c5-8db5-3e7b0f09cf10");
+    UUID id4 = UUID.fromString("7c3a7e4f-b5e5-4b7b-8e94-d7e080e6ad");
+    UUID id5 = UUID.fromString("5d6b15c7-35a0-4b5f-a42f-9739e0b9cd8e");
+    UUID id6 = UUID.fromString("9a5f6d9a-12e4-4e8f-a8a7-b6f607f4b3b0");
+    UUID id7 = UUID.fromString("3bcce62d-6ec9-4577-b24d-73a22b1b83c7");
+    UUID id8 = UUID.fromString("d8f82e88-f6cd-49c5-bcfa-5b93cfb923bf");
+    Contact contact1 = new Contact(id1, ContactType.COMPANY, "Chevrolet", "Ecuador", telephones1, null, null, null, null, null);
+    Contact contact2 = new Contact(id2, ContactType.PERSON, "Juan", "Peru", null, null, null, null, null, null);
+    Contact contact3 = new Contact(id3, ContactType.COMPANY, "Ferrari", "Ecuador", null, null, null, null, null, null);
+    Contact contact4 = new Contact(id4, ContactType.PERSON, "Juafra", "Italia", null, null, null, null, null, null);
+    Contact contact5 = new Contact(id5, ContactType.COMPANY, "Telconet", "Mexico", null, null, null, null, null, null);
+    Contact contact6 = new Contact(id6, ContactType.PERSON, "Kevin", "Mexico", null, null, null, null, null, null);
+    Contact contact7 = new Contact(id7, ContactType.COMPANY, "Audi", "Ecuador", null, null, null, null, null, null);
+    Contact contact8 = new Contact(id8, ContactType.PERSON, "Daniela", "Panama", null, null, null, null, null, null);CompletableFuture<Void> future1 = contactRepository.saveContact(contact1);
     CompletableFuture<Void> future2 = contactRepository.saveContact(contact2);
     CompletableFuture<Void> future3 = contactRepository.saveContact(contact3);
     CompletableFuture<Void> future4 = contactRepository.saveContact(contact4);
@@ -133,7 +141,6 @@ public class ContactsOverviewActivity extends AppCompatActivity
                   () -> {
                     contactsList = contacts;
                     contactRecyclerView.updateData(contacts);
-                    Toast.makeText(this, "Se cargaron los datos", Toast.LENGTH_SHORT).show();
                   });
             })
         .exceptionally(
@@ -190,6 +197,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
         }
       });
     }else{
+      updateRecyclerView(contactsList);
       spinnerOrderBy.setVisibility(View.GONE);
     }
   }

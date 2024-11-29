@@ -23,13 +23,22 @@ import com.example.dsproyect_p1.data.model.Email;
 import com.example.dsproyect_p1.data.model.EventDate;
 import com.example.dsproyect_p1.data.model.SocialMediaAccount;
 import com.example.dsproyect_p1.data.model.Telephone;
+import com.example.dsproyect_p1.data.repository.ContactRepository;
 import com.example.dsproyect_p1.modules.edit_contact.view.EditContactActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class ContactDetailsActivity extends AppCompatActivity {
     LinearLayout telephoneContent, adressContent, emailContent, eventDateContent, associateContactContent, socialMediaContent;
     TextView name, residencyCountry;
+    @Inject
+    ContactRepository contactRepository;
+    Contact contactUse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +61,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
         if(contact != null){
+            contactUse = contact;
             loadContact(contact);
         }else{
             Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
@@ -59,9 +69,14 @@ public class ContactDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadContact(contactUse);
+    }
+
     public void loadContact(Contact contact){
         name.setText(contact.getName());
-        Toast.makeText(this, " " + contact.getResidencyCountry(), Toast.LENGTH_SHORT).show();
         residencyCountry.setText(contact.getResidencyCountry());
         loadTelephone(contact.getTelephones());
         loadEmails(contact.getEmails());
@@ -74,11 +89,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
     public void loadTelephone(List<Telephone> telephones){
         if(!telephones.isEmpty()){
             for(Telephone telephone : telephones){
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
                 TextView textTelephoneC = new TextView(this);
                 textTelephoneC.setId(View.generateViewId());
                 textTelephoneC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textTelephoneC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textTelephoneC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -88,8 +111,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 TextView textLabelC = new TextView(this);
                 textLabelC.setId(View.generateViewId());
                 textLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -97,8 +121,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textLabelC.setPadding(5, 5, 5, 5);
                 textLabelC.setText(telephone.getLabel());
 
-                telephoneContent.addView(textTelephoneC);
-                telephoneContent.addView(textLabelC);
+                linearLayout.addView(textTelephoneC);
+                linearLayout.addView(textLabelC);
+
+                telephoneContent.addView(linearLayout);
             }
         }
 
@@ -107,11 +133,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
     public void loadAddress(List<Address> addresses){
         if(!addresses.isEmpty()){
             for(Address address: addresses) {
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
                 TextView textAdressC = new TextView(this);
                 textAdressC.setId(View.generateViewId());
                 textAdressC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textAdressC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textAdressC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -122,8 +156,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 TextView textAdressLabelC = new TextView(this);
                 textAdressLabelC.setId(View.generateViewId());
                 textAdressLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textAdressLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textAdressLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -131,8 +166,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textAdressLabelC.setPadding(5, 5, 5, 5);
                 textAdressLabelC.setText(address.getLabel());
 
-                adressContent.addView(textAdressC);
-                adressContent.addView(textAdressLabelC);
+                linearLayout.addView(textAdressC);
+                linearLayout.addView(textAdressLabelC);
+
+                adressContent.addView(linearLayout);
             }
         }
     }
@@ -140,11 +177,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
     public void loadEmails(List<Email> emails){
         if(!emails.isEmpty()){
             for(Email email : emails) {
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
                 TextView textEmailC = new TextView(this);
                 textEmailC.setId(View.generateViewId());
                 textEmailC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textEmailC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textEmailC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -155,8 +200,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 TextView textEmailLabelC = new TextView(this);
                 textEmailLabelC.setId(View.generateViewId());
                 textEmailLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textEmailLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textEmailLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -164,8 +210,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textEmailLabelC.setPadding(5, 5, 5, 5);
                 textEmailLabelC.setText(email.getLabel());
 
-                emailContent.addView(textEmailC);
-                emailContent.addView(textEmailLabelC);
+                linearLayout.addView(textEmailC);
+                linearLayout.addView(textEmailLabelC);
+
+                emailContent.addView(linearLayout);
             }
         }
     }
@@ -173,11 +221,18 @@ public class ContactDetailsActivity extends AppCompatActivity {
     public void loadSocialMedia(List<SocialMediaAccount> socialMediaAccounts){
         if(!socialMediaAccounts.isEmpty()){
             for(SocialMediaAccount socialMediaAccount: socialMediaAccounts){
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
                 TextView textSocialMediaC = new TextView(this);
                 textSocialMediaC.setId(View.generateViewId());
                 textSocialMediaC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textSocialMediaC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textSocialMediaC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -188,8 +243,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 TextView textSocialMediaLabelC = new TextView(this);
                 textSocialMediaLabelC.setId(View.generateViewId());
                 textSocialMediaLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textSocialMediaLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textSocialMediaLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -197,8 +253,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textSocialMediaLabelC.setPadding(5, 5, 5, 5);
                 textSocialMediaLabelC.setText(socialMediaAccount.getUser());
 
-                socialMediaContent.addView(textSocialMediaC);
-                socialMediaContent.addView(textSocialMediaLabelC);
+                linearLayout.addView(textSocialMediaC);
+                linearLayout.addView(textSocialMediaLabelC);
+
+                socialMediaContent.addView(linearLayout);
             }
         }
 
@@ -207,11 +265,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
     public void loadAssociateContacts(List<AssociateContact> associateContacts){
         if(!associateContacts.isEmpty()){
             for(AssociateContact associateContact : associateContacts) {
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
                 TextView textAssociateC = new TextView(this);
                 textAssociateC.setId(View.generateViewId());
                 textAssociateC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textAssociateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textAssociateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -222,8 +288,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 TextView textAssociateLabelC = new TextView(this);
                 textAssociateLabelC.setId(View.generateViewId());
                 textAssociateLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textAssociateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textAssociateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -231,8 +298,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textAssociateLabelC.setPadding(5, 5, 5, 5);
                 textAssociateLabelC.setText(associateContact.getTelephone());
 
-                associateContactContent.addView(textAssociateC);
-                associateContactContent.addView(textAssociateLabelC);
+                linearLayout.addView(textAssociateC);
+                linearLayout.addView(textAssociateLabelC);
+
+                associateContactContent.addView(linearLayout);
             }
         }
     }
@@ -240,11 +309,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
     public void loadEventDates(List<EventDate> eventDates){
         if(!eventDates.isEmpty()){
             for(EventDate eventDate : eventDates) {
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                ));
+                linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+
                 TextView textEventDateC = new TextView(this);
                 textEventDateC.setId(View.generateViewId());
                 textEventDateC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textEventDateC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textEventDateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -255,8 +332,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 TextView textEventDateLabelC = new TextView(this);
                 textEventDateLabelC.setId(View.generateViewId());
                 textEventDateLabelC.setLayoutParams(new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
+                        0,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        1
                 ));
                 textEventDateLabelC.setTextColor(ContextCompat.getColor(this, R.color.md_theme_onSurface));
                 textEventDateLabelC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
@@ -264,8 +342,10 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textEventDateLabelC.setPadding(5, 5, 5, 5);
                 textEventDateLabelC.setText(eventDate.getLabel());
 
-                eventDateContent.addView(textEventDateC);
-                eventDateContent.addView(textEventDateLabelC);
+                linearLayout.addView(textEventDateC);
+                linearLayout.addView(textEventDateLabelC);
+
+                eventDateContent.addView(linearLayout);
             }
         }
     }
@@ -274,9 +354,18 @@ public class ContactDetailsActivity extends AppCompatActivity {
         finish();
     }
 
+    public void deleteContact(View view){
+        contactRepository.deleteContact(contactUse.getId()).thenRun(()->{
+            runOnUiThread(() -> {
+                Toast.makeText(this, "Contacto eliminado", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        });
+    }
+
     public void editContact(View view){
         Intent intent = new Intent(ContactDetailsActivity.this, EditContactActivity.class);
-        intent.putExtra("EditContact", getIntent().getParcelableExtra("ContactDetailsActivity", Contact.class));
+        intent.putExtra("EditContact", contactUse);
         startActivity(intent);
     }
 }

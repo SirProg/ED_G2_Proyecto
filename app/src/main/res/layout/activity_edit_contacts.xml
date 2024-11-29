@@ -80,6 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:text="Add Phone Number"
+                        android:onClick="addEditTelephone"
                         android:textColor="?attr/colorOnPrimary"
                         android:backgroundTint="?attr/colorPrimary"/>
 
@@ -248,6 +249,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="?attr/colorPrimary"
+            android:onClick="closeEdit"
             android:text="Close"
             android:layout_marginEnd="5dp"/>
         <Button
@@ -256,7 +258,8 @@
             android:layout_weight="1"
             android:text="Save"
             android:backgroundTint="?attr/colorPrimary"
-            android:layout_marginStart="5dp"/>
+            android:layout_marginStart="5dp"
+            android:onClick="saveChange"/>
 
     </LinearLayout>
 
