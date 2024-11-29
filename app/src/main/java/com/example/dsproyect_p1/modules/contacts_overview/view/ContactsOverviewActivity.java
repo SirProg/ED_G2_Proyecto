@@ -167,6 +167,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
   public void openSpinnerOrder(View view) {
     if (spinnerOrderBy.getVisibility() == View.GONE) {
       spinnerOrderBy.setVisibility(View.VISIBLE);
+      contactRecyclerView.updateData(getSortedContacts(spinnerOrderBy.getSelectedItem().toString()));
       spinnerOrderBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -185,6 +186,7 @@ public class ContactsOverviewActivity extends AppCompatActivity
       spinnerOrderBy.setVisibility(View.GONE);
     }
   }
+
 
   private List<Contact> getSortedContacts(String selectedItem) {
     List<Contact> sortedContacts = new CustomArrayList<>(contactsList);

@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,17 +25,32 @@ import com.example.dsproyect_p1.R;
 import com.example.dsproyect_p1.data.model.Address;
 import com.example.dsproyect_p1.data.model.AssociateContact;
 import com.example.dsproyect_p1.data.model.Contact;
+import com.example.dsproyect_p1.data.model.ContactType;
 import com.example.dsproyect_p1.data.model.Email;
 import com.example.dsproyect_p1.data.model.EventDate;
+import com.example.dsproyect_p1.data.model.SocialMedia;
 import com.example.dsproyect_p1.data.model.SocialMediaAccount;
 import com.example.dsproyect_p1.data.model.Telephone;
+import com.example.dsproyect_p1.data.repository.ContactRepository;
+import com.example.dsproyect_p1.data.structures.CustomArrayList;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class EditContactActivity extends AppCompatActivity {
     LinearLayout telephoneContent, emailContent, addressContent, socialMediaContent, associatedContactsContent, eventDateContent;
-    TextView name, residency;
+    EditText name, residency;
+    ContactType contactType;
+    RadioGroup radioGroup;
+    @Inject
+    ContactRepository contactRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +64,18 @@ public class EditContactActivity extends AppCompatActivity {
         });
 
         Contact contact = getIntent().getParcelableExtra("EditContact", Contact.class);
+
+        radioGroup = findViewById(R.id.radioGroupSelected);
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if(checkedId == R.id.radioButtonEmpresa){
+                contactType = ContactType.COMPANY;
+                Toast.makeText(this, "Empresa", Toast.LENGTH_SHORT).show();
+            }else if(checkedId == R.id.radioButtonPersona) {
+                contactType = ContactType.PERSON;
+                Toast.makeText(this, "Persona", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
         name = findViewById(R.id.editName);
         residency = findViewById(R.id.editResidency);
@@ -67,6 +95,7 @@ public class EditContactActivity extends AppCompatActivity {
 
     public void loadData(Contact contact){
         name.setText(contact.getName());
+        radioGroup.check(contact.getContactType() == ContactType.COMPANY ? R.id.radioButtonEmpresa : R.id.radioButtonPersona);
         residency.setText(contact.getResidencyCountry());
         loadDataTelephone(contact.getTelephones());
         loadDataEmail(contact.getEmails());
@@ -626,11 +655,156 @@ public class EditContactActivity extends AppCompatActivity {
         associatedContactsContent.addView(newAssociateContact, associatedContactsContent.getChildCount() - 1);
     }
 
+    public CustomArrayList<Telephone> obtenerTelefonos() {
+        CustomArrayList<Telephone> listaTelefonos = new CustomArrayList<>();
+        for (int i = 0; i < telephoneContent.getChildCount(); i++) {
+            View vista = telephoneContent.getChildAt(i);
+            if (vista instanceof LinearLayout) {
+                LinearLayout telefono = (LinearLayout) vista;
+                EditText editTextTelefono = (EditText) telefono.getChildAt(0);
+                String numero = editTextTelefono.getText().toString();
+                Spinner spinnerLabel = (Spinner) telefono.getChildAt(1);
+                String label = spinnerLabel.getSelectedItem().toString();
+                if (!numero.isEmpty()) {
+                    listaTelefonos.add(new Telephone(label, numero));
+                }
+            }
+        }
+        return listaTelefonos;
+    }
+
+    public CustomArrayList<Email> obtenerEmail() {
+        CustomArrayList<Email> listaEmail = new CustomArrayList<>();
+        for (int i = 0; i < emailContent.getChildCount(); i++) {
+            View vista = emailContent.getChildAt(i);
+            if (vista instanceof LinearLayout) {
+                LinearLayout llEmail = (LinearLayout) vista;
+                EditText editTextEmail = (EditText) llEmail.getChildAt(0);
+                String email = editTextEmail.getText().toString();
+                Spinner spinnerLabel = (Spinner) llEmail.getChildAt(1);
+                String label = spinnerLabel.getSelectedItem().toString();
+                if (!email.isEmpty()) {
+                    listaEmail.add(new Email(label, email));
+                }
+            }
+        }
+        return listaEmail;
+    }
+
+    public CustomArrayList<Address> obtenerDirecciones() {
+        CustomArrayList<Address> listaAdress = new CustomArrayList<>();
+        for (int i = 0; i < addressContent.getChildCount(); i++) {
+            View vista = addressContent.getChildAt(i);
+            if (vista instanceof LinearLayout) {
+                LinearLayout llDireccion = (LinearLayout) vista;
+                EditText editTextDireccion = (EditText) llDireccion.getChildAt(0);
+                String direccion = editTextDireccion.getText().toString();
+                Spinner spinnerLabel = (Spinner) llDireccion.getChildAt(1);
+                String label = spinnerLabel.getSelectedItem().toString();
+                if (!direccion.isEmpty()) {
+                    listaAdress.add(new Address(label, direccion));
+                }
+            }
+        }
+        return listaAdress;
+    }
+
+    public CustomArrayList<EventDate> obtenerFecha() {
+        CustomArrayList<EventDate> listaDate = new CustomArrayList<>();
+        for (int i = 0; i < eventDateContent.getChildCount(); i++) {
+            View vista = eventDateContent.getChildAt(i);
+            if (vista instanceof LinearLayout) {
+                LinearLayout llFecha = (LinearLayout) vista;
+                EditText editTextFecha = (EditText) llFecha.getChildAt(0);
+                String fecha = editTextFecha.getText().toString();
+
+                DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date = LocalDate.parse(fecha, formate);
+
+                Spinner spinnerLabel = (Spinner) llFecha.getChildAt(1);
+                String label = spinnerLabel.getSelectedItem().toString();
+                if (!fecha.isEmpty()) {
+                    listaDate.add(new EventDate(label, date));
+                }
+            }
+        }
+        return listaDate;
+    }
+
+    public CustomArrayList<SocialMediaAccount> obtenerSocialMedia() {
+        CustomArrayList<SocialMediaAccount> listaRedSocial = new CustomArrayList<>();
+        for (int i = 0; i < socialMediaContent.getChildCount(); i++) {
+            View vista = socialMediaContent.getChildAt(i);
+            if (vista instanceof LinearLayout) {
+                LinearLayout llSocial = (LinearLayout) vista;
+                EditText editTextuser = (EditText) llSocial.getChildAt(0);
+                String user = editTextuser.getText().toString();
+                Spinner spinnerLabel = (Spinner) llSocial.getChildAt(1);
+                String seleccion = spinnerLabel.getSelectedItem().toString();
+
+                SocialMedia label = null;
+
+                switch (seleccion) {
+                    case "Facebook":
+                        label = SocialMedia.FACEBOOK;
+                        break;
+                    case "Instagram":
+                        label = SocialMedia.INSTAGRAM;
+                        break;
+                    case "Twitter":
+                        label = SocialMedia.TWITTER;
+                        break;
+                    case "YouTube":
+                        label = SocialMedia.YOUTUBE;
+                        break;
+                }
+                if (!user.isEmpty()) {
+                    listaRedSocial.add(new SocialMediaAccount(label, user));
+                }
+            }
+        }
+        return listaRedSocial;
+    }
+
+    public CustomArrayList<AssociateContact> obtenerAsociados() {
+        CustomArrayList<AssociateContact> listaAsociados = new CustomArrayList<>();
+        for (int i = 0; i < associatedContactsContent.getChildCount(); i++) {
+            View vista = associatedContactsContent.getChildAt(i);
+            if (vista instanceof LinearLayout) {
+                LinearLayout llAsociado = (LinearLayout) vista;
+                EditText editTextnombre = (EditText) llAsociado.getChildAt(0);
+                String nombre = editTextnombre.getText().toString();
+                EditText editTextnumero = (EditText) llAsociado.getChildAt(0);
+                String numero = editTextnumero.getText().toString();
+                if (!nombre.isEmpty()) {
+                    listaAsociados.add(new AssociateContact(nombre, numero));
+                }
+            }
+        }
+        return listaAsociados;
+    }
+
     public void closeEdit(View view){
         finish();
     }
 
     public void saveChange(View view){
+        Contact contactEdit = getIntent().getParcelableExtra("CONTACT", Contact.class).copyWith(
+                contactType,
+                name.getText().toString(),
+                residency.getText().toString(),
+                obtenerTelefonos(),
+                obtenerDirecciones(),
+                obtenerEmail(),
+                obtenerFecha(),
+                obtenerAsociados(),
+                obtenerSocialMedia());
 
+        contactRepository.saveContact(contactEdit).thenRun(()-> {
+            runOnUiThread(()->{
+                Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            });
+        });
     }
 }

@@ -24,9 +24,11 @@ import com.example.dsproyect_p1.data.model.EventDate;
 import com.example.dsproyect_p1.data.model.SocialMediaAccount;
 import com.example.dsproyect_p1.data.model.Telephone;
 import com.example.dsproyect_p1.data.repository.ContactRepository;
+import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import com.example.dsproyect_p1.modules.edit_contact.view.EditContactActivity;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import javax.inject.Inject;
 
@@ -72,6 +74,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
             return;
         }
     }
+
 
     public void loadContact(Contact contact){
         name.setText(contact.getName());
@@ -260,6 +263,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     }
 
+
+
     public void loadAssociateContacts(List<AssociateContact> associateContacts){
         if(!associateContacts.isEmpty()){
             for(AssociateContact associateContact : associateContacts) {
@@ -300,6 +305,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 linearLayout.addView(textAssociateLabelC);
 
                 associateContactContent.addView(linearLayout);
+
+
             }
         }
     }
