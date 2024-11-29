@@ -5,37 +5,30 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.dsproyect_p1.data.repository.ContactRepository;
-import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
 import com.example.dsproyect_p1.R;
-import com.example.dsproyect_p1.data.api.ContactApi;
 import com.example.dsproyect_p1.data.model.*;
+import com.example.dsproyect_p1.data.repository.ContactRepository;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
+import com.example.dsproyect_p1.modules.contacts_overview.view.ContactsOverviewActivity;
+import dagger.hilt.android.AndroidEntryPoint;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-
 import javax.inject.Inject;
-
-import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class AddContactActivity extends AppCompatActivity {
@@ -47,8 +40,7 @@ public class AddContactActivity extends AppCompatActivity {
       contenedorAsociados;
   EditText name, residenciaCC;
   Button cancelar, guardar;
-  @Inject
-  ContactRepository contactRepository;
+  @Inject ContactRepository contactRepository;
   ContactType contactType;
   RadioGroup radioGroup;
 
@@ -67,15 +59,16 @@ public class AddContactActivity extends AppCompatActivity {
 
     radioGroup = findViewById(R.id.radioGroupSelected);
 
-    radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-      if(checkedId == R.id.radioButtonEmpresa){
-          contactType = ContactType.COMPANY;
-          Toast.makeText(this, "Empresa", Toast.LENGTH_SHORT).show();
-      }else if(checkedId == R.id.radioButtonPersona) {
-          contactType = ContactType.PERSON;
-          Toast.makeText(this, "Persona", Toast.LENGTH_SHORT).show();
-      }
-    });
+    radioGroup.setOnCheckedChangeListener(
+        (group, checkedId) -> {
+          if (checkedId == R.id.radioButtonEmpresa) {
+            contactType = ContactType.COMPANY;
+            Toast.makeText(this, "Empresa", Toast.LENGTH_SHORT).show();
+          } else if (checkedId == R.id.radioButtonPersona) {
+            contactType = ContactType.PERSON;
+            Toast.makeText(this, "Persona", Toast.LENGTH_SHORT).show();
+          }
+        });
 
     name = findViewById(R.id.nombreID);
     residenciaCC = findViewById(R.id.residenciaID);
@@ -87,6 +80,12 @@ public class AddContactActivity extends AppCompatActivity {
         new View.OnClickListener() {
           @Override
           public void onClick(View view) {
+            if (contactType == null) {
+              String contactTypeValidation = getString(R.string.contact_type_validation);
+              Toast.makeText(AddContactActivity.this, contactTypeValidation, Toast.LENGTH_SHORT)
+                  .show();
+              return; // Stop further execution
+            }
             registarContacto();
             Intent i = new Intent(getApplicationContext(), ContactsOverviewActivity.class);
             startActivity(i);
@@ -117,8 +116,9 @@ public class AddContactActivity extends AppCompatActivity {
           spinnerEtiqueta.setLayoutParams(
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-              this, R.array.etiquetas_telefonoC, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter =
+              ArrayAdapter.createFromResource(
+                  this, R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -205,8 +205,9 @@ public class AddContactActivity extends AppCompatActivity {
               new LinearLayout.LayoutParams(
                   0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
-          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-              this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter =
+              ArrayAdapter.createFromResource(
+                  this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -252,8 +253,9 @@ public class AddContactActivity extends AppCompatActivity {
               new LinearLayout.LayoutParams(
                   0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
 
-          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-              this, R.array.etiquetas_direccionC, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter =
+              ArrayAdapter.createFromResource(
+                  this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -298,8 +300,9 @@ public class AddContactActivity extends AppCompatActivity {
           spinnerEtiqueta.setLayoutParams(
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-              this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter =
+              ArrayAdapter.createFromResource(
+                  this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -343,8 +346,9 @@ public class AddContactActivity extends AppCompatActivity {
           spinnerEtiqueta.setLayoutParams(
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-          ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-              this, R.array.etiquetas_fechaC, android.R.layout.simple_spinner_item);
+          ArrayAdapter<CharSequence> adapter =
+              ArrayAdapter.createFromResource(
+                  this, R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
           spinnerEtiqueta.setAdapter(adapter);
 
@@ -353,7 +357,6 @@ public class AddContactActivity extends AppCompatActivity {
               new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
           textViewFecha.setHint("Seleccionar fecha");
           textViewFecha.setPadding(16, 16, 16, 16);
-          textViewFecha.setBackgroundResource(android.R.drawable.edit_text);
 
           Button botonEliminar = new Button(this);
           botonEliminar.setLayoutParams(
@@ -372,16 +375,18 @@ public class AddContactActivity extends AppCompatActivity {
                 int mes = calendario.get(Calendar.MONTH);
                 int dia = calendario.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    this,
-                    (view, year, monthOfYear, dayOfMonth) -> {
-                      String fechaSeleccionada = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                      textViewFecha.setText(fechaSeleccionada);
-                      textViewFecha.setTextColor(Color.BLACK);
-                    },
-                    anio,
-                    mes,
-                    dia);
+                DatePickerDialog datePickerDialog =
+                    new DatePickerDialog(
+                        this,
+                        (view, year, monthOfYear, dayOfMonth) -> {
+                          String fechaSeleccionada =
+                              dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                          textViewFecha.setText(fechaSeleccionada);
+                          textViewFecha.setTextColor(Color.BLACK);
+                        },
+                        anio,
+                        mes,
+                        dia);
                 datePickerDialog.show();
               });
 
@@ -524,23 +529,28 @@ public class AddContactActivity extends AppCompatActivity {
   }
 
   public void registarContacto() {
-    Contact contact = new Contact(
-        null,
-        contactType,
+    Contact contact =
+        new Contact(
+            null,
+            contactType,
             name.getText().toString(),
-        residenciaCC.getText().toString(),
-        obtenerTelefonos(),
-        obtenerDirecciones(),
-        obtenerEmail(),
-        obtenerFecha(),
-        obtenerAsociados(),
-        obtenerSocialMedia());
+            residenciaCC.getText().toString(),
+            obtenerTelefonos(),
+            obtenerDirecciones(),
+            obtenerEmail(),
+            obtenerFecha(),
+            obtenerAsociados(),
+            obtenerSocialMedia());
 
-      contactRepository.saveContact(contact).thenRun(()-> {
-          runOnUiThread(()->{
-              Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
-              finish();
-          });
-      });
+    contactRepository
+        .saveContact(contact)
+        .thenRun(
+            () -> {
+              runOnUiThread(
+                  () -> {
+                    Toast.makeText(this, "Contact saved successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                  });
+            });
   }
 }

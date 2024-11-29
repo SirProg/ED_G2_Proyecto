@@ -5,13 +5,12 @@
   <string name="Favoritos">Favorites</string>
   <string name="add">Enregistrer</string>
   <string name="close">Annuler</string>
-  <string name="add_contact">adde contacte</string>
+  <string name="add_contact">Ajouter un contact</string>
+  <string name="contact_type_validation">Choisissez un type de contact</string>
   <string-array name="etiquetas_telefono">
     <item>Maison</item>
     <item>Travail</item>
     <item>Personnel</item>
-    </string-array>
-  <string-array name="etiquetas_telefonoC">
     <item>Entreprise</item>
     <item>Direct</item>
     <item>Secrétaire</item>
@@ -25,16 +24,9 @@
     <item>Travail</item>
     <item>Autre</item>
     </string-array>
-  <string-array name="etiquetas_direccionC">
-    <item>Travail</item>
-    <item>Autre</item>
-    </string-array>
   <string-array name="etiquetas_fecha">
     <item>Anniversaire</item>
     <item>Anniversaire</item>
-    <item>Autre</item>
-    </string-array>
-  <string-array name="etiquetas_fechaC">
     <item>Réunion</item>
     <item>Autre</item>
     </string-array>

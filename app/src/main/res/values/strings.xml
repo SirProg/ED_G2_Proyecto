@@ -5,12 +5,11 @@
   <string name="Favoritos">Favorites</string>
   <string name="add">Save</string>
   <string name="close">Cancel</string>
+  <string name="contact_type_validation">Please select a contact type</string>
   <string-array name="etiquetas_telefono">
     <item>Home</item>
     <item>Work</item>
     <item>Personal</item>
-    </string-array>
-  <string-array name="etiquetas_telefonoC">
     <item>Business</item>
     <item>Direct</item>
     <item>Secretary</item>
@@ -24,16 +23,10 @@
     <item>Work</item>
     <item>Other</item>
     </string-array>
-  <string-array name="etiquetas_direccionC">
-    <item>Work</item>
-    <item>Other</item>
-    </string-array>
   <string-array name="etiquetas_fecha">
     <item>Birthday</item>
     <item>Anniversary</item>
     <item>Other</item>
-    </string-array>
-  <string-array name="etiquetas_fechaC">
     <item>Meeting</item>
     <item>Other</item>
     </string-array>

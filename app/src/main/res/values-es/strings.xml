@@ -6,12 +6,11 @@
   <string name="add">Guardar</string>
   <string name="close">Cancelar</string>
   <string name="add_contact">Añadir contacto</string>
+  <string name="contact_type_validation">Elige un tipo de contacto</string>
   <string-array name="etiquetas_telefono">
     <item>Casa</item>
     <item>Trabajo</item>
     <item>Personal</item>
-    </string-array>
-  <string-array name="etiquetas_telefonoC">
     <item>Empresa</item>
     <item>Directo</item>
     <item>Secretaría</item>
@@ -25,16 +24,9 @@
     <item>Trabajo</item>
     <item>Otro</item>
     </string-array>
-  <string-array name="etiquetas_direccionC">
-    <item>Trabajo</item>
-    <item>Otro</item>
-    </string-array>
   <string-array name="etiquetas_fecha">
     <item>Cumpleaños</item>
     <item>Aniversario</item>
-    <item>Otro</item>
-    </string-array>
-  <string-array name="etiquetas_fechaC">
     <item>Reunión</item>
     <item>Otro</item>
     </string-array>
