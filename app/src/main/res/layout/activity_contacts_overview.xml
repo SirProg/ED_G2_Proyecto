@@ -94,7 +94,7 @@
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="Contactos"/>
+            android:text="@string/Contactos"/>
 
         <Button
             android:id="@+id/footerButton2"
@@ -103,7 +103,7 @@
             android:layout_weight="1"
             android:layout_marginStart="4dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="Favoritos"/>
+            android:text="@string/Favoritos"/>
 
     </LinearLayout>
 

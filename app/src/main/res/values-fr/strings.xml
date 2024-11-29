@@ -1,41 +1,42 @@
 <resources>
   <string name="app_name">DSProyect_P1</string>
-  <string name="orden">Order</string>
+  <string name="orden">Ordre</string>
   <string name="Contactos">Contacts</string>
   <string name="Favoritos">Favorites</string>
-  <string name="add">Save</string>
-  <string name="close">Cancel</string>
+  <string name="add">Enregistrer</string>
+  <string name="close">Annuler</string>
+  <string name="add_contact">adde contacte</string>
   <string-array name="etiquetas_telefono">
-    <item>Home</item>
-    <item>Work</item>
-    <item>Personal</item>
+    <item>Maison</item>
+    <item>Travail</item>
+    <item>Personnel</item>
     </string-array>
   <string-array name="etiquetas_telefonoC">
-    <item>Business</item>
+    <item>Entreprise</item>
     <item>Direct</item>
-    <item>Secretary</item>
+    <item>Secrétaire</item>
     </string-array>
   <string-array name="etiquetas_email">
-    <item>Personal</item>
-    <item>Work</item>
+    <item>Personnel</item>
+    <item>Travail</item>
     </string-array>
   <string-array name="etiquetas_direccion">
-    <item>Home</item>
-    <item>Work</item>
-    <item>Other</item>
+    <item>Domicile</item>
+    <item>Travail</item>
+    <item>Autre</item>
     </string-array>
   <string-array name="etiquetas_direccionC">
-    <item>Work</item>
-    <item>Other</item>
+    <item>Travail</item>
+    <item>Autre</item>
     </string-array>
   <string-array name="etiquetas_fecha">
-    <item>Birthday</item>
-    <item>Anniversary</item>
-    <item>Other</item>
+    <item>Anniversaire</item>
+    <item>Anniversaire</item>
+    <item>Autre</item>
     </string-array>
   <string-array name="etiquetas_fechaC">
-    <item>Meeting</item>
-    <item>Other</item>
+    <item>Réunion</item>
+    <item>Autre</item>
     </string-array>
   <string-array name="etiquetas_RedSocial">
     <item>Facebook</item>
@@ -44,10 +45,10 @@
     <item>YouTube</item>
     </string-array>
   <string-array name="order">
-    <item>All</item>
-    <item>Names</item>
-    <item>Country</item>
-    <item>Contact Type</item>
+    <item>Tous</item>
+    <item>Noms</item>
+    <item>Pays</item>
+    <item>Type de Contact</item>
     </string-array>
-  <string name="title_activity_company_details">CompanyDetails</string>
+  <string name="title_activity_company_details">Detail de l entreprise</string>
   </resources>
