@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,15 +21,20 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.data.model.Address;
+import com.example.dsproyect_p1.data.model.AssociateContact;
 import com.example.dsproyect_p1.data.model.Contact;
+import com.example.dsproyect_p1.data.model.Email;
+import com.example.dsproyect_p1.data.model.EventDate;
+import com.example.dsproyect_p1.data.model.SocialMediaAccount;
+import com.example.dsproyect_p1.data.model.Telephone;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class EditContactActivity extends AppCompatActivity {
-    LinearLayout telephone, email, address, socialMedia, associatedContacts, date;
+    LinearLayout telephoneContent, emailContent, addressContent, socialMediaContent, associatedContactsContent, eventDateContent;
     TextView name, residency;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +51,12 @@ public class EditContactActivity extends AppCompatActivity {
 
         name = findViewById(R.id.editName);
         residency = findViewById(R.id.editResidency);
-        telephone = findViewById(R.id.editTelephone);
-        email = findViewById(R.id.editEmail);
-        address = findViewById(R.id.editAddress);
-        socialMedia = findViewById(R.id.editSocialMedia);
-        associatedContacts = findViewById(R.id.editAssociatedContact);
-        date = findViewById(R.id.editDate);
+        telephoneContent = findViewById(R.id.editTelephone);
+        emailContent = findViewById(R.id.editEmail);
+        addressContent = findViewById(R.id.editAddress);
+        socialMediaContent = findViewById(R.id.editSocialMedia);
+        associatedContactsContent = findViewById(R.id.editAssociatedContact);
+        eventDateContent = findViewById(R.id.editDate);
         if(contact != null){
             loadData(contact);
         }else{
@@ -58,261 +64,566 @@ public class EditContactActivity extends AppCompatActivity {
             return;
         }
     }
+
     public void loadData(Contact contact){
         name.setText(contact.getName());
         residency.setText(contact.getResidencyCountry());
-        //addEditTelephone();
-        addEditDate();
-        addEditAddress();
-        addEditEmail();
-        addEditSocialMedia();
-    }
-    public void addEditTelephone(View view){
-        //Button buttonAgregarTelefono = findViewById(R.id.buttonAgregarTelephone);
-
-        //buttonAgregarTelefono.setOnClickListener(
-                //v -> {
-                    LinearLayout nuevoTelefono = new LinearLayout(this);
-                    nuevoTelefono.setOrientation(LinearLayout.HORIZONTAL);
-                    nuevoTelefono.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    nuevoTelefono.setPadding(0, 16, 0, 16);
-
-                    Spinner spinnerEtiqueta = new Spinner(this);
-                    spinnerEtiqueta.setLayoutParams(
-                            new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                            this, R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerEtiqueta.setAdapter(adapter);
-
-                    EditText editTextTelefono = new EditText(this);
-                    editTextTelefono.setLayoutParams(
-                            new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                    editTextTelefono.setHint("Teléfono");
-                    editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
-
-                    Button botonEliminar = new Button(EditContactActivity.this);
-                    botonEliminar.setLayoutParams(
-                            new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
-                    botonEliminar.setText("x");
-                    botonEliminar.setTextSize(8);
-                    botonEliminar.setBackgroundColor(Color.RED);
-                    botonEliminar.setTextColor(Color.WHITE);
-
-                    botonEliminar.setOnClickListener(b -> telephone.removeView(nuevoTelefono));
-                    nuevoTelefono.addView(editTextTelefono);
-                    nuevoTelefono.addView(spinnerEtiqueta);
-                    nuevoTelefono.addView(botonEliminar);
-
-                    telephone.addView(nuevoTelefono, telephone.getChildCount() - 1);
-                //});
+        loadDataTelephone(contact.getTelephones());
+        loadDataEmail(contact.getEmails());
+        loadDataAddress(contact.getAddresses());
+        loadDataSocialMedia(contact.getSocialMediaAccounts());
+        loadDataDate(contact.getEventDates());
+        loadDataAssociatedContacts(contact.getAssociateContacts());
     }
 
-    public void addEditEmail(){
-        Button buttonAgregarEmail = findViewById(R.id.buttonAgregarEmail);
+    public void loadDataTelephone(List<Telephone> telephones){
+        for(Telephone telephoneData : telephones){
+            LinearLayout nuevoTelefono = new LinearLayout(this);
+            nuevoTelefono.setOrientation(LinearLayout.HORIZONTAL);
+            nuevoTelefono.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            nuevoTelefono.setPadding(0, 16, 0, 16);
+            Spinner spinnerEtiqueta = new Spinner(this);
+            spinnerEtiqueta.setLayoutParams(
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-        buttonAgregarEmail.setOnClickListener(
-                v -> {
-                    LinearLayout nuevoEmail = new LinearLayout(this);
-                    nuevoEmail.setOrientation(LinearLayout.HORIZONTAL);
-                    nuevoEmail.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    nuevoEmail.setPadding(0, 16, 0, 16);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this, R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerEtiqueta.setAdapter(adapter);
+            spinnerEtiqueta.setSelection(adapter.getPosition(telephoneData.getLabel()));;
 
-                    Spinner spinnerEtiqueta = new Spinner(this);
-                    spinnerEtiqueta.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+            EditText editTextTelefono = new EditText(this);
+            editTextTelefono.setLayoutParams(
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            editTextTelefono.setHint("Teléfono");
+            editTextTelefono.setText(telephoneData.getNumber());
+            editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                            this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerEtiqueta.setAdapter(adapter);
+            Button botonEliminar = new Button(EditContactActivity.this);
+            botonEliminar.setLayoutParams(
+                    new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+            botonEliminar.setText("x");
+            botonEliminar.setTextSize(8);
+            botonEliminar.setBackgroundColor(Color.RED);
+            botonEliminar.setTextColor(Color.WHITE);
 
-                    EditText editTextEmail = new EditText(this);
-                    editTextEmail.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
-                    editTextEmail.setHint("E-mail");
-                    editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
+            botonEliminar.setOnClickListener(b -> telephoneContent.removeView(nuevoTelefono));
+            nuevoTelefono.addView(editTextTelefono);
+            nuevoTelefono.addView(spinnerEtiqueta);
+            nuevoTelefono.addView(botonEliminar);
 
-                    Button botonEliminar = new Button(EditContactActivity.this);
-                    botonEliminar.setLayoutParams(
-                            new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
-                    botonEliminar.setText("x");
-                    botonEliminar.setTextSize(8);
-                    botonEliminar.setBackgroundColor(Color.RED);
-                    botonEliminar.setTextColor(Color.WHITE);
+            telephoneContent.addView(nuevoTelefono, telephoneContent.getChildCount() - 1);
+        }
 
-                    botonEliminar.setOnClickListener(b -> email.removeView(nuevoEmail));
+    }
 
-                    nuevoEmail.addView(editTextEmail);
-                    nuevoEmail.addView(spinnerEtiqueta);
-                    nuevoEmail.addView(botonEliminar);
+    public void loadDataEmail(List<Email> emails){
+        for(Email emailData : emails){
+            LinearLayout nuevoEmail = new LinearLayout(this);
+            nuevoEmail.setOrientation(LinearLayout.HORIZONTAL);
+            nuevoEmail.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            nuevoEmail.setPadding(0, 16, 0, 16);
 
-                    email.addView(nuevoEmail, email.getChildCount() - 1);
+            Spinner spinnerEtiqueta = new Spinner(this);
+            spinnerEtiqueta.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerEtiqueta.setAdapter(adapter);
+            spinnerEtiqueta.setSelection(adapter.getPosition(emailData.getLabel()));
+
+            EditText editTextEmail = new EditText(this);
+            editTextEmail.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+            editTextEmail.setHint("E-mail");
+            editTextEmail.setText(emailData.getEmail());
+            editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
+
+            Button botonEliminar = new Button(EditContactActivity.this);
+            botonEliminar.setLayoutParams(
+                    new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+            botonEliminar.setText("x");
+            botonEliminar.setTextSize(8);
+            botonEliminar.setBackgroundColor(Color.RED);
+            botonEliminar.setTextColor(Color.WHITE);
+
+            botonEliminar.setOnClickListener(b -> emailContent.removeView(nuevoEmail));
+
+            nuevoEmail.addView(editTextEmail);
+            nuevoEmail.addView(spinnerEtiqueta);
+            nuevoEmail.addView(botonEliminar);
+
+            emailContent.addView(nuevoEmail, emailContent.getChildCount() - 1);
+        }
+    }
+
+    public void loadDataAddress(List<Address> addresses){
+        for(Address addressData : addresses){
+            LinearLayout nuevaDireccion = new LinearLayout(this);
+            nuevaDireccion.setOrientation(LinearLayout.HORIZONTAL);
+            nuevaDireccion.setLayoutParams(
+                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            nuevaDireccion.setPadding(0, 16, 0, 16);
+
+            Spinner spinnerEtiqueta = new Spinner(this);
+            spinnerEtiqueta.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerEtiqueta.setAdapter(adapter);
+            spinnerEtiqueta.setSelection(adapter.getPosition(addressData.getLabel()));
+
+            EditText editTextDireccion = new EditText(this);
+            editTextDireccion.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+            editTextDireccion.setHint("Dirección");
+            editTextDireccion.setText(addressData.getDescription());
+            editTextDireccion.setInputType(InputType.TYPE_CLASS_TEXT);
+
+            Button botonEliminar = new Button(this);
+            botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75));
+            botonEliminar.setText("x");
+            botonEliminar.setTextSize(8);
+            botonEliminar.setBackgroundColor(Color.RED);
+            botonEliminar.setTextColor(Color.WHITE);
+
+            botonEliminar.setOnClickListener(b -> addressContent.removeView(nuevaDireccion));
+
+            nuevaDireccion.addView(editTextDireccion);
+            nuevaDireccion.addView(spinnerEtiqueta);
+            nuevaDireccion.addView(botonEliminar);
+
+            addressContent.addView(nuevaDireccion, addressContent.getChildCount() - 1);
+        }
+    }
+
+    public void loadDataSocialMedia(List<SocialMediaAccount> socialMedias){
+        for(SocialMediaAccount socialMediaData : socialMedias){
+            LinearLayout nuevoSocial = new LinearLayout(this);
+            nuevoSocial.setOrientation(LinearLayout.HORIZONTAL);
+            nuevoSocial.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            nuevoSocial.setPadding(0, 16, 0, 16);
+
+            Spinner spinnerEtiqueta = new Spinner(this);
+            spinnerEtiqueta.setLayoutParams(
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerEtiqueta.setAdapter(adapter);
+            spinnerEtiqueta.setSelection(adapter.getPosition(socialMediaData.getSocialMedia().name()));
+
+            EditText editTextSocial = new EditText(this);
+            editTextSocial.setLayoutParams(
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            editTextSocial.setHint("Red Social");
+            editTextSocial.setInputType(InputType.TYPE_CLASS_TEXT);
+            editTextSocial.setText(socialMediaData.getUser());
+
+            Button botonEliminar = new Button(this);
+            botonEliminar.setLayoutParams(
+                    new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+            botonEliminar.setText("x");
+            botonEliminar.setTextSize(8);
+            botonEliminar.setBackgroundColor(Color.RED);
+            botonEliminar.setTextColor(Color.WHITE);
+
+            botonEliminar.setOnClickListener(b -> socialMediaContent.removeView(nuevoSocial));
+
+            nuevoSocial.addView(editTextSocial);
+            nuevoSocial.addView(spinnerEtiqueta);
+            nuevoSocial.addView(botonEliminar);
+
+            socialMediaContent.addView(nuevoSocial, socialMediaContent.getChildCount() - 1);
+        }
+    }
+
+    public void loadDataDate(List<EventDate> dates){
+        for(EventDate dateData : dates){
+            LinearLayout nuevaFecha = new LinearLayout(this);
+            nuevaFecha.setOrientation(LinearLayout.HORIZONTAL);
+            nuevaFecha.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            nuevaFecha.setPadding(0, 16, 0, 16);
+
+            Spinner spinnerEtiqueta = new Spinner(this);
+            spinnerEtiqueta.setLayoutParams(
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                    this, R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerEtiqueta.setAdapter(adapter);
+            spinnerEtiqueta.setSelection(adapter.getPosition(dateData.getLabel()));
+
+            TextView textViewFecha = new TextView(this);
+            textViewFecha.setLayoutParams(
+                    new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            textViewFecha.setHint("Seleccionar fecha");
+            textViewFecha.setPadding(16, 16, 16, 16);
+            textViewFecha.setBackgroundResource(android.R.drawable.edit_text);
+            textViewFecha.setText(dateData.getDate().toString());
+
+            Button botonEliminar = new Button(this);
+            botonEliminar.setLayoutParams(
+                    new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+            botonEliminar.setText("x");
+            botonEliminar.setTextSize(8);
+            botonEliminar.setBackgroundColor(Color.RED);
+            botonEliminar.setTextColor(Color.WHITE);
+
+            botonEliminar.setOnClickListener(b -> eventDateContent.removeView(nuevaFecha));
+
+            textViewFecha.setOnClickListener(
+                    tv -> {
+                        Calendar calendario = Calendar.getInstance();
+                        int anio = calendario.get(Calendar.YEAR);
+                        int mes = calendario.get(Calendar.MONTH);
+                        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                                this,
+                                (view, year, monthOfYear, dayOfMonth) -> {
+                                    String fechaSeleccionada = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                    textViewFecha.setText(fechaSeleccionada);
+                                    textViewFecha.setTextColor(Color.BLACK);
+                                },
+                                anio,
+                                mes,
+                                dia);
+                        datePickerDialog.show();
+                    });
+
+            nuevaFecha.addView(textViewFecha);
+            nuevaFecha.addView(spinnerEtiqueta);
+
+            nuevaFecha.addView(botonEliminar);
+
+            eventDateContent.addView(nuevaFecha, eventDateContent.getChildCount() - 1);
+        }
+    }
+
+    public void loadDataAssociatedContacts(List<AssociateContact> associatedContacts){
+        for(AssociateContact associatedContactData : associatedContacts){
+            LinearLayout newAssociateContact = new LinearLayout(this);
+            newAssociateContact.setOrientation(LinearLayout.HORIZONTAL);
+            newAssociateContact.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            newAssociateContact.setPadding(0, 16, 0, 16);
+
+            EditText editTextName = new EditText(this);
+            editTextName.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            editTextName.setHint("Name");
+            editTextName.setInputType(InputType.TYPE_CLASS_TEXT);
+            editTextName.setText(associatedContactData.getName());
+
+            EditText editTextTelephone = new EditText(this);
+            editTextTelephone.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+            editTextTelephone.setHint("Telephone");
+            editTextTelephone.setInputType(InputType.TYPE_CLASS_TEXT);
+            editTextTelephone.setText(associatedContactData.getTelephone());
+
+            Button botonEliminar = new Button(this);
+            botonEliminar.setLayoutParams(
+                    new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+            botonEliminar.setText("x");
+            botonEliminar.setTextSize(8);
+            botonEliminar.setBackgroundColor(Color.RED);
+            botonEliminar.setGravity(Gravity.CENTER);
+            botonEliminar.setTextColor(Color.WHITE);
+
+            botonEliminar.setOnClickListener(b -> associatedContactsContent.removeView(newAssociateContact));
+
+            newAssociateContact.addView(editTextName);
+            newAssociateContact.addView(editTextTelephone);
+            newAssociateContact.addView(botonEliminar);
+
+            associatedContactsContent.addView(newAssociateContact, associatedContactsContent.getChildCount() - 1);
+        }
+    }
+
+
+
+    public void addEditTelephone(View viewTelephone){
+        LinearLayout nuevoTelefono = new LinearLayout(this);
+        nuevoTelefono.setOrientation(LinearLayout.HORIZONTAL);
+        nuevoTelefono.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        nuevoTelefono.setPadding(0, 16, 0, 16);
+        Spinner spinnerEtiqueta = new Spinner(this);
+        spinnerEtiqueta.setLayoutParams(
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.etiquetas_telefono, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEtiqueta.setAdapter(adapter);
+
+        EditText editTextTelefono = new EditText(this);
+        editTextTelefono.setLayoutParams(
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        editTextTelefono.setHint("Teléfono");
+        editTextTelefono.setInputType(InputType.TYPE_CLASS_PHONE);
+
+        Button botonEliminar = new Button(EditContactActivity.this);
+        botonEliminar.setLayoutParams(
+                new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+        botonEliminar.setText("x");
+        botonEliminar.setTextSize(8);
+        botonEliminar.setBackgroundColor(Color.RED);
+        botonEliminar.setTextColor(Color.WHITE);
+
+        botonEliminar.setOnClickListener(b -> telephoneContent.removeView(nuevoTelefono));
+        nuevoTelefono.addView(editTextTelefono);
+        nuevoTelefono.addView(spinnerEtiqueta);
+        nuevoTelefono.addView(botonEliminar);
+
+        telephoneContent.addView(nuevoTelefono, telephoneContent.getChildCount() - 1);
+    }
+
+    public void addEditEmail(View viewEmail){
+        LinearLayout nuevoEmail = new LinearLayout(this);
+        nuevoEmail.setOrientation(LinearLayout.HORIZONTAL);
+        nuevoEmail.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        nuevoEmail.setPadding(0, 16, 0, 16);
+
+        Spinner spinnerEtiqueta = new Spinner(this);
+        spinnerEtiqueta.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.etiquetas_email, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEtiqueta.setAdapter(adapter);
+
+        EditText editTextEmail = new EditText(this);
+        editTextEmail.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+        editTextEmail.setHint("E-mail");
+        editTextEmail.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        Button botonEliminar = new Button(EditContactActivity.this);
+        botonEliminar.setLayoutParams(
+                new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+        botonEliminar.setText("x");
+        botonEliminar.setTextSize(8);
+        botonEliminar.setBackgroundColor(Color.RED);
+        botonEliminar.setTextColor(Color.WHITE);
+
+        botonEliminar.setOnClickListener(b -> emailContent.removeView(nuevoEmail));
+
+        nuevoEmail.addView(editTextEmail);
+        nuevoEmail.addView(spinnerEtiqueta);
+        nuevoEmail.addView(botonEliminar);
+
+        emailContent.addView(nuevoEmail, emailContent.getChildCount() - 1);
+    }
+    public void addEditAddress(View viewAddress){
+        LinearLayout nuevaDireccion = new LinearLayout(this);
+        nuevaDireccion.setOrientation(LinearLayout.HORIZONTAL);
+        nuevaDireccion.setLayoutParams(
+                new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        nuevaDireccion.setPadding(0, 16, 0, 16);
+
+        Spinner spinnerEtiqueta = new Spinner(this);
+        spinnerEtiqueta.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEtiqueta.setAdapter(adapter);
+
+        EditText editTextDireccion = new EditText(this);
+        editTextDireccion.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
+        editTextDireccion.setHint("Dirección");
+        editTextDireccion.setInputType(InputType.TYPE_CLASS_TEXT);
+
+        Button botonEliminar = new Button(this);
+        botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75));
+        botonEliminar.setText("x");
+        botonEliminar.setTextSize(8);
+        botonEliminar.setBackgroundColor(Color.RED);
+        botonEliminar.setTextColor(Color.WHITE);
+
+        botonEliminar.setOnClickListener(b -> addressContent.removeView(nuevaDireccion));
+
+        nuevaDireccion.addView(editTextDireccion);
+        nuevaDireccion.addView(spinnerEtiqueta);
+        nuevaDireccion.addView(botonEliminar);
+
+        addressContent.addView(nuevaDireccion, addressContent.getChildCount() - 1);
+    }
+
+    public void addEditDate(View viewDate){
+        LinearLayout nuevaFecha = new LinearLayout(this);
+        nuevaFecha.setOrientation(LinearLayout.HORIZONTAL);
+        nuevaFecha.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        nuevaFecha.setPadding(0, 16, 0, 16);
+
+        Spinner spinnerEtiqueta = new Spinner(this);
+        spinnerEtiqueta.setLayoutParams(
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEtiqueta.setAdapter(adapter);
+
+        TextView textViewFecha = new TextView(this);
+        textViewFecha.setLayoutParams(
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        textViewFecha.setHint("Seleccionar fecha");
+        textViewFecha.setPadding(16, 16, 16, 16);
+        textViewFecha.setBackgroundResource(android.R.drawable.edit_text);
+
+        Button botonEliminar = new Button(this);
+        botonEliminar.setLayoutParams(
+                new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+        botonEliminar.setText("x");
+        botonEliminar.setTextSize(8);
+        botonEliminar.setBackgroundColor(Color.RED);
+        botonEliminar.setTextColor(Color.WHITE);
+
+        botonEliminar.setOnClickListener(b -> eventDateContent.removeView(nuevaFecha));
+
+        textViewFecha.setOnClickListener(
+                tv -> {
+                    Calendar calendario = Calendar.getInstance();
+                    int anio = calendario.get(Calendar.YEAR);
+                    int mes = calendario.get(Calendar.MONTH);
+                    int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+                    DatePickerDialog datePickerDialog = new DatePickerDialog(
+                            this,
+                            (view, year, monthOfYear, dayOfMonth) -> {
+                                String fechaSeleccionada = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                                textViewFecha.setText(fechaSeleccionada);
+                                textViewFecha.setTextColor(Color.BLACK);
+                                },
+                            anio,
+                            mes,
+                            dia);
+                    datePickerDialog.show();
                 });
-    }
-    public void addEditAddress(){
-        Button buttonAgreganDireccion = findViewById(R.id.buttonAgregarAddress);
 
-        buttonAgreganDireccion.setOnClickListener(
-                v -> {
-                    LinearLayout nuevaDireccion = new LinearLayout(this);
-                    nuevaDireccion.setOrientation(LinearLayout.HORIZONTAL);
-                    nuevaDireccion.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    nuevaDireccion.setPadding(0, 16, 0, 16);
+        nuevaFecha.addView(textViewFecha);
+        nuevaFecha.addView(spinnerEtiqueta);
 
-                    Spinner spinnerEtiqueta = new Spinner(this);
-                    spinnerEtiqueta.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 1
+        nuevaFecha.addView(botonEliminar);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                            this, R.array.etiquetas_direccion, android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerEtiqueta.setAdapter(adapter);
-
-                    EditText editTextDireccion = new EditText(this);
-                    editTextDireccion.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Peso 2
-                    editTextDireccion.setHint("Dirección");
-                    editTextDireccion.setInputType(InputType.TYPE_CLASS_TEXT);
-
-                    Button botonEliminar = new Button(this);
-                    botonEliminar.setLayoutParams(new LinearLayout.LayoutParams(75, 75));
-                    botonEliminar.setText("x");
-                    botonEliminar.setTextSize(8);
-                    botonEliminar.setBackgroundColor(Color.RED);
-                    botonEliminar.setTextColor(Color.WHITE);
-
-                    botonEliminar.setOnClickListener(b -> address.removeView(nuevaDireccion));
-
-                    nuevaDireccion.addView(editTextDireccion);
-                    nuevaDireccion.addView(spinnerEtiqueta);
-                    nuevaDireccion.addView(botonEliminar);
-
-                    address.addView(nuevaDireccion, address.getChildCount() - 1);
-                });
+        eventDateContent.addView(nuevaFecha, eventDateContent.getChildCount() - 1);
     }
 
-    public void addEditDate(){
-        Button buttonAgregarFecha = findViewById(R.id.buttonAgregarDate);
+    public void addEditSocialMedia(View viewSocialMedia){
+        LinearLayout nuevoSocial = new LinearLayout(this);
+        nuevoSocial.setOrientation(LinearLayout.HORIZONTAL);
+        nuevoSocial.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        nuevoSocial.setPadding(0, 16, 0, 16);
 
-        buttonAgregarFecha.setOnClickListener(
-                v -> {
-                    LinearLayout nuevaFecha = new LinearLayout(this);
-                    nuevaFecha.setOrientation(LinearLayout.HORIZONTAL);
-                    nuevaFecha.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    nuevaFecha.setPadding(0, 16, 0, 16);
+        Spinner spinnerEtiqueta = new Spinner(this);
+        spinnerEtiqueta.setLayoutParams(
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
 
-                    Spinner spinnerEtiqueta = new Spinner(this);
-                    spinnerEtiqueta.setLayoutParams(
-                            new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEtiqueta.setAdapter(adapter);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                            this, R.array.etiquetas_fecha, android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerEtiqueta.setAdapter(adapter);
+        EditText editTextSocial = new EditText(this);
+        editTextSocial.setLayoutParams(
+                new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        editTextSocial.setHint("Red Social");
+        editTextSocial.setInputType(InputType.TYPE_CLASS_TEXT);
 
-                    TextView textViewFecha = new TextView(this);
-                    textViewFecha.setLayoutParams(
-                            new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                    textViewFecha.setHint("Seleccionar fecha");
-                    textViewFecha.setPadding(16, 16, 16, 16);
-                    textViewFecha.setBackgroundResource(android.R.drawable.edit_text);
+        Button botonEliminar = new Button(this);
+        botonEliminar.setLayoutParams(
+                new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+        botonEliminar.setText("x");
+        botonEliminar.setTextSize(8);
+        botonEliminar.setBackgroundColor(Color.RED);
+        botonEliminar.setTextColor(Color.WHITE);
 
-                    Button botonEliminar = new Button(this);
-                    botonEliminar.setLayoutParams(
-                            new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
-                    botonEliminar.setText("x");
-                    botonEliminar.setTextSize(8);
-                    botonEliminar.setBackgroundColor(Color.RED);
-                    botonEliminar.setTextColor(Color.WHITE);
+        botonEliminar.setOnClickListener(b -> socialMediaContent.removeView(nuevoSocial));
 
-                    botonEliminar.setOnClickListener(b -> date.removeView(nuevaFecha));
+        nuevoSocial.addView(editTextSocial);
+        nuevoSocial.addView(spinnerEtiqueta);
+        nuevoSocial.addView(botonEliminar);
 
-                    textViewFecha.setOnClickListener(
-                            tv -> {
-                                Calendar calendario = Calendar.getInstance();
-                                int anio = calendario.get(Calendar.YEAR);
-                                int mes = calendario.get(Calendar.MONTH);
-                                int dia = calendario.get(Calendar.DAY_OF_MONTH);
-
-                                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                                        this,
-                                        (view, year, monthOfYear, dayOfMonth) -> {
-                                            String fechaSeleccionada = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
-                                            textViewFecha.setText(fechaSeleccionada);
-                                            textViewFecha.setTextColor(Color.BLACK);
-                                        },
-                                        anio,
-                                        mes,
-                                        dia);
-                                datePickerDialog.show();
-                            });
-
-                    nuevaFecha.addView(textViewFecha);
-                    nuevaFecha.addView(spinnerEtiqueta);
-
-                    nuevaFecha.addView(botonEliminar);
-
-                    date.addView(nuevaFecha, date.getChildCount() - 1);
-                });
+        socialMediaContent.addView(nuevoSocial, socialMediaContent.getChildCount() - 1);
     }
 
-    public void addEditSocialMedia(){
-        Button buttonAgregarSocial = findViewById(R.id.buttonAgregarSocialMedia);
+    public void addEditAssociateContact(View viewAssociateContact){
+        LinearLayout newAssociateContact = new LinearLayout(this);
+        newAssociateContact.setOrientation(LinearLayout.HORIZONTAL);
+        newAssociateContact.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        newAssociateContact.setPadding(0, 16, 0, 16);
 
-        buttonAgregarSocial.setOnClickListener(
-                v -> {
-                    LinearLayout nuevoSocial = new LinearLayout(this);
-                    nuevoSocial.setOrientation(LinearLayout.HORIZONTAL);
-                    nuevoSocial.setLayoutParams(
-                            new LinearLayout.LayoutParams(
-                                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-                    nuevoSocial.setPadding(0, 16, 0, 16);
+        EditText editTextName = new EditText(this);
+        editTextName.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        editTextName.setHint("Name");
+        editTextName.setInputType(InputType.TYPE_CLASS_TEXT);
 
-                    Spinner spinnerEtiqueta = new Spinner(this);
-                    spinnerEtiqueta.setLayoutParams(
-                            new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        EditText editTextTelephone = new EditText(this);
+        editTextTelephone.setLayoutParams(
+                new LinearLayout.LayoutParams(
+                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
+        editTextTelephone.setHint("Telephone");
+        editTextTelephone.setInputType(InputType.TYPE_CLASS_TEXT);
 
-                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                            this, R.array.etiquetas_RedSocial, android.R.layout.simple_spinner_item);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerEtiqueta.setAdapter(adapter);
+        Button botonEliminar = new Button(this);
+        botonEliminar.setLayoutParams(
+                new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
+        botonEliminar.setText("x");
+        botonEliminar.setTextSize(8);
+        botonEliminar.setBackgroundColor(Color.RED);
+        botonEliminar.setGravity(Gravity.CENTER);
+        botonEliminar.setTextColor(Color.WHITE);
 
-                    EditText editTextSocial = new EditText(this);
-                    editTextSocial.setLayoutParams(
-                            new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
-                    editTextSocial.setHint("Red Social");
-                    editTextSocial.setInputType(InputType.TYPE_CLASS_TEXT);
+        botonEliminar.setOnClickListener(b -> associatedContactsContent.removeView(newAssociateContact));
 
-                    Button botonEliminar = new Button(this);
-                    botonEliminar.setLayoutParams(
-                            new LinearLayout.LayoutParams(75, 75)); // Ancho y alto en píxeles
-                    botonEliminar.setText("x");
-                    botonEliminar.setTextSize(8);
-                    botonEliminar.setBackgroundColor(Color.RED);
-                    botonEliminar.setTextColor(Color.WHITE);
+        newAssociateContact.addView(editTextName);
+        newAssociateContact.addView(editTextTelephone);
+        newAssociateContact.addView(botonEliminar);
 
-                    botonEliminar.setOnClickListener(b -> socialMedia.removeView(nuevoSocial));
-
-                    nuevoSocial.addView(editTextSocial);
-                    nuevoSocial.addView(spinnerEtiqueta);
-                    nuevoSocial.addView(botonEliminar);
-
-                    socialMedia.addView(nuevoSocial, socialMedia.getChildCount() - 1);
-                });
+        associatedContactsContent.addView(newAssociateContact, associatedContactsContent.getChildCount() - 1);
     }
 
     public void closeEdit(View view){

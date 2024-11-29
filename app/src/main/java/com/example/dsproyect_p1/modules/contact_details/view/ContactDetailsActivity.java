@@ -38,7 +38,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
     TextView name, residencyCountry;
     @Inject
     ContactRepository contactRepository;
-    Contact contactUse;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,20 +58,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
         associateContactContent = findViewById(R.id.idAssociateContact);
         socialMediaContent = findViewById(R.id.idSocialMediaContact);
 
-        Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
-        if(contact != null){
-            contactUse = contact;
-            loadContact(contact);
-        }else{
-            Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        loadContact(contactUse);
+        Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
+        if(contact != null){
+            loadContact(contact);
+        }else{
+            Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 
     public void loadContact(Contact contact){
@@ -355,7 +353,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
     }
 
     public void deleteContact(View view){
-        contactRepository.deleteContact(contactUse.getId()).thenRun(()->{
+        contactRepository.deleteContact(getIntent().getParcelableExtra("CONTACT", Contact.class).getId()).thenRun(()->{
             runOnUiThread(() -> {
                 Toast.makeText(this, "Contacto eliminado", Toast.LENGTH_SHORT).show();
                 finish();
@@ -365,7 +363,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     public void editContact(View view){
         Intent intent = new Intent(ContactDetailsActivity.this, EditContactActivity.class);
-        intent.putExtra("EditContact", contactUse);
+        intent.putExtra("EditContact", getIntent().getParcelableExtra("CONTACT", Contact.class));
         startActivity(intent);
     }
 }
