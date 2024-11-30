@@ -20,9 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         >
 
+        <Button
+            android:id="@+id/filtro"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Filtro"
+            android:layout_gravity="end"
+            android:backgroundTint="?attr/colorPrimary"
+
+            />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="3"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="Contacts"
             android:layout_gravity="center"
@@ -64,6 +75,51 @@
             android:textAlignment="center"
             android:visibility="gone"
             />
+        <RadioGroup
+            android:id="@+id/radioGroupFiltros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">>
+            <RadioButton
+                android:id="@+id/botonCity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ciudad" />
+
+            <RadioButton
+                android:id="@+id/botonType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo de contacto" />
+
+            <RadioButton
+                android:id="@+id/botonEspecial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Por red social" />
+            <!--
+            <RadioButton
+                android:id="@+id/botonNoFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sin filtro" />
+-->
+            <Button
+                android:id="@+id/SinFiltroContacto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quitar Filtro" />
+        </RadioGroup>
+
+
+
+        <Spinner
+            android:id="@+id/spinnerFiltrosContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewContacts"
@@ -94,7 +150,7 @@
             android:layout_weight="1"
             android:layout_marginEnd="4dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="Contactos"/>
+            android:text="@string/Contactos"/>
 
         <Button
             android:id="@+id/footerButton2"
@@ -103,7 +159,7 @@
             android:layout_weight="1"
             android:layout_marginStart="4dp"
             android:backgroundTint="?attr/colorSecondary"
-            android:text="Favoritos"/>
+            android:text="@string/Favoritos"/>
 
     </LinearLayout>
 

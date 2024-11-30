@@ -1,0 +1,46 @@
+<resources>
+  <string name="app_name">DSProyect_P1</string>
+  <string name="orden">Ordre</string>
+  <string name="Contactos">Contacts</string>
+  <string name="Favoritos">Favorites</string>
+  <string name="add">Enregistrer</string>
+  <string name="close">Annuler</string>
+  <string name="add_contact">Ajouter un contact</string>
+  <string name="contact_type_validation">Choisissez un type de contact</string>
+  <string-array name="etiquetas_telefono">
+    <item>Maison</item>
+    <item>Travail</item>
+    <item>Personnel</item>
+    <item>Entreprise</item>
+    <item>Direct</item>
+    <item>Secrétaire</item>
+    </string-array>
+  <string-array name="etiquetas_email">
+    <item>Personnel</item>
+    <item>Travail</item>
+    </string-array>
+  <string-array name="etiquetas_direccion">
+    <item>Domicile</item>
+    <item>Travail</item>
+    <item>Autre</item>
+    </string-array>
+  <string-array name="etiquetas_fecha">
+    <item>Anniversaire</item>
+    <item>Anniversaire</item>
+    <item>Réunion</item>
+    <item>Autre</item>
+    </string-array>
+  <string-array name="etiquetas_RedSocial">
+    <item>Facebook</item>
+    <item>Instagram</item>
+    <item>Twitter</item>
+    <item>YouTube</item>
+    </string-array>
+  <string-array name="order">
+    <item>Tous</item>
+    <item>Noms</item>
+    <item>Pays</item>
+    <item>Type de Contact</item>
+    </string-array>
+  <string name="title_activity_company_details">Detail de l entreprise</string>
+  </resources>
