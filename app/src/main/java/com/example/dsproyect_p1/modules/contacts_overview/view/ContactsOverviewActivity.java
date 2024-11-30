@@ -1,6 +1,7 @@
 package com.example.dsproyect_p1.modules.contacts_overview.view;
 
 import android.content.Intent;
+import androidx.annotation.NonNull;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,7 +43,8 @@ public class ContactsOverviewActivity extends AppCompatActivity
   private List<Contact> contactsList;
   private boolean isInjected;
 
-  @Inject ContactRepository contactRepository;
+  @Inject
+  ContactRepository contactRepository;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -62,19 +64,28 @@ public class ContactsOverviewActivity extends AppCompatActivity
       injectContacts();
     }
     spinnerOrderBy = findViewById(R.id.spinnerOrderBy);
-    ArrayAdapter<CharSequence> adapter =
-        ArrayAdapter.createFromResource(this, R.array.order, android.R.layout.simple_spinner_item);
+    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.order,
+        android.R.layout.simple_spinner_item);
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spinnerOrderBy.setAdapter(adapter);
 
     recyclerViewContact = findViewById(R.id.recyclerViewContacts);
     recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
 
-    contactRecyclerView =
-        new ContactRecyclerView(List.of(), contact -> moveToDescriptionContact(contact));
+    contactRecyclerView = new ContactRecyclerView(List.of(), contact -> moveToDescriptionContact(contact));
     recyclerViewContact.setAdapter(contactRecyclerView);
 
     fetchContacts();
+
+    recyclerViewContact.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        if (!recyclerView.canScrollVertically(1)) {
+          loadMoreData();
+        }
+      }
+    });
   }
 
   public void moveToDescriptionContact(Contact contact) {
@@ -101,37 +112,29 @@ public class ContactsOverviewActivity extends AppCompatActivity
     UUID id6 = UUID.fromString("9a5f6d9a-12e4-4e8f-a8a7-b6f607f4b3b0");
     UUID id7 = UUID.fromString("3bcce62d-6ec9-4577-b24d-73a22b1b83c7");
     UUID id8 = UUID.fromString("d8f82e88-f6cd-49c5-bcfa-5b93cfb923bf");
-    Contact contact1 =
-        new Contact(
-            id1,
-            ContactType.COMPANY,
-            "Chevrolet",
-            "Ecuador",
-            telephones1,
-            null,
-            null,
-            null,
-            null,
-            null);
-    Contact contact2 =
-        new Contact(id2, ContactType.PERSON, "Juan", "Peru", null, null, null, null, null, null);
-    Contact contact3 =
-        new Contact(
-            id3, ContactType.COMPANY, "Ferrari", "Ecuador", null, null, null, null, null, null);
-    Contact contact4 =
-        new Contact(
-            id4, ContactType.PERSON, "Juafra", "Italia", null, null, null, null, null, null);
-    Contact contact5 =
-        new Contact(
-            id5, ContactType.COMPANY, "Telconet", "Mexico", null, null, null, null, null, null);
-    Contact contact6 =
-        new Contact(id6, ContactType.PERSON, "Kevin", "Mexico", null, null, null, null, null, null);
-    Contact contact7 =
-        new Contact(
-            id7, ContactType.COMPANY, "Audi", "Ecuador", null, null, null, null, null, null);
-    Contact contact8 =
-        new Contact(
-            id8, ContactType.PERSON, "Daniela", "Panama", null, null, null, null, null, null);
+    Contact contact1 = new Contact(
+        id1,
+        ContactType.COMPANY,
+        "Chevrolet",
+        "Ecuador",
+        telephones1,
+        null,
+        null,
+        null,
+        null,
+        null);
+    Contact contact2 = new Contact(id2, ContactType.PERSON, "Juan", "Peru", null, null, null, null, null, null);
+    Contact contact3 = new Contact(
+        id3, ContactType.COMPANY, "Ferrari", "Ecuador", null, null, null, null, null, null);
+    Contact contact4 = new Contact(
+        id4, ContactType.PERSON, "Juafra", "Italia", null, null, null, null, null, null);
+    Contact contact5 = new Contact(
+        id5, ContactType.COMPANY, "Telconet", "Mexico", null, null, null, null, null, null);
+    Contact contact6 = new Contact(id6, ContactType.PERSON, "Kevin", "Mexico", null, null, null, null, null, null);
+    Contact contact7 = new Contact(
+        id7, ContactType.COMPANY, "Audi", "Ecuador", null, null, null, null, null, null);
+    Contact contact8 = new Contact(
+        id8, ContactType.PERSON, "Daniela", "Panama", null, null, null, null, null, null);
     CompletableFuture<Void> future1 = contactRepository.saveContact(contact1);
     CompletableFuture<Void> future2 = contactRepository.saveContact(contact2);
     CompletableFuture<Void> future3 = contactRepository.saveContact(contact3);
@@ -167,9 +170,9 @@ public class ContactsOverviewActivity extends AppCompatActivity
               runOnUiThread(
                   () -> {
                     Toast.makeText(
-                            ContactsOverviewActivity.this,
-                            "Failed to load contacts",
-                            Toast.LENGTH_SHORT)
+                        ContactsOverviewActivity.this,
+                        "Failed to load contacts",
+                        Toast.LENGTH_SHORT)
                         .show();
                   });
               return null;
@@ -220,5 +223,10 @@ public class ContactsOverviewActivity extends AppCompatActivity
       sortedContacts.sort(ContactComparators.BY_CONTACT_TYPE);
     }
     return sortedContacts;
+  }
+
+  private void loadMoreData() {
+    contactsList.addAll(contactsList);
+    contactRecyclerView.updateData(contactsList);
   }
 }
