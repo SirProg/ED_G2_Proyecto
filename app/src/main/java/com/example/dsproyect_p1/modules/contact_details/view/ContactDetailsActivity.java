@@ -63,15 +63,17 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onResume() {
         super.onResume();
         Contact contact = getIntent().getParcelableExtra("CONTACT", Contact.class);
         if(contact != null){
+            Toast.makeText(this, " " + contact.getEventDates().get(0).getDate().toString(), Toast.LENGTH_SHORT).show();
             loadContact(contact);
         }else{
             Toast.makeText(this, "Error al cargar el contacto", Toast.LENGTH_SHORT).show();
-            return;
         }
     }
 
@@ -332,7 +334,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 textEventDateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 textEventDateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 textEventDateC.setPadding(5, 5, 5, 5);
-                textEventDateC.setText(eventDate.getDate().toString());
+                if(eventDate.getDate() != null){
+                    textEventDateC.setText(eventDate.getDate().toString());
+                }else{
+                    textEventDateC.setText("Nothing");
+                }
 
                 TextView textEventDateLabelC = new TextView(this);
                 textEventDateLabelC.setId(View.generateViewId());

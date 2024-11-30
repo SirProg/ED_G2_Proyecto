@@ -718,13 +718,14 @@ public class EditContactActivity extends AppCompatActivity {
                 EditText editTextFecha = (EditText) llFecha.getChildAt(0);
                 String fecha = editTextFecha.getText().toString();
 
-                DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate date = LocalDate.parse(fecha, formate);
+                //DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                //LocalDate date = LocalDate.parse(fecha, formate);
 
                 Spinner spinnerLabel = (Spinner) llFecha.getChildAt(1);
                 String label = spinnerLabel.getSelectedItem().toString();
+
                 if (!fecha.isEmpty()) {
-                    listaDate.add(new EventDate(label, date));
+                    listaDate.add(new EventDate(label, fecha));
                 }
             }
         }
