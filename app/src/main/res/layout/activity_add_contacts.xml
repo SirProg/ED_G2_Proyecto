@@ -150,7 +150,7 @@
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="+ Añadir E-mail"
+                    android:text="Añadir E-mail"
                     android:textColor="?attr/colorOnPrimary"
                     android:backgroundTint="?attr/colorPrimary"/>
             </LinearLayout>
@@ -189,7 +189,7 @@
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="+ Añadir Direccion"
+                    android:text="Añadir Direccion"
                     android:textColor="?attr/colorOnPrimary"
                     android:backgroundTint="?attr/colorPrimary" />
             </LinearLayout>
@@ -229,7 +229,7 @@
                     android:layout_gravity="start"
                     android:backgroundTint="?attr/colorPrimary"
                     android:text="Añadir contacto asociado"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="?attr/colorOnPrimary" />
             </LinearLayout>
 
             <LinearLayout

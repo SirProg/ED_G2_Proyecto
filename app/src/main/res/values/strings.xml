@@ -1,54 +1,46 @@
 <resources>
-    <string name="app_name">DSProyect_P1</string>
-    <string name="orden">Orden</string>
-    <string name="Contactos">Contactos</string>
-    <string name="add">Guardar</string>
-    <string name="close">Cancelar</string>
-    <string-array name="etiquetas_telefono">
-        <item>Casa</item>
-        <item>Trabajo</item>
-        <item>Personal</item>
+  <string name="app_name">DSProyect_P1</string>
+  <string name="orden">Order</string>
+  <string name="Contactos">Contacts</string>
+  <string name="Favoritos">Favorites</string>
+  <string name="add">Save</string>
+  <string name="close">Cancel</string>
+  <string name="contact_type_validation">Please select a contact type</string>
+  <string-array name="etiquetas_telefono">
+    <item>Home</item>
+    <item>Work</item>
+    <item>Personal</item>
+    <item>Business</item>
+    <item>Direct</item>
+    <item>Secretary</item>
     </string-array>
-    <string-array name="etiquetas_telefonoC">
-        <item>Empresa</item>
-        <item>Directo</item>
-        <item>Secretaria</item>
+  <string-array name="etiquetas_email">
+    <item>Personal</item>
+    <item>Work</item>
     </string-array>
-    <string-array name="etiquetas_email">
-        <item>Personal</item>
-        <item>Trabajo</item>
+  <string-array name="etiquetas_direccion">
+    <item>Home</item>
+    <item>Work</item>
+    <item>Other</item>
     </string-array>
-    <string-array name="etiquetas_direccion">
-        <item>Domicilio</item>
-        <item>Trabajo</item>
-        <item>Otro</item>
+  <string-array name="etiquetas_fecha">
+    <item>Birthday</item>
+    <item>Anniversary</item>
+    <item>Other</item>
+    <item>Meeting</item>
+    <item>Other</item>
     </string-array>
-    <string-array name="etiquetas_direccionC">
-        <item>Trabajo</item>
-        <item>Otro</item>
+  <string-array name="etiquetas_RedSocial">
+    <item>Facebook</item>
+    <item>Instagram</item>
+    <item>Twitter</item>
+    <item>YouTube</item>
     </string-array>
-    <string-array name="etiquetas_fecha">
-        <item>Cumpleaños</item>
-        <item>Aniversario</item>
-        <item>Otro</item>
+  <string-array name="order">
+    <item>All</item>
+    <item>Names</item>
+    <item>Country</item>
+    <item>Contact Type</item>
     </string-array>
-    <string-array name="etiquetas_fechaC">
-        <item>Reunión</item>
-        <item>Otro</item>
-    </string-array>
-    <string-array name="etiquetas_RedSocial">
-        <item>Facebook</item>
-        <item>Instagram</item>
-        <item>Twitter</item>
-        <item>YouTube</item>
-    </string-array>
-    <string-array name="order">
-        <item>Todos</item>
-        <item>Nombres</item>
-        <item>Pais</item>
-        <item>Tipo Contacto</item>
-    </string-array>
-    <string name="title_activity_company_details">CompanyDetails</string>
-
-
-</resources>
+  <string name="title_activity_company_details">CompanyDetails</string>
+  </resources>
