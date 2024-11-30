@@ -48,5 +48,6 @@ public class SocialMediaAccount implements Parcelable {
   @Override
   public void writeToParcel(@NonNull Parcel parcel, int i) {
     parcel.writeString(socialMedia.name());
+    parcel.writeString(user);
   }
 }

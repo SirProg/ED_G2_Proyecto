@@ -6,12 +6,16 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class EventDate implements Parcelable {
   private String label;
-  private LocalDate date;
+  private String date;
 
-  public EventDate(final String label, final LocalDate date) {
+  private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+  public EventDate(final String label, final String date) {
     this.label = label;
     this.date = date;
   }
@@ -20,14 +24,14 @@ public class EventDate implements Parcelable {
     return label;
   }
 
-  public LocalDate getDate() {
+  public String getDate() {
     return date;
   }
 
   protected EventDate(Parcel parcel) {
     label = parcel.readString();
-    String dateString = parcel.readString();
-    date = (dateString != null) ? LocalDate.parse(dateString) : null;
+    //String dateString = parcel.readString();
+    date = parcel.readString();
   }
 
   public static final Creator<EventDate> CREATOR = new Creator<EventDate>() {
@@ -50,6 +54,6 @@ public class EventDate implements Parcelable {
   @Override
   public void writeToParcel(@NonNull Parcel parcel, int i) {
     parcel.writeString(label);
-    parcel.writeString(date != null ? date.toString() : null);
+    parcel.writeString(date);
   }
 }

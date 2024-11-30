@@ -374,9 +374,10 @@ public class AddContactActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                     this,
                     (view, year, monthOfYear, dayOfMonth) -> {
-                      String fechaSeleccionada = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
+                      String fechaSeleccionada = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                       textViewFecha.setText(fechaSeleccionada);
                       textViewFecha.setTextColor(Color.BLACK);
+
                     },
                     anio,
                     mes,
@@ -386,8 +387,9 @@ public class AddContactActivity extends AppCompatActivity {
 
           nuevaFecha.addView(textViewFecha);
           nuevaFecha.addView(spinnerEtiqueta);
-
           nuevaFecha.addView(botonEliminar);
+
+          Toast.makeText(this, " " + textViewFecha.getText().toString(), Toast.LENGTH_SHORT).show();
 
           contenedorDate.addView(nuevaFecha, contenedorDate.getChildCount() - 1);
         });
@@ -417,7 +419,7 @@ public class AddContactActivity extends AppCompatActivity {
       View vista = contenedorEmail.getChildAt(i);
       if (vista instanceof LinearLayout) {
         LinearLayout llEmail = (LinearLayout) vista;
-        EditText editTextEmail = (EditText) llEmail.getChildAt(0);
+        TextView editTextEmail = (TextView) llEmail.getChildAt(0);
         String email = editTextEmail.getText().toString();
         Spinner spinnerLabel = (Spinner) llEmail.getChildAt(1);
         String label = spinnerLabel.getSelectedItem().toString();
@@ -453,17 +455,17 @@ public class AddContactActivity extends AppCompatActivity {
       View vista = contenedorDate.getChildAt(i);
       if (vista instanceof LinearLayout) {
         LinearLayout llFecha = (LinearLayout) vista;
-        EditText editTextFecha = (EditText) llFecha.getChildAt(0);
+        TextView editTextFecha = (TextView) llFecha.getChildAt(0);
         String fecha = editTextFecha.getText().toString();
-
-        DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = LocalDate.parse(fecha, formate);
 
         Spinner spinnerLabel = (Spinner) llFecha.getChildAt(1);
         String label = spinnerLabel.getSelectedItem().toString();
-        if (!fecha.isEmpty()) {
-          listaDate.add(new EventDate(label, date));
-        }
+
+        //DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+          // LocalDate date = LocalDate.parse(fecha, formate);
+          //Toast.makeText(this, "Fecha dada " + date.toString() + " " + date.getClass().toString(), Toast.LENGTH_SHORT).show();
+            listaDate.add(new EventDate(label, fecha));
+
       }
     }
     return listaDate;

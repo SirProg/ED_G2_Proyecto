@@ -324,7 +324,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         textEventDateC.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
         textEventDateC.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         textEventDateC.setPadding(5, 5, 5, 5);
-        textEventDateC.setText(eventDate.getDate().toString());
+        textEventDateC.setText(eventDate.getDate());
 
         TextView textEventDateLabelC = new TextView(this);
         textEventDateLabelC.setId(View.generateViewId());

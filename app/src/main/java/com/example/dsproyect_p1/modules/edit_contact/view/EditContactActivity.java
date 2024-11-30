@@ -2,6 +2,7 @@ package com.example.dsproyect_p1.modules.edit_contact.view;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -310,7 +311,7 @@ public class EditContactActivity extends AppCompatActivity {
           new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1));
       textViewFecha.setHint("Seleccionar fecha");
       textViewFecha.setPadding(16, 16, 16, 16);
-      textViewFecha.setText(dateData.getDate().toString());
+      textViewFecha.setText(dateData.getDate());
 
       Button botonEliminar = new Button(this);
       botonEliminar.setLayoutParams(
@@ -709,16 +710,14 @@ public class EditContactActivity extends AppCompatActivity {
       View vista = eventDateContent.getChildAt(i);
       if (vista instanceof LinearLayout) {
         LinearLayout llFecha = (LinearLayout) vista;
-        EditText editTextFecha = (EditText) llFecha.getChildAt(0);
+        TextView editTextFecha = (TextView) llFecha.getChildAt(0);
         String fecha = editTextFecha.getText().toString();
-
-        DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = LocalDate.parse(fecha, formate);
 
         Spinner spinnerLabel = (Spinner) llFecha.getChildAt(1);
         String label = spinnerLabel.getSelectedItem().toString();
+
         if (!fecha.isEmpty()) {
-          listaDate.add(new EventDate(label, date));
+            listaDate.add(new EventDate(label, fecha));
         }
       }
     }
