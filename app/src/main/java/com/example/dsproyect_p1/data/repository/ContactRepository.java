@@ -5,6 +5,8 @@ import com.example.dsproyect_p1.data.model.Contact;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -32,4 +34,16 @@ public class ContactRepository {
   public CompletableFuture<Void> deleteContact(UUID id) {
     return contactApi.deleteContact(id);
   }
+
+
+  public CompletableFuture<List<String>> getAvailableCountries() {
+    return contactApi.getContacts()
+            .thenApply(contacts -> contacts.stream()
+                    .map(Contact::getResidencyCountry)
+                    .filter(country -> country != null && !country.isEmpty())
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.toList()));
+  }
+
 }

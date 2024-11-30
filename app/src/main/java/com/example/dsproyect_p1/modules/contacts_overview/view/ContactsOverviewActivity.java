@@ -3,6 +3,7 @@ package com.example.dsproyect_p1.modules.contacts_overview.view;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
@@ -23,20 +25,28 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.dsproyect_p1.R;
+import com.example.dsproyect_p1.data.api.ContactApi;
 import com.example.dsproyect_p1.data.model.Contact;
 import com.example.dsproyect_p1.data.model.ContactType;
+import com.example.dsproyect_p1.data.model.SocialMedia;
 import com.example.dsproyect_p1.data.model.Telephone;
 import com.example.dsproyect_p1.data.repository.*;
 import com.example.dsproyect_p1.data.structures.ContactComparators;
+import com.example.dsproyect_p1.data.structures.ContactFilter;
 import com.example.dsproyect_p1.data.structures.CustomArrayList;
 import com.example.dsproyect_p1.modules.add_contact.view.AddContactActivity;
 import com.example.dsproyect_p1.modules.contact_details.view.ContactDetailsActivity;
 import com.example.dsproyect_p1.modules.contacts_overview.adapter.ContactRecyclerView;
+import com.example.dsproyect_p1.modules.filter.Filter;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
+
 import javax.inject.Inject;
 
 @AndroidEntryPoint
@@ -44,10 +54,18 @@ public class ContactsOverviewActivity extends AppCompatActivity
     implements  ContactRecyclerView.onItemClickListener {
   private RecyclerView recyclerViewContact;
   private Button btnContacts, btnFavorite, btnOrder;
-  private Button btnAddContact;
+  private Button btnAddContact,filtro, noFiltro;
   private ContactRecyclerView contactRecyclerView;
-  private Spinner spinnerOrderBy;
+  private Spinner spinnerOrderBy, spinnerFilter;
   private List<Contact> contactsList;
+  private ContactFilter contactFilter;
+  private RadioGroup radioGroupFiltros;
+  private List<String> tipo,especial,ciudades,emptyData;
+  private String selectedSpinnerOption = "";
+  private int filtroSeleccionado;
+  ContactApi contactApi;
+  private ContactType tipoC;
+  private SocialMedia socialMedia;
 
   @Inject
   ContactRepository contactRepository;
@@ -57,6 +75,12 @@ public class ContactsOverviewActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
     setContentView(R.layout.activity_contacts_overview);
+
+
+
+    filtro = findViewById(R.id.filtro);
+    radioGroupFiltros= findViewById(R.id.radioGroupFiltros);
+    noFiltro = findViewById(R.id.SinFiltroContacto);
 
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(R.id.main),
@@ -72,13 +96,112 @@ public class ContactsOverviewActivity extends AppCompatActivity
     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     spinnerOrderBy.setAdapter(adapter);
 
+    noFiltro.setOnClickListener(v -> quitarFiltro());
+
     recyclerViewContact = findViewById(R.id.recyclerViewContacts);
     recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
 
     contactRecyclerView = new ContactRecyclerView(List.of(), contact -> moveToDescriptionContact(contact));
     recyclerViewContact.setAdapter(contactRecyclerView);
 
+    filtro.setOnClickListener(v -> {
+      if (radioGroupFiltros.getVisibility() == View.GONE) {
+        radioGroupFiltros.setVisibility(View.VISIBLE);
+      } else {
+        radioGroupFiltros.setVisibility(View.GONE);
+      }
+    });
+    tipo = new CustomArrayList<>(Arrays.asList("Person", "Company"));
+    especial = new CustomArrayList<>(Arrays.asList("Instagram","Facebook","YouTube","Twitter"));
+
+
+    spinnerFilter = findViewById(R.id.spinnerFiltrosContact);
+    radioGroupFiltros.setOnCheckedChangeListener((group, checkedId) -> {
+      if (checkedId == R.id.botonCity) {
+        filtroSeleccionado = 1;
+        showContactCiudades();
+      } else if (checkedId == R.id.botonType) {
+        showContactTypeData();
+        filtroSeleccionado =2;
+      } /*else if (checkedId == R.id.botonNoFilter) {
+        //Toast.makeText(this, "ingresa", Toast.LENGTH_SHORT).show();
+        //hideSpinner();
+        //filtroSeleccionado =4;
+        //updateRecyclerView(contactsList);
+        try {
+          Toast.makeText(this, "ingresa", Toast.LENGTH_SHORT).show();
+          filtroSeleccionado = 4;
+          hideSpinner();
+          if (contactsList != null) {
+            updateRecyclerView(contactsList);
+          } else {
+            Log.e("Error", "La lista de contactos es null");
+          }
+        } catch (Exception e) {
+          Log.e("Error", "Error al manejar el botón No Filtro", e);
+        }
+      }*/ else if (checkedId == R.id.botonEspecial) {
+        filtroSeleccionado=3;
+        showEspecial();
+      } else {
+        hideSpinner();
+      }
+    });
+    
+
+    spinnerFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedSpinnerOption = parent.getItemAtPosition(position).toString();
+        switch (filtroSeleccionado){
+          case 1:
+            List<Contact> filtro1 = contactFilter.filtrarPorCiudad(contactsList,selectedSpinnerOption);
+            updateRecyclerView(filtro1);
+            break;
+          case 2:
+            if(selectedSpinnerOption.equalsIgnoreCase("Person")){
+              tipoC = ContactType.PERSON;
+            }else{
+              tipoC = ContactType.COMPANY;
+            }
+            List<Contact> filtro2 = contactFilter.filtrarPorTipo(contactsList,tipoC);
+            updateRecyclerView(filtro2);
+            break;
+          case 3:
+            if(selectedSpinnerOption.equals("Instagram")){
+              socialMedia = SocialMedia.INSTAGRAM;
+            } else if (selectedSpinnerOption.equalsIgnoreCase("Facebook")) {
+              socialMedia = SocialMedia.FACEBOOK;
+            } else if (selectedSpinnerOption.equalsIgnoreCase("YouTube")) {
+              socialMedia = SocialMedia.YOUTUBE;
+            } else {
+              socialMedia = SocialMedia.TWITTER;
+            }
+            List<Contact> filtro3 = contactFilter.filtrarPorRedSocial(contactsList,socialMedia);
+            updateRecyclerView(filtro3);
+            break;
+
+          default:
+            updateRecyclerView(contactsList);
+            break;
+
+
+
+        }
+        //Log.d("Filtro", "Filtro seleccionado: " + filtroSeleccionado + " - " + selectedSpinnerOption);
+
+        // Aplica el filtro cada vez que se selecciona una opción en el Spinner
+        //applyFilter(selectedFilterType, selectedSpinnerOption);
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+        selectedSpinnerOption = ""; // Reinicia la selección
+      }
+    });
+
     fetchContacts();
+
   }
 
   public void moveToDescriptionContact(Contact contact) {
@@ -155,6 +278,13 @@ public class ContactsOverviewActivity extends AppCompatActivity
     startActivity(intent);
   }
 
+  private void quitarFiltro(){
+    updateRecyclerView(contactsList);
+    spinnerFilter.setVisibility(View.GONE);
+    radioGroupFiltros.setVisibility(View.GONE);
+
+
+  }
   public void openSpinnerOrder(View view){
     if(spinnerOrderBy.getVisibility() == View.GONE){
       spinnerOrderBy.setVisibility(View.VISIBLE);
@@ -198,6 +328,50 @@ public class ContactsOverviewActivity extends AppCompatActivity
   public void updateRecyclerView(List<Contact> contacts){
     contactRecyclerView.updateData(contacts);
     contactRecyclerView.notifyDataSetChanged();
+  }
+
+  private void updateSpinner(List<String> data) {
+    ArrayAdapter<String> adapter = new ArrayAdapter<>(
+            this,
+            android.R.layout.simple_spinner_item,
+            data
+    );
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    spinnerFilter.setAdapter(adapter);
+  }
+
+  private List<String> getUniqueCountries() {
+    if (contactsList == null || contactsList.isEmpty()) {
+      return new CustomArrayList<>();
+    }
+
+    return contactsList.stream()
+            .map(Contact::getResidencyCountry)
+            .filter(country -> country != null && !country.isEmpty())
+            .distinct()
+            .sorted()
+            .collect(Collectors.toList());
+  }
+
+  private void showContactCiudades() {
+    spinnerFilter.setVisibility(View.VISIBLE);
+    List<String> ciud = getUniqueCountries();
+    updateSpinner(ciud);
+  }
+
+  private void showContactTypeData() {
+    spinnerFilter.setVisibility(View.VISIBLE);
+    updateSpinner(tipo);
+  }
+
+  private void showEspecial() {
+    spinnerFilter.setVisibility(View.VISIBLE);
+    updateSpinner(especial);
+  }
+
+  private void hideSpinner() {
+    spinnerFilter.setVisibility(View.GONE);
+    updateSpinner(emptyData);
   }
 
 }
