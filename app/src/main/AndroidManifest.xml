@@ -14,6 +14,12 @@
         android:theme="@style/Theme.DSProyect_P1"
         tools:targetApi="31">
         <activity
+            android:name=".modules.filter.Filter"
+            android:exported="false" />
+        <activity
+            android:name=".modules.filter.ContactFilter"
+            android:exported="false" />
+        <activity
             android:name=".modules.add_contact.view.AddContactActivity"
             android:exported="true" />
         <activity
