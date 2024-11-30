@@ -377,7 +377,6 @@ public class AddContactActivity extends AppCompatActivity {
                       String fechaSeleccionada = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                       textViewFecha.setText(fechaSeleccionada);
                       textViewFecha.setTextColor(Color.BLACK);
-
                     },
                     anio,
                     mes,
@@ -388,8 +387,6 @@ public class AddContactActivity extends AppCompatActivity {
           nuevaFecha.addView(textViewFecha);
           nuevaFecha.addView(spinnerEtiqueta);
           nuevaFecha.addView(botonEliminar);
-
-          Toast.makeText(this, " " + textViewFecha.getText().toString(), Toast.LENGTH_SHORT).show();
 
           contenedorDate.addView(nuevaFecha, contenedorDate.getChildCount() - 1);
         });
@@ -461,10 +458,7 @@ public class AddContactActivity extends AppCompatActivity {
         Spinner spinnerLabel = (Spinner) llFecha.getChildAt(1);
         String label = spinnerLabel.getSelectedItem().toString();
 
-        //DateTimeFormatter formate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-          // LocalDate date = LocalDate.parse(fecha, formate);
-          //Toast.makeText(this, "Fecha dada " + date.toString() + " " + date.getClass().toString(), Toast.LENGTH_SHORT).show();
-            listaDate.add(new EventDate(label, fecha));
+        listaDate.add(new EventDate(label, fecha));
 
       }
     }
@@ -514,7 +508,7 @@ public class AddContactActivity extends AppCompatActivity {
         LinearLayout llAsociado = (LinearLayout) vista;
         EditText editTextnombre = (EditText) llAsociado.getChildAt(0);
         String nombre = editTextnombre.getText().toString();
-        EditText editTextnumero = (EditText) llAsociado.getChildAt(0);
+        EditText editTextnumero = (EditText) llAsociado.getChildAt(1);
         String numero = editTextnumero.getText().toString();
         if (!nombre.isEmpty()) {
           listaAsociados.add(new AssociateContact(nombre, numero));
