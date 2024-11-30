@@ -1,5 +1,12 @@
 # Proyecto Estructura de Datos G2
 
+## Integrantes
+
+- JFcoFer: Juan Francisco Fernandéz Ramos
+- Danx111: Daniela Joselyne Espinoza Toala
+- JuanAyala619: Juan Sebastian Ayala Villalobos
+- SirProg: Kevin Fernando Maldonado Paredes
+
 ### Descripción
 
 Los **Contactos** tienen sus atributos de los cuales son los siguientes:
