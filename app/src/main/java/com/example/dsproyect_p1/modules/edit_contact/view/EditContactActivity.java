@@ -710,7 +710,7 @@ public class EditContactActivity extends AppCompatActivity {
       View vista = eventDateContent.getChildAt(i);
       if (vista instanceof LinearLayout) {
         LinearLayout llFecha = (LinearLayout) vista;
-        EditText editTextFecha = (EditText) llFecha.getChildAt(0);
+        TextView editTextFecha = (TextView) llFecha.getChildAt(0);
         String fecha = editTextFecha.getText().toString();
 
         Spinner spinnerLabel = (Spinner) llFecha.getChildAt(1);
