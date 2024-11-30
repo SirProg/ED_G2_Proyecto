@@ -200,6 +200,15 @@ public class ContactsOverviewActivity extends AppCompatActivity
   protected void onResume() {
     super.onResume();
     fetchContacts();
+    recyclerViewContact.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        if (!recyclerView.canScrollVertically(1)) {
+          loadMoreData();
+        }
+      }
+    });
   }
 
   private void injectContacts() {

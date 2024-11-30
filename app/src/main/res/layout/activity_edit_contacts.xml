@@ -276,7 +276,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTint="?attr/colorTertiary"
             android:onClick="closeEdit"
             android:text="Close"
             android:layout_marginEnd="5dp"/>
@@ -285,7 +285,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Save"
-            android:backgroundTint="?attr/colorPrimary"
+            android:backgroundTint="?attr/colorSecondary"
             android:layout_marginStart="5dp"
             android:onClick="saveChange"/>
 

@@ -412,7 +412,7 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:onClick="closeDetail"
-            android:backgroundTint="?attr/colorError"
+            android:backgroundTint="?attr/colorTertiary"
             android:text="Close" />
 
         <Button

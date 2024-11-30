@@ -317,7 +317,7 @@
         android:id="@+id/inferior"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorOnPrimary"
+        android:background="?attr/android:colorBackground"
         android:padding="5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
